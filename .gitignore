@@ -1,0 +1,19 @@
+# Delphi temporários e binários
+*.dcu
+*.~*
+*.identcache
+*.local
+*.tvsconfig
+*.dproj.local
+*.groupproj.local
+*.dsk
+*.map
+*.log
+*.tmp
+
+# Executáveis e bibliotecas
+*.exe
+*.dll
+
+# Pasta de histórico
+__history/
