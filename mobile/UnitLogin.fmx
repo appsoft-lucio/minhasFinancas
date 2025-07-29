@@ -1,0 +1,68 @@
+object FormLogin: TFormLogin
+  Left = 0
+  Top = 0
+  Caption = 'MinhasFinancas'
+  ClientHeight = 650
+  ClientWidth = 300
+  Fill.Kind = Solid
+  Position = MainFormCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object TabControl: TTabControl
+    Align = Client
+    Size.Width = 300.000000000000000000
+    Size.Height = 650.000000000000000000
+    Size.PlatformDefault = False
+    TabIndex = 2
+    TabOrder = 1
+    TabPosition = PlatformDefault
+    Sizes = (
+      300s
+      624s
+      300s
+      624s
+      300s
+      624s)
+    object TabInicio: TTabItem
+      CustomIcon = <
+        item
+        end>
+      TextSettings.Trimming = None
+      IsSelected = False
+      Size.Width = 67.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'TabInicio'
+    end
+    object TabLogin: TTabItem
+      CustomIcon = <
+        item
+        end>
+      TextSettings.Trimming = None
+      IsSelected = False
+      Size.Width = 68.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'TabLogin'
+    end
+    object TabNovaConta: TTabItem
+      CustomIcon = <
+        item
+        end>
+      TextSettings.Trimming = None
+      IsSelected = True
+      Size.Width = 98.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'TabNovaConta'
+    end
+  end
+end
