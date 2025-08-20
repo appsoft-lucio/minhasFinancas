@@ -1,19 +1,29 @@
-# Delphi temporários e binários
+# Delphi cache e backups
+__history/
+__recovery/
 *.dcu
-*.~*
-*.identcache
+*.dcp
 *.local
+*.identcache
+*.stat
 *.tvsconfig
-*.dproj.local
-*.groupproj.local
-*.dsk
-*.map
-*.log
-*.tmp
 
-# Executáveis e bibliotecas
+# Android build
+*.apk
+*.dex
+*.class
+*.so
+*.jar
+*.o
+*.a
+*.res
+
+# Windows build
 *.exe
 *.dll
+*.obj
+*.map
 
-# Pasta de histórico
-__history/
+# Outras pastas temporárias
+.idea/
+*.tmp
