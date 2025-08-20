@@ -1838,7 +1838,7 @@ object FormLogin: TFormLogin
             StyledSettings = []
             Position.X = 57.000000000000000000
             Position.Y = 128.000000000000000000
-            Size.Width = 122.000000000000000000
+            Size.Width = 124.000000000000000000
             Size.Height = 17.000000000000000000
             Size.PlatformDefault = False
             TextSettings.Font.Family = 'Roboto'
