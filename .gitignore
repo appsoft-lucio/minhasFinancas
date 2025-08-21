@@ -1,29 +1,63 @@
-# Delphi cache e backups
-__history/
-__recovery/
-*.dcu
-*.dcp
-*.local
-*.identcache
-*.stat
-*.tvsconfig
+# Node modules
+node_modules/
 
-# Android build
-*.apk
-*.dex
-*.class
-*.so
-*.jar
-*.o
-*.a
-*.res
+# Build outputs
+.expo/
+.expo-shared/
+dist/
+build/
+web-build/
 
-# Windows build
-*.exe
-*.dll
-*.obj
-*.map
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 
-# Outras pastas temporárias
+# Metro cache
+.metro-cache/
+
+# Babel cache
+.cache/
+
+# IDEs e editores
+.vscode/
 .idea/
-*.tmp
+*.swp
+*.swo
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Configurações locais do ambiente
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Expo
+.expo/
+.expo-shared/
+
+# Android
+android/app/build/
+android/.gradle/
+android/local.properties
+
+# iOS
+ios/build/
+ios/Pods/
+ios/.expo
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+
+# Misc
+*.pid
+*.seed
+*.tgz
+*.log

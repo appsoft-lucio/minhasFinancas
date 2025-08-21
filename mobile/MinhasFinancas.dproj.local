@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2025/07/29 10:52:38.000.766,=E:\git_hub\Unit1.pas</Transaction>
+    <Transaction>2025/07/29 11:12:33.000.903,E:\git_hub\Unit1.pas=E:\git_hub\minhasFinancas\mobile\UnitLogin.pas</Transaction>
+    <Transaction>2025/07/29 11:12:33.000.903,E:\git_hub\Unit1.fmx=E:\git_hub\minhasFinancas\mobile\UnitLogin.fmx</Transaction>
+    <Transaction>2025/07/29 11:13:04.000.035,E:\git_hub\Project1.dproj=E:\git_hub\minhasFinancas\mobile\MinhasFinancas.dproj</Transaction>
+  </Transactions>  <ActiveMobileDevice>   <NoProfile Android64="LMK410SSGIAQHEJVC6" Android=""/>
+  </ActiveMobileDevice>
+</BorlandProject>
