@@ -1,63 +1,109 @@
-# Node modules
-node_modules/
+# ==========================
+# Delphi / RAD Studio
+# ==========================
 
-# Build outputs
-.expo/
-.expo-shared/
-dist/
-build/
-web-build/
+# Arquivos compilados
+*.dcu
+*.dcp
+*.dcpil
+*.dpu
+*.ppu
+*.o
+*.obj
+*.apk
+*.apks
+*.aab
+*.so
+*.exe
+*.dll
+*.bpl
+*.bpi
+*.dylib
+*.dSYM/
+
+# Arquivos temporários de projeto
+*.local
+*.identcache
+*.projdata
+*.tvsconfig
+*.stat
+*.dsk
+*.dproj.local
+*.dproj.bak
+*.res
+*.map
+*.cfg
+*.pch
+
+# Diretórios de histórico do Delphi
+__history/
+__recovery/
+
+# ==========================
+# Plataformas específicas
+# ==========================
+
+# Android
+mobile/Android/Debug/
+mobile/Android64/Debug/
+*.dex
+*.class
+*.apk.idsig
+
+# iOS
+*.ipa
+*.xcarchive/
+ios/build/
+ios/Pods/
+ios/.expo
+
+# Windows build
+mobile/Win32/
+mobile/Win64/
+
+# MacOS
+*.app
+*.pkg
+
+# ==========================
+# IDEs e Editores
+# ==========================
+
+# RAD Studio cache
+*.drc
+*.dcpil
+
+# Visual Studio Code
+.vscode/
+
+# JetBrains (Delphi pode usar plugins no IDEA)
+.idea/
+
+# Arquivos de editor
+*.swp
+*.swo
+
+# ==========================
+# Logs e caches
+# ==========================
 
 # Logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# Metro cache
-.metro-cache/
-
-# Babel cache
+# Caches
 .cache/
-
-# IDEs e editores
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# Arquivos do sistema operacional
-.DS_Store
-Thumbs.db
-
-# Configurações locais do ambiente
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# Expo
+.metro-cache/
 .expo/
 .expo-shared/
 
-# Android
-android/app/build/
-android/.gradle/
-android/local.properties
+# ==========================
+# Arquivos de sistema
+# ==========================
 
-# iOS
-ios/build/
-ios/Pods/
-ios/.expo
-
-# Fastlane
-fastlane/report.xml
-fastlane/Preview.html
-fastlane/screenshots
-
-# Misc
-*.pid
-*.seed
-*.tgz
-*.log
+.DS_Store
+Thumbs.db
+desktop.ini

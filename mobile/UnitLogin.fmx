@@ -15,7 +15,7 @@ object FormLogin: TFormLogin
     Size.Width = 367.000000000000000000
     Size.Height = 710.000000000000000000
     Size.PlatformDefault = False
-    TabIndex = 0
+    TabIndex = 2
     TabOrder = 1
     TabPosition = PlatformDefault
     Sizes = (
@@ -30,7 +30,7 @@ object FormLogin: TFormLogin
         item
         end>
       TextSettings.Trimming = None
-      IsSelected = True
+      IsSelected = False
       Size.Width = 67.000000000000000000
       Size.Height = 26.000000000000000000
       Size.PlatformDefault = False
@@ -3856,7 +3856,7 @@ object FormLogin: TFormLogin
         item
         end>
       TextSettings.Trimming = None
-      IsSelected = False
+      IsSelected = True
       Size.Width = 98.000000000000000000
       Size.Height = 26.000000000000000000
       Size.PlatformDefault = False
@@ -5717,7 +5717,7 @@ object FormLogin: TFormLogin
             Size.Width = 347.000000000000000000
             Size.Height = 50.000000000000000000
             Size.PlatformDefault = False
-            Text = 'Acessar '
+            Text = 'Criar Conta'
             TextSettings.Font.Family = 'Roboto'
             TextSettings.Font.Size = 16.000000000000000000
             TextSettings.Font.StyleExt = {00070000000000000004000000}
