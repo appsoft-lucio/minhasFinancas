@@ -10,14 +10,18 @@
 *.ppu
 *.o
 *.obj
-*.apk
-*.apks
-*.aab
-*.so
 *.exe
 *.dll
 *.bpl
 *.bpi
+*.res
+*.map
+*.cfg
+*.pch
+*.apk
+*.apks
+*.aab
+*.so
 *.dylib
 *.dSYM/
 
@@ -30,12 +34,8 @@
 *.dsk
 *.dproj.local
 *.dproj.bak
-*.res
-*.map
-*.cfg
-*.pch
 
-# Diretórios de histórico do Delphi
+# Diretórios de histórico e recuperação do Delphi
 __history/
 __recovery/
 
@@ -57,7 +57,7 @@ ios/build/
 ios/Pods/
 ios/.expo
 
-# Windows build
+# Windows
 mobile/Win32/
 mobile/Win64/
 
@@ -66,20 +66,19 @@ mobile/Win64/
 *.pkg
 
 # ==========================
-# IDEs e Editores
+# IDEs e editores
 # ==========================
 
 # RAD Studio cache
 *.drc
-*.dcpil
 
-# Visual Studio Code
+# VS Code
 .vscode/
 
-# JetBrains (Delphi pode usar plugins no IDEA)
+# JetBrains / IntelliJ IDEA
 .idea/
 
-# Arquivos de editor
+# Arquivos temporários do editor
 *.swp
 *.swo
 
