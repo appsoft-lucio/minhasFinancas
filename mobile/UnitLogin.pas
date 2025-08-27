@@ -49,6 +49,13 @@ type
     LblEmail: TLabel;
     LblEmailAcessar: TLabel;
     LblSenhaAcessar: TLabel;
+    procedure SpeedButtonAcessarLoginClick(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
+    procedure SpeedButton5Click(Sender: TObject);
+    procedure Image1Click(Sender: TObject);
+    procedure Image2Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -61,5 +68,40 @@ var
 implementation
 
 {$R *.fmx}
+
+procedure TFormLogin.FormShow(Sender: TObject);
+begin
+        TabControl.ActiveTab := TabInicio;
+end;
+
+procedure TFormLogin.Image1Click(Sender: TObject);
+begin
+        TabControl.GotoVisibleTab(0);
+end;
+
+procedure TFormLogin.Image2Click(Sender: TObject);
+begin
+        TabControl.GotoVisibleTab(0);
+end;
+
+procedure TFormLogin.SpeedButton1Click(Sender: TObject);
+begin
+        TabControl.GotoVisibleTab(2);
+end;
+
+procedure TFormLogin.SpeedButton3Click(Sender: TObject);
+begin
+        TabControl.GotoVisibleTab(2)
+end;
+
+procedure TFormLogin.SpeedButton5Click(Sender: TObject);
+begin
+        TabControl.GotoVisibleTab(1);
+end;
+
+procedure TFormLogin.SpeedButtonAcessarLoginClick(Sender: TObject);
+begin
+        TabControl.GotoVisibleTab(1);
+end;
 
 end.

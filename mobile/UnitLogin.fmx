@@ -2,37 +2,39 @@ object FormLogin: TFormLogin
   Left = 0
   Top = 0
   Caption = 'MinhasFinancas'
-  ClientHeight = 710
-  ClientWidth = 367
+  ClientHeight = 709
+  ClientWidth = 347
   Fill.Kind = Solid
   Position = MainFormCenter
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
-  DesignerMasterStyle = 0
+  OnShow = FormShow
+  DesignerMasterStyle = 3
   object TabControl: TTabControl
     Align = Client
-    Size.Width = 367.000000000000000000
-    Size.Height = 710.000000000000000000
+    Size.Width = 347.000000000000000000
+    Size.Height = 709.000000000000000000
     Size.PlatformDefault = False
-    TabIndex = 0
+    TabHeight = 49.000000000000000000
+    TabIndex = 1
     TabOrder = 1
-    TabPosition = PlatformDefault
+    TabPosition = None
     Sizes = (
-      367s
-      684s
-      367s
-      684s
-      367s
-      684s)
+      347s
+      709s
+      347s
+      709s
+      347s
+      709s)
     object TabInicio: TTabItem
       CustomIcon = <
         item
         end>
       TextSettings.Trimming = None
-      IsSelected = True
-      Size.Width = 67.000000000000000000
-      Size.Height = 26.000000000000000000
+      IsSelected = False
+      Size.Width = 8.000000000000000000
+      Size.Height = 8.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = ''
       TabOrder = 0
@@ -45,8 +47,8 @@ object FormLogin: TFormLogin
         Padding.Top = 10.000000000000000000
         Padding.Right = 10.000000000000000000
         Padding.Bottom = 10.000000000000000000
-        Size.Width = 367.000000000000000000
-        Size.Height = 684.000000000000000000
+        Size.Width = 347.000000000000000000
+        Size.Height = 709.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         object imgPorquinho: TImage
@@ -1837,7 +1839,7 @@ object FormLogin: TFormLogin
           Align = Top
           Position.X = 10.000000000000000000
           Position.Y = 10.000000000000000000
-          Size.Width = 347.000000000000000000
+          Size.Width = 327.000000000000000000
           Size.Height = 130.000000000000000000
           Size.PlatformDefault = False
           object LabelImgPorquinho: TLabel
@@ -1845,7 +1847,7 @@ object FormLogin: TFormLogin
             StyledSettings = []
             Margins.Bottom = -15.000000000000000000
             Position.Y = 119.000000000000000000
-            Size.Width = 347.000000000000000000
+            Size.Width = 327.000000000000000000
             Size.Height = 26.000000000000000000
             Size.PlatformDefault = False
             TextSettings.Font.Family = 'Roboto'
@@ -1863,8 +1865,8 @@ object FormLogin: TFormLogin
           Margins.Left = 30.000000000000000000
           Margins.Top = 160.000000000000000000
           Margins.Right = 30.000000000000000000
-          Size.Width = 287.000000000000000000
-          Size.Height = 264.000000000000000000
+          Size.Width = 267.000000000000000000
+          Size.Height = 289.000000000000000000
           Size.PlatformDefault = False
           TextSettings.Font.Family = 'Roboto'
           TextSettings.Font.Size = 26.000000000000000000
@@ -1877,8 +1879,8 @@ object FormLogin: TFormLogin
           Align = Bottom
           Fill.Color = xFFCC5500
           Position.X = 10.000000000000000000
-          Position.Y = 564.000000000000000000
-          Size.Width = 347.000000000000000000
+          Position.Y = 589.000000000000000000
+          Size.Width = 327.000000000000000000
           Size.Height = 50.000000000000000000
           Size.PlatformDefault = False
           Stroke.Kind = None
@@ -1887,8 +1889,8 @@ object FormLogin: TFormLogin
           object SpeedButtonAcessarLogin: TSpeedButton
             Align = Client
             StyledSettings = []
-            Size.Width = 347.000000000000000000
-            Size.Height = 50.000000000000000000
+            Size.Width = 327.000000000000000000
+            Size.Height = 48.000000000000000000
             Size.PlatformDefault = False
             Text = 'Acessar Minha Conta'
             TextSettings.Font.Family = 'Roboto'
@@ -1896,6 +1898,7 @@ object FormLogin: TFormLogin
             TextSettings.Font.StyleExt = {00070000000000000004000000}
             TextSettings.FontColor = claWhite
             TextSettings.Trimming = None
+            OnClick = SpeedButtonAcessarLoginClick
           end
         end
         object Rectangle1: TRectangle
@@ -1903,8 +1906,8 @@ object FormLogin: TFormLogin
           Fill.Color = claWhite
           Margins.Top = 10.000000000000000000
           Position.X = 10.000000000000000000
-          Position.Y = 624.000000000000000000
-          Size.Width = 347.000000000000000000
+          Position.Y = 649.000000000000000000
+          Size.Width = 327.000000000000000000
           Size.Height = 50.000000000000000000
           Size.PlatformDefault = False
           Stroke.Color = xFFCC5500
@@ -1913,8 +1916,8 @@ object FormLogin: TFormLogin
           object SpeedButton1: TSpeedButton
             Align = Client
             StyledSettings = []
-            Size.Width = 347.000000000000000000
-            Size.Height = 50.000000000000000000
+            Size.Width = 327.000000000000000000
+            Size.Height = 48.000000000000000000
             Size.PlatformDefault = False
             Text = 'Criar minha conta.'
             TextSettings.Font.Family = 'Roboto'
@@ -1922,6 +1925,7 @@ object FormLogin: TFormLogin
             TextSettings.Font.StyleExt = {00070000000000000004000000}
             TextSettings.FontColor = xFFCC5500
             TextSettings.Trimming = None
+            OnClick = SpeedButton1Click
           end
         end
       end
@@ -1931,9 +1935,9 @@ object FormLogin: TFormLogin
         item
         end>
       TextSettings.Trimming = None
-      IsSelected = False
-      Size.Width = 68.000000000000000000
-      Size.Height = 26.000000000000000000
+      IsSelected = True
+      Size.Width = 8.000000000000000000
+      Size.Height = 8.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = ''
       TabOrder = 0
@@ -1946,8 +1950,8 @@ object FormLogin: TFormLogin
         Padding.Top = 10.000000000000000000
         Padding.Right = 10.000000000000000000
         Padding.Bottom = 10.000000000000000000
-        Size.Width = 367.000000000000000000
-        Size.Height = 684.000000000000000000
+        Size.Width = 347.000000000000000000
+        Size.Height = 709.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         object Image1: TImage
@@ -3738,15 +3742,16 @@ object FormLogin: TFormLogin
           Align = Top
           Position.X = 10.000000000000000000
           Position.Y = 10.000000000000000000
-          Size.Width = 347.000000000000000000
+          Size.Width = 327.000000000000000000
           Size.Height = 130.000000000000000000
           Size.PlatformDefault = False
+          OnClick = Image1Click
           object Label2: TLabel
             Align = Bottom
             StyledSettings = []
             Margins.Bottom = -15.000000000000000000
             Position.Y = 119.000000000000000000
-            Size.Width = 347.000000000000000000
+            Size.Width = 327.000000000000000000
             Size.Height = 26.000000000000000000
             Size.PlatformDefault = False
             TextSettings.Font.Family = 'Roboto'
@@ -3764,7 +3769,7 @@ object FormLogin: TFormLogin
           Margins.Top = 30.000000000000000000
           Position.X = 10.000000000000000000
           Position.Y = 170.000000000000000000
-          Size.Width = 347.000000000000000000
+          Size.Width = 327.000000000000000000
           Size.Height = 93.000000000000000000
           Size.PlatformDefault = False
           TextSettings.Font.Family = 'Roboto'
@@ -3778,8 +3783,8 @@ object FormLogin: TFormLogin
           Align = Bottom
           Fill.Color = xFFCC5500
           Position.X = 10.000000000000000000
-          Position.Y = 564.000000000000000000
-          Size.Width = 347.000000000000000000
+          Position.Y = 579.000000000000000000
+          Size.Width = 327.000000000000000000
           Size.Height = 50.000000000000000000
           Size.PlatformDefault = False
           Stroke.Kind = None
@@ -3788,8 +3793,8 @@ object FormLogin: TFormLogin
           object SpeedButton2: TSpeedButton
             Align = Client
             StyledSettings = []
-            Size.Width = 347.000000000000000000
-            Size.Height = 50.000000000000000000
+            Size.Width = 327.000000000000000000
+            Size.Height = 48.000000000000000000
             Size.PlatformDefault = False
             Text = 'Acessar '
             TextSettings.Font.Family = 'Roboto'
@@ -3803,9 +3808,10 @@ object FormLogin: TFormLogin
           Align = Bottom
           Fill.Color = claWhite
           Margins.Top = 10.000000000000000000
+          Margins.Bottom = 10.000000000000000000
           Position.X = 10.000000000000000000
-          Position.Y = 624.000000000000000000
-          Size.Width = 347.000000000000000000
+          Position.Y = 639.000000000000000000
+          Size.Width = 327.000000000000000000
           Size.Height = 50.000000000000000000
           Size.PlatformDefault = False
           Stroke.Color = xFFCC5500
@@ -3814,8 +3820,8 @@ object FormLogin: TFormLogin
           object SpeedButton3: TSpeedButton
             Align = Client
             StyledSettings = []
-            Size.Width = 347.000000000000000000
-            Size.Height = 50.000000000000000000
+            Size.Width = 327.000000000000000000
+            Size.Height = 48.000000000000000000
             Size.PlatformDefault = False
             Text = 'N'#227'o tenho conta.Criar minha conta.'
             TextSettings.Font.Family = 'Roboto'
@@ -3823,6 +3829,7 @@ object FormLogin: TFormLogin
             TextSettings.Font.StyleExt = {00070000000000000004000000}
             TextSettings.FontColor = xFFCC5500
             TextSettings.Trimming = None
+            OnClick = SpeedButton3Click
           end
         end
         object EditEmail: TEdit
@@ -3832,7 +3839,7 @@ object FormLogin: TFormLogin
           Position.X = 10.000000000000000000
           Position.Y = 286.000000000000000000
           Margins.Bottom = 30.000000000000000000
-          Size.Width = 347.000000000000000000
+          Size.Width = 327.000000000000000000
           Size.Height = 32.000000000000000000
           Size.PlatformDefault = False
           TextPrompt = 'Digite seu e-mail'
@@ -3844,7 +3851,7 @@ object FormLogin: TFormLogin
           Position.X = 10.000000000000000000
           Position.Y = 371.000000000000000000
           Margins.Bottom = 30.000000000000000000
-          Size.Width = 347.000000000000000000
+          Size.Width = 327.000000000000000000
           Size.Height = 32.000000000000000000
           Size.PlatformDefault = False
           TextPrompt = 'Digite sua senha'
@@ -3854,7 +3861,7 @@ object FormLogin: TFormLogin
           StyledSettings = [Size, FontColor]
           Position.X = 10.000000000000000000
           Position.Y = 263.000000000000000000
-          Size.Width = 347.000000000000000000
+          Size.Width = 327.000000000000000000
           Size.Height = 23.000000000000000000
           Size.PlatformDefault = False
           TextSettings.Font.Family = 'Roboto'
@@ -3867,7 +3874,7 @@ object FormLogin: TFormLogin
           StyledSettings = [Size, FontColor]
           Position.X = 10.000000000000000000
           Position.Y = 348.000000000000000000
-          Size.Width = 347.000000000000000000
+          Size.Width = 327.000000000000000000
           Size.Height = 23.000000000000000000
           Size.PlatformDefault = False
           TextSettings.Font.Family = 'Roboto'
@@ -3883,8 +3890,8 @@ object FormLogin: TFormLogin
         end>
       TextSettings.Trimming = None
       IsSelected = False
-      Size.Width = 98.000000000000000000
-      Size.Height = 26.000000000000000000
+      Size.Width = 8.000000000000000000
+      Size.Height = 8.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = ''
       TabOrder = 0
@@ -3897,8 +3904,8 @@ object FormLogin: TFormLogin
         Padding.Top = 10.000000000000000000
         Padding.Right = 10.000000000000000000
         Padding.Bottom = 10.000000000000000000
-        Size.Width = 367.000000000000000000
-        Size.Height = 684.000000000000000000
+        Size.Width = 347.000000000000000000
+        Size.Height = 709.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         object Image2: TImage
@@ -5689,15 +5696,16 @@ object FormLogin: TFormLogin
           Align = Top
           Position.X = 10.000000000000000000
           Position.Y = 10.000000000000000000
-          Size.Width = 347.000000000000000000
+          Size.Width = 327.000000000000000000
           Size.Height = 130.000000000000000000
           Size.PlatformDefault = False
+          OnClick = Image2Click
           object Label4: TLabel
             Align = Bottom
             StyledSettings = []
             Margins.Bottom = -15.000000000000000000
             Position.Y = 119.000000000000000000
-            Size.Width = 347.000000000000000000
+            Size.Width = 327.000000000000000000
             Size.Height = 26.000000000000000000
             Size.PlatformDefault = False
             TextSettings.Font.Family = 'Roboto'
@@ -5716,7 +5724,7 @@ object FormLogin: TFormLogin
           Margins.Bottom = 15.000000000000000000
           Position.X = 10.000000000000000000
           Position.Y = 170.000000000000000000
-          Size.Width = 347.000000000000000000
+          Size.Width = 327.000000000000000000
           Size.Height = 93.000000000000000000
           Size.PlatformDefault = False
           TextSettings.Font.Family = 'Roboto'
@@ -5730,8 +5738,8 @@ object FormLogin: TFormLogin
           Align = Bottom
           Fill.Color = xFFCC5500
           Position.X = 10.000000000000000000
-          Position.Y = 564.000000000000000000
-          Size.Width = 347.000000000000000000
+          Position.Y = 579.000000000000000000
+          Size.Width = 327.000000000000000000
           Size.Height = 50.000000000000000000
           Size.PlatformDefault = False
           Stroke.Kind = None
@@ -5740,8 +5748,8 @@ object FormLogin: TFormLogin
           object SpeedButton4: TSpeedButton
             Align = Client
             StyledSettings = []
-            Size.Width = 347.000000000000000000
-            Size.Height = 50.000000000000000000
+            Size.Width = 327.000000000000000000
+            Size.Height = 48.000000000000000000
             Size.PlatformDefault = False
             Text = 'Criar Conta'
             TextSettings.Font.Family = 'Roboto'
@@ -5755,9 +5763,10 @@ object FormLogin: TFormLogin
           Align = Bottom
           Fill.Color = claWhite
           Margins.Top = 10.000000000000000000
+          Margins.Bottom = 10.000000000000000000
           Position.X = 10.000000000000000000
-          Position.Y = 624.000000000000000000
-          Size.Width = 347.000000000000000000
+          Position.Y = 639.000000000000000000
+          Size.Width = 327.000000000000000000
           Size.Height = 50.000000000000000000
           Size.PlatformDefault = False
           Stroke.Color = xFFCC5500
@@ -5766,8 +5775,8 @@ object FormLogin: TFormLogin
           object SpeedButton5: TSpeedButton
             Align = Client
             StyledSettings = []
-            Size.Width = 347.000000000000000000
-            Size.Height = 50.000000000000000000
+            Size.Width = 327.000000000000000000
+            Size.Height = 48.000000000000000000
             Size.PlatformDefault = False
             Text = 'J'#225' tenho uma conta. Acessar.'
             TextSettings.Font.Family = 'Roboto'
@@ -5775,6 +5784,7 @@ object FormLogin: TFormLogin
             TextSettings.Font.StyleExt = {00070000000000000004000000}
             TextSettings.FontColor = xFFCC5500
             TextSettings.Trimming = None
+            OnClick = SpeedButton5Click
           end
         end
         object Edit1: TEdit
@@ -5784,7 +5794,7 @@ object FormLogin: TFormLogin
           Position.X = 10.000000000000000000
           Position.Y = 301.000000000000000000
           Margins.Bottom = 15.000000000000000000
-          Size.Width = 347.000000000000000000
+          Size.Width = 327.000000000000000000
           Size.Height = 32.000000000000000000
           Size.PlatformDefault = False
           TextPrompt = 'Nome Completo'
@@ -5796,7 +5806,7 @@ object FormLogin: TFormLogin
           Position.X = 10.000000000000000000
           Position.Y = 511.000000000000000000
           Margins.Bottom = 30.000000000000000000
-          Size.Width = 347.000000000000000000
+          Size.Width = 327.000000000000000000
           Size.Height = 32.000000000000000000
           Size.PlatformDefault = False
           TextPrompt = 'Confirme sua senha'
@@ -5808,7 +5818,7 @@ object FormLogin: TFormLogin
           Position.X = 10.000000000000000000
           Position.Y = 441.000000000000000000
           Margins.Bottom = 15.000000000000000000
-          Size.Width = 347.000000000000000000
+          Size.Width = 327.000000000000000000
           Size.Height = 32.000000000000000000
           Size.PlatformDefault = False
           TextPrompt = 'Informe uma senha'
@@ -5820,7 +5830,7 @@ object FormLogin: TFormLogin
           Position.X = 10.000000000000000000
           Position.Y = 371.000000000000000000
           Margins.Bottom = 15.000000000000000000
-          Size.Width = 347.000000000000000000
+          Size.Width = 327.000000000000000000
           Size.Height = 32.000000000000000000
           Size.PlatformDefault = False
           TextPrompt = 'Didigete seu E-mail'
@@ -5830,7 +5840,7 @@ object FormLogin: TFormLogin
           StyledSettings = [Size, FontColor]
           Position.X = 10.000000000000000000
           Position.Y = 278.000000000000000000
-          Size.Width = 347.000000000000000000
+          Size.Width = 327.000000000000000000
           Size.Height = 23.000000000000000000
           Size.PlatformDefault = False
           TextSettings.Font.Family = 'Roboto'
@@ -5843,7 +5853,7 @@ object FormLogin: TFormLogin
           StyledSettings = [Size, FontColor]
           Position.X = 10.000000000000000000
           Position.Y = 488.000000000000000000
-          Size.Width = 347.000000000000000000
+          Size.Width = 327.000000000000000000
           Size.Height = 23.000000000000000000
           Size.PlatformDefault = False
           TextSettings.Font.Family = 'Roboto'
@@ -5856,7 +5866,7 @@ object FormLogin: TFormLogin
           StyledSettings = [Size, FontColor]
           Position.X = 10.000000000000000000
           Position.Y = 418.000000000000000000
-          Size.Width = 347.000000000000000000
+          Size.Width = 327.000000000000000000
           Size.Height = 23.000000000000000000
           Size.PlatformDefault = False
           TextSettings.Font.Family = 'Roboto'
@@ -5869,7 +5879,7 @@ object FormLogin: TFormLogin
           StyledSettings = [Size, FontColor]
           Position.X = 10.000000000000000000
           Position.Y = 348.000000000000000000
-          Size.Width = 347.000000000000000000
+          Size.Width = 327.000000000000000000
           Size.Height = 23.000000000000000000
           Size.PlatformDefault = False
           TextSettings.Font.Family = 'Roboto'
