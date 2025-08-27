@@ -15,7 +15,7 @@ object FormLogin: TFormLogin
     Size.Width = 367.000000000000000000
     Size.Height = 710.000000000000000000
     Size.PlatformDefault = False
-    TabIndex = 2
+    TabIndex = 0
     TabOrder = 1
     TabPosition = PlatformDefault
     Sizes = (
@@ -30,7 +30,7 @@ object FormLogin: TFormLogin
         item
         end>
       TextSettings.Trimming = None
-      IsSelected = False
+      IsSelected = True
       Size.Width = 67.000000000000000000
       Size.Height = 26.000000000000000000
       Size.PlatformDefault = False
@@ -1861,10 +1861,10 @@ object FormLogin: TFormLogin
           Align = Client
           StyledSettings = [FontColor]
           Margins.Left = 30.000000000000000000
-          Margins.Top = 100.000000000000000000
+          Margins.Top = 160.000000000000000000
           Margins.Right = 30.000000000000000000
           Size.Width = 287.000000000000000000
-          Size.Height = 324.000000000000000000
+          Size.Height = 264.000000000000000000
           Size.PlatformDefault = False
           TextSettings.Font.Family = 'Roboto'
           TextSettings.Font.Size = 26.000000000000000000
@@ -3830,24 +3830,50 @@ object FormLogin: TFormLogin
           Align = Top
           TabOrder = 2
           Position.X = 10.000000000000000000
-          Position.Y = 263.000000000000000000
+          Position.Y = 286.000000000000000000
           Margins.Bottom = 30.000000000000000000
           Size.Width = 347.000000000000000000
           Size.Height = 32.000000000000000000
           Size.PlatformDefault = False
-          TextPrompt = 'E-mail'
+          TextPrompt = 'Digite seu e-mail'
         end
         object EditSenha: TEdit
           Touch.InteractiveGestures = [LongTap, DoubleTap]
           Align = Top
           TabOrder = 1
           Position.X = 10.000000000000000000
-          Position.Y = 325.000000000000000000
+          Position.Y = 371.000000000000000000
           Margins.Bottom = 30.000000000000000000
           Size.Width = 347.000000000000000000
           Size.Height = 32.000000000000000000
           Size.PlatformDefault = False
-          TextPrompt = 'Senha'
+          TextPrompt = 'Digite sua senha'
+        end
+        object LblEmailAcessar: TLabel
+          Align = Top
+          StyledSettings = [Size, FontColor]
+          Position.X = 10.000000000000000000
+          Position.Y = 263.000000000000000000
+          Size.Width = 347.000000000000000000
+          Size.Height = 23.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Roboto'
+          TextSettings.Font.StyleExt = {00050000000000000004000000}
+          Text = 'E-mail'
+          TabOrder = 6
+        end
+        object LblSenhaAcessar: TLabel
+          Align = Top
+          StyledSettings = [Size, FontColor]
+          Position.X = 10.000000000000000000
+          Position.Y = 348.000000000000000000
+          Size.Width = 347.000000000000000000
+          Size.Height = 23.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Roboto'
+          TextSettings.Font.StyleExt = {00050000000000000004000000}
+          Text = 'Senha'
+          TabOrder = 5
         end
       end
     end
@@ -3856,7 +3882,7 @@ object FormLogin: TFormLogin
         item
         end>
       TextSettings.Trimming = None
-      IsSelected = True
+      IsSelected = False
       Size.Width = 98.000000000000000000
       Size.Height = 26.000000000000000000
       Size.PlatformDefault = False
@@ -5687,7 +5713,7 @@ object FormLogin: TFormLogin
           Align = Top
           StyledSettings = [FontColor]
           Margins.Top = 30.000000000000000000
-          Margins.Bottom = 30.000000000000000000
+          Margins.Bottom = 15.000000000000000000
           Position.X = 10.000000000000000000
           Position.Y = 170.000000000000000000
           Size.Width = 347.000000000000000000
@@ -5756,8 +5782,8 @@ object FormLogin: TFormLogin
           Align = Top
           TabOrder = 4
           Position.X = 10.000000000000000000
-          Position.Y = 293.000000000000000000
-          Margins.Bottom = 30.000000000000000000
+          Position.Y = 301.000000000000000000
+          Margins.Bottom = 15.000000000000000000
           Size.Width = 347.000000000000000000
           Size.Height = 32.000000000000000000
           Size.PlatformDefault = False
@@ -5768,7 +5794,7 @@ object FormLogin: TFormLogin
           Align = Top
           TabOrder = 1
           Position.X = 10.000000000000000000
-          Position.Y = 479.000000000000000000
+          Position.Y = 511.000000000000000000
           Margins.Bottom = 30.000000000000000000
           Size.Width = 347.000000000000000000
           Size.Height = 32.000000000000000000
@@ -5780,8 +5806,8 @@ object FormLogin: TFormLogin
           Align = Top
           TabOrder = 3
           Position.X = 10.000000000000000000
-          Position.Y = 417.000000000000000000
-          Margins.Bottom = 30.000000000000000000
+          Position.Y = 441.000000000000000000
+          Margins.Bottom = 15.000000000000000000
           Size.Width = 347.000000000000000000
           Size.Height = 32.000000000000000000
           Size.PlatformDefault = False
@@ -5792,12 +5818,64 @@ object FormLogin: TFormLogin
           Align = Top
           TabOrder = 2
           Position.X = 10.000000000000000000
-          Position.Y = 355.000000000000000000
-          Margins.Bottom = 30.000000000000000000
+          Position.Y = 371.000000000000000000
+          Margins.Bottom = 15.000000000000000000
           Size.Width = 347.000000000000000000
           Size.Height = 32.000000000000000000
           Size.PlatformDefault = False
-          TextPrompt = 'E-mail'
+          TextPrompt = 'Didigete seu E-mail'
+        end
+        object LblNome: TLabel
+          Align = Top
+          StyledSettings = [Size, FontColor]
+          Position.X = 10.000000000000000000
+          Position.Y = 278.000000000000000000
+          Size.Width = 347.000000000000000000
+          Size.Height = 23.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Roboto'
+          TextSettings.Font.StyleExt = {00050000000000000004000000}
+          Text = 'Nome'
+          TabOrder = 8
+        end
+        object LblConfirmaSenha: TLabel
+          Align = Top
+          StyledSettings = [Size, FontColor]
+          Position.X = 10.000000000000000000
+          Position.Y = 488.000000000000000000
+          Size.Width = 347.000000000000000000
+          Size.Height = 23.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Roboto'
+          TextSettings.Font.StyleExt = {00050000000000000004000000}
+          Text = 'Confirme sua senha'
+          TabOrder = 7
+        end
+        object LblSenha: TLabel
+          Align = Top
+          StyledSettings = [Size, FontColor]
+          Position.X = 10.000000000000000000
+          Position.Y = 418.000000000000000000
+          Size.Width = 347.000000000000000000
+          Size.Height = 23.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Roboto'
+          TextSettings.Font.StyleExt = {00050000000000000004000000}
+          Text = 'Senha'
+          TabOrder = 6
+        end
+        object LblEmail: TLabel
+          Align = Top
+          StyledSettings = [Size, FontColor]
+          Position.X = 10.000000000000000000
+          Position.Y = 348.000000000000000000
+          Size.Width = 347.000000000000000000
+          Size.Height = 23.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Family = 'Roboto'
+          TextSettings.Font.StyleExt = {00050000000000000004000000}
+          Text = 'E-mail'
+          TabOrder = 5
         end
       end
     end

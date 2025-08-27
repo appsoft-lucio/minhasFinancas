@@ -43,6 +43,12 @@ type
     Edit2: TEdit;
     Edit3: TEdit;
     Edit4: TEdit;
+    LblNome: TLabel;
+    LblConfirmaSenha: TLabel;
+    LblSenha: TLabel;
+    LblEmail: TLabel;
+    LblEmailAcessar: TLabel;
+    LblSenhaAcessar: TLabel;
   private
     { Private declarations }
   public
