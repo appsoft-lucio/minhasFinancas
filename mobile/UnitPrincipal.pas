@@ -15,19 +15,20 @@ type
     TabUserConfig: TTabItem;
     LytToolbarHomer: TLayout;
     LblToolbarHomer: TLabel;
-    Layout1: TLayout;
+    LytSaldoReceitaDespesa: TLayout;
     LytSaldo: TLayout;
-    Image1: TImage;
+    ImgSaldoMes: TImage;
     Label1: TLabel;
-    Label2: TLabel;
+    LblValorSaldo: TLabel;
     LytTotalReceitas: TLayout;
     Image2: TImage;
-    Label3: TLabel;
-    Label4: TLabel;
+    LblReceita: TLabel;
+    LblValorReceita: TLabel;
     LytDespesas: TLayout;
     Image3: TImage;
-    Label5: TLabel;
-    Label6: TLabel;
+    LblDespesa: TLabel;
+    LblValorDespesa: TLabel;
+    RecCabecalhoHome: TRectangle;
   private
     { Private declarations }
   public
