@@ -53,8 +53,6 @@ type
     procedure SpeedButton1Click(Sender: TObject);
     procedure SpeedButton3Click(Sender: TObject);
     procedure SpeedButton5Click(Sender: TObject);
-    procedure Image1Click(Sender: TObject);
-    procedure Image2Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
   private
     { Private declarations }
@@ -72,16 +70,6 @@ implementation
 procedure TFormLogin.FormShow(Sender: TObject);
 begin
         TabControl.ActiveTab := TabInicio;
-end;
-
-procedure TFormLogin.Image1Click(Sender: TObject);
-begin
-        TabControl.GotoVisibleTab(0);
-end;
-
-procedure TFormLogin.Image2Click(Sender: TObject);
-begin
-        TabControl.GotoVisibleTab(0);
 end;
 
 procedure TFormLogin.SpeedButton1Click(Sender: TObject);

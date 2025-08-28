@@ -16,7 +16,8 @@ object FormLogin: TFormLogin
     Size.Width = 350.000000000000000000
     Size.Height = 710.000000000000000000
     Size.PlatformDefault = False
-    TabIndex = 1
+    TabHeight = 49.000000000000000000
+    TabIndex = 2
     TabOrder = 1
     TabPosition = None
     Sizes = (
@@ -1934,7 +1935,7 @@ object FormLogin: TFormLogin
         item
         end>
       TextSettings.Trimming = None
-      IsSelected = True
+      IsSelected = False
       Size.Width = 8.000000000000000000
       Size.Height = 8.000000000000000000
       Size.PlatformDefault = False
@@ -3744,7 +3745,6 @@ object FormLogin: TFormLogin
           Size.Width = 330.000000000000000000
           Size.Height = 130.000000000000000000
           Size.PlatformDefault = False
-          OnClick = Image1Click
           object Label2: TLabel
             Align = Bottom
             StyledSettings = []
@@ -3888,7 +3888,7 @@ object FormLogin: TFormLogin
         item
         end>
       TextSettings.Trimming = None
-      IsSelected = False
+      IsSelected = True
       Size.Width = 8.000000000000000000
       Size.Height = 8.000000000000000000
       Size.PlatformDefault = False
@@ -5698,7 +5698,6 @@ object FormLogin: TFormLogin
           Size.Width = 330.000000000000000000
           Size.Height = 130.000000000000000000
           Size.PlatformDefault = False
-          OnClick = Image2Click
           object Label4: TLabel
             Align = Bottom
             StyledSettings = []

@@ -20,6 +20,14 @@ type
     Image1: TImage;
     Label1: TLabel;
     Label2: TLabel;
+    LytTotalReceitas: TLayout;
+    Image2: TImage;
+    Label3: TLabel;
+    Label4: TLabel;
+    LytDespesas: TLayout;
+    Image3: TImage;
+    Label5: TLabel;
+    Label6: TLabel;
   private
     { Private declarations }
   public
