@@ -10,7 +10,7 @@ uses
 
 begin
   Application.Initialize;
-  Application.CreateForm(TFormLogin, FormLogin);
   Application.CreateForm(TFormPrincipal, FormPrincipal);
+  Application.CreateForm(TFormLogin, FormLogin);
   Application.Run;
 end.

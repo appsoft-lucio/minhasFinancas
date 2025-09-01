@@ -5,14 +5,12 @@ interface
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.TabControl,
-  FMX.Controls.Presentation, FMX.StdCtrls, FMX.Layouts, FMX.Objects;
+  FMX.Controls.Presentation, FMX.StdCtrls, FMX.Layouts, FMX.Objects,
+  FMX.ListView.Types, FMX.ListView.Appearances, FMX.ListView.Adapters.Base,
+  FMX.ListView;
 
 type
   TFormPrincipal = class(TForm)
-    TabControl: TTabControl;
-    TabHome: TTabItem;
-    TabLancamentos: TTabItem;
-    TabUserConfig: TTabItem;
     LytToolbarHomer: TLayout;
     LblToolbarHomer: TLabel;
     LytSaldoReceitaDespesa: TLayout;
@@ -21,14 +19,26 @@ type
     Label1: TLabel;
     LblValorSaldo: TLabel;
     LytTotalReceitas: TLayout;
-    Image2: TImage;
+    ImgValorReceita: TImage;
     LblReceita: TLabel;
     LblValorReceita: TLabel;
     LytDespesas: TLayout;
-    Image3: TImage;
+    ImgValorDespesa: TImage;
     LblDespesa: TLabel;
     LblValorDespesa: TLabel;
     RecCabecalhoHome: TRectangle;
+    Rectangle1: TRectangle;
+    LblUltimosLancamentos: TLabel;
+    Label2: TLabel;
+    RectBtnAbas: TRectangle;
+    RectAbas: TRectangle;
+    LytAbas: TLayout;
+    Image1: TImage;
+    ListView1: TListView;
+    ImgHome: TImage;
+    ImgLancamentos: TImage;
+    ImgConfig: TImage;
+    LvLancamentos: TListView;
   private
     { Private declarations }
   public
