@@ -34,12 +34,18 @@ type
     RectAbas: TRectangle;
     LytAbas: TLayout;
     Image1: TImage;
-    ListView1: TListView;
     ImgHome: TImage;
     ImgLancamentos: TImage;
     ImgConfig: TImage;
     LvLancamentos: TListView;
+    Layout1: TLayout;
+    LayoutReceitaEDespesas: TLayout;
+    procedure FormShow(Sender: TObject);
   private
+    procedure AddLancamentosLv(id_lancamentos: integer;
+                               descricao, categoria,
+                               dt: string; valor: double);
+    procedure ListarUltimosLacamentos;
     { Private declarations }
   public
     { Public declarations }
@@ -51,5 +57,44 @@ var
 implementation
 
 {$R *.fmx}
+
+procedure TFormPrincipal.AddLancamentosLv(id_lancamentos: integer;
+                                          descricao, categoria,
+                                          dt: string; valor: double);
+
+var
+        item: TListViewItem;
+begin
+        item:= LvLancamentos.Items.Add;
+        item.Height:= 50;
+        item.Tag:= id_lancamentos;
+
+        TListItemText(item.Objects.FindDrawable('TxtDescricao')).Text := descricao;
+        TListItemText(item.Objects.FindDrawable('TxtCategoria')).Text := categoria;
+        TListItemText(item.Objects.FindDrawable('TxtValor')).Text := dt;
+        TListItemText(item.Objects.FindDrawable('TxtData')).Text := FormatFloat('R$#,##0.00', valor);
+end;
+
+procedure TFormPrincipal.FormShow(Sender: TObject);
+begin
+        ListarUltimosLacamentos
+end;
+
+procedure TFormPrincipal.ListarUltimosLacamentos;
+
+begin
+        AddLancamentosLv(1, 'Compra de gasolina', 'Transporte', '01/08/2025', 170);
+        AddLancamentosLv(2, 'Almoço no restaurante', 'Alimentação', '02/08/2025', 45);
+        AddLancamentosLv(3, 'Supermercado', 'Alimentação', '03/08/2025', 320);
+        AddLancamentosLv(4, 'Cinema', 'Lazer', '04/08/2025', 25);
+        AddLancamentosLv(5, 'Mensalidade Academia', 'Saúde', '05/08/2025', 120);
+        AddLancamentosLv(6, 'Conta de luz', 'Moradia', '06/08/2025', 180);
+        AddLancamentosLv(7, 'Pagamento do cartão', 'Dívidas', '07/08/2025', 500);
+        AddLancamentosLv(8, 'Uber para trabalho', 'Transporte', '08/08/2025', 35);
+        AddLancamentosLv(9, 'Água e esgoto', 'Moradia', '09/08/2025', 90);
+        AddLancamentosLv(10, 'Compra de roupas', 'Vestuário', '10/08/2025', 250);
+        AddLancamentosLv(11, 'Compra de gasolina', 'Transporte', '01/09', 170);
+
+end;
 
 end.
