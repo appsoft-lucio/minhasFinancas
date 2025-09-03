@@ -1,9 +1,9 @@
 object FormPrincipal: TFormPrincipal
   Left = 0
   Top = 0
-  Caption = 'Minhas Financas'
-  ClientHeight = 710
-  ClientWidth = 350
+  Caption = 'Minhas Finan'#231'as'
+  ClientHeight = 650
+  ClientWidth = 400
   Fill.Kind = Solid
   Position = MainFormCenter
   FormFactor.Width = 320
@@ -15,13 +15,13 @@ object FormPrincipal: TFormPrincipal
     Align = Top
     Fill.Color = xFFFAFAFA
     Sides = [Bottom]
-    Size.Width = 350.000000000000000000
+    Size.Width = 400.000000000000000000
     Size.Height = 209.000000000000000000
     Size.PlatformDefault = False
     Stroke.Color = xFFE9E9E9
     object LytToolbarHomer: TLayout
       Align = Top
-      Size.Width = 350.000000000000000000
+      Size.Width = 400.000000000000000000
       Size.Height = 50.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 0
@@ -43,19 +43,19 @@ object FormPrincipal: TFormPrincipal
     object LytSaldoReceitaDespesa: TLayout
       Align = Top
       Position.Y = 50.000000000000000000
-      Size.Width = 350.000000000000000000
+      Size.Width = 400.000000000000000000
       Size.Height = 160.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 1
       object Layout1: TLayout
         Align = Top
-        Size.Width = 350.000000000000000000
+        Size.Width = 400.000000000000000000
         Size.Height = 169.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         object LytSaldo: TLayout
           Align = Top
-          Size.Width = 350.000000000000000000
+          Size.Width = 400.000000000000000000
           Size.Height = 65.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 0
@@ -563,7 +563,7 @@ object FormPrincipal: TFormPrincipal
               end>
             Align = Right
             Margins.Right = 15.000000000000000000
-            Position.X = 254.000000000000000000
+            Position.X = 304.000000000000000000
             Size.Width = 81.000000000000000000
             Size.Height = 65.000000000000000000
             Size.PlatformDefault = False
@@ -595,14 +595,14 @@ object FormPrincipal: TFormPrincipal
             TextSettings.Font.Size = 26.000000000000000000
             TextSettings.Font.StyleExt = {00090000000000000004000000}
             TextSettings.FontColor = xFF4B4B4B
-            Text = 'R$3.000,00'
+            Text = 'R$1.500,00'
             TabOrder = 1
           end
         end
         object LayoutReceitaEDespesas: TLayout
           Align = Top
           Position.Y = 65.000000000000000000
-          Size.Width = 350.000000000000000000
+          Size.Width = 400.000000000000000000
           Size.Height = 100.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 1
@@ -1644,7 +1644,7 @@ object FormPrincipal: TFormPrincipal
               TextSettings.Font.Size = 16.000000000000000000
               TextSettings.Font.StyleExt = {00050000000000000004000000}
               TextSettings.FontColor = xFF4B4B4B
-              Text = 'R$3.000,00'
+              Text = 'R$2.750,00'
               TabOrder = 1
             end
           end
@@ -1654,7 +1654,7 @@ object FormPrincipal: TFormPrincipal
             Padding.Bottom = 10.000000000000000000
             Margins.Top = 5.000000000000000000
             Margins.Right = 10.000000000000000000
-            Position.X = 180.000000000000000000
+            Position.X = 230.000000000000000000
             Position.Y = 5.000000000000000000
             Size.Width = 160.000000000000000000
             Size.Height = 95.000000000000000000
@@ -2694,7 +2694,7 @@ object FormPrincipal: TFormPrincipal
               TextSettings.Font.Size = 16.000000000000000000
               TextSettings.Font.StyleExt = {00050000000000000004000000}
               TextSettings.FontColor = xFF4B4B4B
-              Text = 'R$1.800,00'
+              Text = 'R$1.500,00'
               TabOrder = 1
             end
           end
@@ -2707,7 +2707,7 @@ object FormPrincipal: TFormPrincipal
     Fill.Color = claWhite
     Position.Y = 209.000000000000000000
     Sides = [Bottom]
-    Size.Width = 350.000000000000000000
+    Size.Width = 400.000000000000000000
     Size.Height = 50.000000000000000000
     Size.PlatformDefault = False
     Stroke.Color = xFFE9E9E9
@@ -2728,8 +2728,9 @@ object FormPrincipal: TFormPrincipal
     object Label2: TLabel
       Align = Right
       StyledSettings = []
+      HitTest = True
       Margins.Right = 10.000000000000000000
-      Position.X = 254.000000000000000000
+      Position.X = 304.000000000000000000
       Size.Width = 86.000000000000000000
       Size.Height = 50.000000000000000000
       Size.PlatformDefault = False
@@ -2740,14 +2741,15 @@ object FormPrincipal: TFormPrincipal
       TextSettings.HorzAlign = Trailing
       Text = 'Ver Todos'
       TabOrder = 1
+      OnClick = Label2Click
     end
   end
   object RectBtnAbas: TRectangle
     Align = Bottom
     Fill.Color = claWhite
-    Position.Y = 640.000000000000000000
+    Position.Y = 580.000000000000000000
     Sides = []
-    Size.Width = 350.000000000000000000
+    Size.Width = 400.000000000000000000
     Size.Height = 70.000000000000000000
     Size.PlatformDefault = False
     Stroke.Kind = None
@@ -3535,8 +3537,8 @@ object FormPrincipal: TFormPrincipal
     ItemSpaces.Left = 0.000000000000000000
     ItemSpaces.Right = 0.000000000000000000
     Align = Client
-    Size.Width = 350.000000000000000000
-    Size.Height = 381.000000000000000000
+    Size.Width = 400.000000000000000000
+    Size.Height = 321.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 0
     ItemAppearance.ItemHeight = 50
@@ -3547,11 +3549,12 @@ object FormPrincipal: TFormPrincipal
         Appearance.Font.Family = 'Roboto'
         Appearance.Font.Size = 14.000000000000000000
         Appearance.TextAlign = Leading
+        Appearance.WordWrap = True
         Appearance.TextColor = xFF6B6B6B
-        Appearance.Width = 211.000000000000000000
+        Appearance.Width = 240.000000000000000000
         Appearance.Height = 22.000000000000000000
         Appearance.VertAlign = Center
-        Appearance.PlaceOffset.X = 8.000000000000000000
+        Appearance.PlaceOffset.X = 13.000000000000000000
         Appearance.PlaceOffset.Y = -15.000000000000000000
       end
       item
@@ -3562,9 +3565,9 @@ object FormPrincipal: TFormPrincipal
         Appearance.TextAlign = Leading
         Appearance.TextVertAlign = Leading
         Appearance.TextColor = xFFBEBEBE
-        Appearance.Width = 210.000000000000000000
+        Appearance.Width = 239.000000000000000000
         Appearance.Height = 22.000000000000000000
-        Appearance.PlaceOffset.X = 8.000000000000000000
+        Appearance.PlaceOffset.X = 13.000000000000000000
         Appearance.PlaceOffset.Y = 29.000000000000000000
       end
       item
@@ -3577,7 +3580,7 @@ object FormPrincipal: TFormPrincipal
         Appearance.TextColor = xFF6B6B6B
         Appearance.Width = 85.000000000000000000
         Appearance.Height = 22.000000000000000000
-        Appearance.PlaceOffset.X = 241.000000000000000000
+        Appearance.PlaceOffset.X = 293.000000000000000000
       end
       item
         AppearanceObjectName = 'TxtData'
@@ -3589,7 +3592,7 @@ object FormPrincipal: TFormPrincipal
         Appearance.TextColor = xFFBEBEBE
         Appearance.Width = 85.000000000000000000
         Appearance.Height = 22.000000000000000000
-        Appearance.PlaceOffset.X = 241.000000000000000000
+        Appearance.PlaceOffset.X = 293.000000000000000000
         Appearance.PlaceOffset.Y = 29.000000000000000000
       end>
     ItemAppearanceObjects.ItemEditObjects.ObjectsCollection = <

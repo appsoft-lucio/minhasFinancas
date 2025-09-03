@@ -1,67 +1,52 @@
-unit UnitPrincipal;
+unit UnitLancamento;
 
 interface
 
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
-  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.TabControl,
-  FMX.Controls.Presentation, FMX.StdCtrls, FMX.Layouts, FMX.Objects,
-  FMX.ListView.Types, FMX.ListView.Appearances, FMX.ListView.Adapters.Base,
-  FMX.ListView;
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
+  FMX.Layouts, FMX.Controls.Presentation, FMX.StdCtrls, FMX.ListView.Types,
+  FMX.ListView.Appearances, FMX.ListView.Adapters.Base, FMX.ListView;
 
 type
-  TFormPrincipal = class(TForm)
-    LytToolbarHomer: TLayout;
-    LblToolbarHomer: TLabel;
-    LytSaldoReceitaDespesa: TLayout;
-    LytSaldo: TLayout;
-    ImgSaldoMes: TImage;
-    Label1: TLabel;
-    LblValorSaldo: TLabel;
-    LytTotalReceitas: TLayout;
-    ImgValorReceita: TImage;
-    LblReceita: TLabel;
-    LblValorReceita: TLabel;
-    LytDespesas: TLayout;
-    ImgValorDespesa: TImage;
-    LblDespesa: TLabel;
-    LblValorDespesa: TLabel;
-    RecCabecalhoHome: TRectangle;
-    Rectangle1: TRectangle;
-    LblUltimosLancamentos: TLabel;
-    Label2: TLabel;
-    RectBtnAbas: TRectangle;
-    RectAbas: TRectangle;
-    LytAbas: TLayout;
-    Image1: TImage;
-    ImgHome: TImage;
-    ImgLancamentos: TImage;
-    ImgConfig: TImage;
-    LvLancamentos: TListView;
+  TFormLancamento = class(TForm)
+    LytCabecalhoLancamento: TLayout;
+    ImgBackLacamento: TImage;
+    LblCabecalhoLancamentos: TLabel;
+    RectDataLacamentos: TRectangle;
+    LblDada: TLabel;
+    RectMeses: TRectangle;
+    ImgMesNext: TImage;
+    ImgMesBack: TImage;
+    Rect: TRectangle;
     Layout1: TLayout;
-    LayoutReceitaEDespesas: TLayout;
+    LblLancamentosReceita: TLabel;
+    LblLancamentosValorReceita: TLabel;
+    LblLancamentosDespesa: TLabel;
+    LblLancamentosValorDespesas: TLabel;
+    LblLancamentosSaldo: TLabel;
+    LblLancamentosValorSaldo: TLabel;
+    LvLancamentos: TListView;
     procedure FormShow(Sender: TObject);
-    procedure Label2Click(Sender: TObject);
+    procedure ImgBackLacamentoClick(Sender: TObject);
   private
     procedure AddLancamentosLv(id_lancamentos: integer;
                                descricao, categoria,
                                dt: string; valor: double);
-    procedure ListarUltimosLacamentos;
+    procedure ListarLacamentos;
     { Private declarations }
   public
     { Public declarations }
   end;
 
 var
-  FormPrincipal: TFormPrincipal;
+  FormLancamento: TFormLancamento;
 
 implementation
 
 {$R *.fmx}
 
-uses UnitLancamento;
-
-procedure TFormPrincipal.AddLancamentosLv(id_lancamentos: integer;
+procedure TFormLancamento.AddLancamentosLv(id_lancamentos: integer;
                                           descricao, categoria,
                                           dt: string; valor: double);
 
@@ -78,20 +63,17 @@ begin
         TListItemText(item.Objects.FindDrawable('TxtData')).Text := FormatFloat('R$#,##0.00', valor);
 end;
 
-procedure TFormPrincipal.FormShow(Sender: TObject);
+procedure TFormLancamento.FormShow(Sender: TObject);
 begin
-        ListarUltimosLacamentos
+        ListarLacamentos;
 end;
 
-procedure TFormPrincipal.Label2Click(Sender: TObject);
+procedure TFormLancamento.ImgBackLacamentoClick(Sender: TObject);
 begin
-        if NOT Assigned(FormLancamento) then
-        Application.CreateForm(TFormLancamento, FormLancamento);
-
-        FormLancamento.Show;
+        Close;
 end;
 
-procedure TFormPrincipal.ListarUltimosLacamentos;
+procedure TFormLancamento.ListarLacamentos;
 
 begin
         AddLancamentosLv(1, 'Compra de gasolina', 'Transporte', '01/08/2025', 170);
