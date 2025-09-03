@@ -29,6 +29,7 @@ type
     LvLancamentos: TListView;
     procedure FormShow(Sender: TObject);
     procedure ImgBackLacamentoClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     procedure AddLancamentosLv(id_lancamentos: integer;
                                descricao, categoria,
@@ -61,6 +62,12 @@ begin
         TListItemText(item.Objects.FindDrawable('TxtCategoria')).Text := categoria;
         TListItemText(item.Objects.FindDrawable('TxtValor')).Text := dt;
         TListItemText(item.Objects.FindDrawable('TxtData')).Text := FormatFloat('R$#,##0.00', valor);
+end;
+
+procedure TFormLancamento.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+        Action:= TCloseAction.caFree;
+        FormLancamento:= nil;
 end;
 
 procedure TFormLancamento.FormShow(Sender: TObject);
