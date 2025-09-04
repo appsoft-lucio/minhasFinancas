@@ -5,13 +5,15 @@ uses
   FMX.Forms,
   UnitLogin in 'UnitLogin.pas' {FormLogin},
   UnitPrincipal in 'UnitPrincipal.pas' {FormPrincipal},
-  UnitLancamento in 'UnitLancamento.pas' {FormLancamento};
+  UnitLancamento in 'UnitLancamento.pas' {FormLancamento},
+  UnitConfig in 'UnitConfig.pas' {FormConfig};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.CreateForm(TFormPrincipal, FormPrincipal);
+  Application.CreateForm(TFormConfig, FormConfig);
   Application.CreateForm(TFormLancamento, FormLancamento);
   Application.CreateForm(TFormLogin, FormLogin);
   Application.Run;

@@ -119,7 +119,9 @@ object FormLancamento: TFormLancamento
           FileName = 'E:\git_hub\minhasFinancas\Image\backLaranja.png'
         end>
       Align = Left
-      Size.Width = 30.000000000000000000
+      Margins.Left = 10.000000000000000000
+      Position.X = 10.000000000000000000
+      Size.Width = 40.000000000000000000
       Size.Height = 50.000000000000000000
       Size.PlatformDefault = False
       OnClick = ImgBackLacamentoClick
@@ -458,14 +460,14 @@ object FormLancamento: TFormLancamento
     Stroke.Kind = None
     object Layout1: TLayout
       Align = Center
-      Size.Width = 261.000000000000000000
+      Size.Width = 284.000000000000000000
       Size.Height = 50.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 1
       object LblLancamentosReceita: TLabel
         StyledSettings = [Size, Style]
         Position.Y = 8.000000000000000000
-        Size.Width = 70.000000000000000000
+        Size.Width = 100.000000000000000000
         Size.Height = 17.000000000000000000
         Size.PlatformDefault = False
         TextSettings.Font.Family = 'Roboto'
@@ -477,13 +479,13 @@ object FormLancamento: TFormLancamento
       object LblLancamentosValorReceita: TLabel
         StyledSettings = []
         Position.Y = 25.000000000000000000
-        Size.Width = 70.000000000000000000
+        Size.Width = 100.000000000000000000
         Size.Height = 17.000000000000000000
         Size.PlatformDefault = False
         TextSettings.Font.Family = 'Roboto'
-        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.Font.StyleExt = {00090000000000000004000000}
         TextSettings.FontColor = claWhite
-        TextSettings.HorzAlign = Trailing
+        TextSettings.HorzAlign = Center
         Text = 'R$2.750,00'
         TabOrder = 3
       end
@@ -491,7 +493,7 @@ object FormLancamento: TFormLancamento
         StyledSettings = [Size, Style]
         Position.X = 94.000000000000000000
         Position.Y = 8.000000000000000000
-        Size.Width = 70.000000000000000000
+        Size.Width = 100.000000000000000000
         Size.Height = 17.000000000000000000
         Size.PlatformDefault = False
         TextSettings.Font.Family = 'Roboto'
@@ -504,13 +506,13 @@ object FormLancamento: TFormLancamento
         StyledSettings = []
         Position.X = 94.000000000000000000
         Position.Y = 25.000000000000000000
-        Size.Width = 70.000000000000000000
+        Size.Width = 100.000000000000000000
         Size.Height = 17.000000000000000000
         Size.PlatformDefault = False
         TextSettings.Font.Family = 'Roboto'
-        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.Font.StyleExt = {00090000000000000004000000}
         TextSettings.FontColor = claWhite
-        TextSettings.HorzAlign = Trailing
+        TextSettings.HorzAlign = Center
         Text = 'R$1.500,00'
         TabOrder = 1
       end
@@ -518,7 +520,7 @@ object FormLancamento: TFormLancamento
         StyledSettings = [Size, Style]
         Position.X = 184.000000000000000000
         Position.Y = 8.000000000000000000
-        Size.Width = 70.000000000000000000
+        Size.Width = 100.000000000000000000
         Size.Height = 17.000000000000000000
         Size.PlatformDefault = False
         TextSettings.Font.Family = 'Roboto'
@@ -531,13 +533,13 @@ object FormLancamento: TFormLancamento
         StyledSettings = []
         Position.X = 184.000000000000000000
         Position.Y = 25.000000000000000000
-        Size.Width = 70.000000000000000000
+        Size.Width = 100.000000000000000000
         Size.Height = 17.000000000000000000
         Size.PlatformDefault = False
         TextSettings.Font.Family = 'Roboto'
-        TextSettings.Font.StyleExt = {00070000000000000004000000}
+        TextSettings.Font.StyleExt = {00090000000000000004000000}
         TextSettings.FontColor = claWhite
-        TextSettings.HorzAlign = Trailing
+        TextSettings.HorzAlign = Center
         Text = 'R$1.250,00'
         TabOrder = 0
       end
@@ -555,7 +557,7 @@ object FormLancamento: TFormLancamento
     Size.Height = 485.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 0
-    ItemAppearance.ItemHeight = 50
+    ItemAppearance.ItemHeight = 75
     ItemAppearanceObjects.ItemObjects.ObjectsCollection = <
       item
         AppearanceObjectName = 'TxtDescricao'
@@ -565,8 +567,8 @@ object FormLancamento: TFormLancamento
         Appearance.TextAlign = Leading
         Appearance.WordWrap = True
         Appearance.TextColor = xFF6B6B6B
-        Appearance.Width = 240.000000000000000000
-        Appearance.Height = 22.000000000000000000
+        Appearance.Width = 260.000000000000000000
+        Appearance.Height = 45.000000000000000000
         Appearance.VertAlign = Center
         Appearance.PlaceOffset.X = 13.000000000000000000
         Appearance.PlaceOffset.Y = -15.000000000000000000
@@ -579,10 +581,10 @@ object FormLancamento: TFormLancamento
         Appearance.TextAlign = Leading
         Appearance.TextVertAlign = Leading
         Appearance.TextColor = xFFBEBEBE
-        Appearance.Width = 239.000000000000000000
+        Appearance.Width = 260.000000000000000000
         Appearance.Height = 22.000000000000000000
         Appearance.PlaceOffset.X = 13.000000000000000000
-        Appearance.PlaceOffset.Y = 29.000000000000000000
+        Appearance.PlaceOffset.Y = 50.000000000000000000
       end
       item
         AppearanceObjectName = 'TxtValor'
@@ -592,9 +594,10 @@ object FormLancamento: TFormLancamento
         Appearance.TextAlign = Trailing
         Appearance.TextVertAlign = Trailing
         Appearance.TextColor = xFF6B6B6B
-        Appearance.Width = 85.000000000000000000
+        Appearance.Width = 100.000000000000000000
         Appearance.Height = 22.000000000000000000
-        Appearance.PlaceOffset.X = 293.000000000000000000
+        Appearance.PlaceOffset.X = 285.000000000000000000
+        Appearance.PlaceOffset.Y = 10.000000000000000000
       end
       item
         AppearanceObjectName = 'TxtData'
@@ -604,10 +607,10 @@ object FormLancamento: TFormLancamento
         Appearance.Font.StyleExt = {00070000000000000004000000}
         Appearance.TextAlign = Trailing
         Appearance.TextColor = xFFBEBEBE
-        Appearance.Width = 85.000000000000000000
+        Appearance.Width = 100.000000000000000000
         Appearance.Height = 22.000000000000000000
-        Appearance.PlaceOffset.X = 293.000000000000000000
-        Appearance.PlaceOffset.Y = 29.000000000000000000
+        Appearance.PlaceOffset.X = 285.000000000000000000
+        Appearance.PlaceOffset.Y = 50.000000000000000000
       end>
     ItemAppearanceObjects.ItemEditObjects.ObjectsCollection = <
       item

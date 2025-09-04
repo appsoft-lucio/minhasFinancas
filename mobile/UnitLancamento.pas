@@ -55,7 +55,7 @@ var
         item: TListViewItem;
 begin
         item:= LvLancamentos.Items.Add;
-        item.Height:= 50;
+        item.Height:= 75;
         item.Tag:= id_lancamentos;
 
         TListItemText(item.Objects.FindDrawable('TxtDescricao')).Text := descricao;

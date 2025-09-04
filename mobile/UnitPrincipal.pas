@@ -33,15 +33,16 @@ type
     RectBtnAbas: TRectangle;
     RectAbas: TRectangle;
     LytAbas: TLayout;
-    Image1: TImage;
-    ImgHome: TImage;
-    ImgLancamentos: TImage;
-    ImgConfig: TImage;
+    ImgAdicinar: TImage;
+    ImgAbaHome: TImage;
+    ImgAbaLancamentos: TImage;
+    ImgAbaConfig: TImage;
     LvLancamentos: TListView;
     Layout1: TLayout;
     LayoutReceitaEDespesas: TLayout;
     procedure FormShow(Sender: TObject);
     procedure Label2Click(Sender: TObject);
+    procedure ImgAbaConfigClick(Sender: TObject);
   private
     procedure AddLancamentosLv(id_lancamentos: integer;
                                descricao, categoria,
@@ -59,7 +60,7 @@ implementation
 
 {$R *.fmx}
 
-uses UnitLancamento;
+uses UnitLancamento, UnitConfig;
 
 procedure TFormPrincipal.AddLancamentosLv(id_lancamentos: integer;
                                           descricao, categoria,
@@ -69,7 +70,7 @@ var
         item: TListViewItem;
 begin
         item:= LvLancamentos.Items.Add;
-        item.Height:= 50;
+        item.Height:= 75;
         item.Tag:= id_lancamentos;
 
         TListItemText(item.Objects.FindDrawable('TxtDescricao')).Text := descricao;
@@ -81,6 +82,14 @@ end;
 procedure TFormPrincipal.FormShow(Sender: TObject);
 begin
         ListarUltimosLacamentos
+end;
+
+procedure TFormPrincipal.ImgAbaConfigClick(Sender: TObject);
+begin
+        if NOT Assigned(FormConfig) then
+        Application.CreateForm(TFormConfig, FormConfig);
+
+        FormConfig.Show;
 end;
 
 procedure TFormPrincipal.Label2Click(Sender: TObject);
@@ -103,7 +112,7 @@ begin
         AddLancamentosLv(7, 'Pagamento do cartão', 'Dívidas', '07/08/2025', 500);
         AddLancamentosLv(8, 'Uber para trabalho', 'Transporte', '08/08/2025', 35);
         AddLancamentosLv(9, 'Água e esgoto', 'Moradia', '09/08/2025', 90);
-        AddLancamentosLv(10, 'Compra de roupas', 'Vestuário', '10/08/2025', 250);
+        AddLancamentosLv(10, 'Compra de roupas', 'Vestuário', '10/08/2025', 2050);
         AddLancamentosLv(11, 'Compra de gasolina', 'Transporte', '01/09', 170);
 
 end;

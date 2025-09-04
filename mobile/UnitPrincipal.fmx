@@ -595,7 +595,7 @@ object FormPrincipal: TFormPrincipal
             TextSettings.Font.Size = 26.000000000000000000
             TextSettings.Font.StyleExt = {00090000000000000004000000}
             TextSettings.FontColor = xFF4B4B4B
-            Text = 'R$1.500,00'
+            Text = 'R$1.250,00'
             TabOrder = 1
           end
         end
@@ -2714,8 +2714,8 @@ object FormPrincipal: TFormPrincipal
     object LblUltimosLancamentos: TLabel
       Align = Left
       StyledSettings = []
-      Margins.Left = 10.000000000000000000
-      Position.X = 10.000000000000000000
+      Margins.Left = 20.000000000000000000
+      Position.X = 20.000000000000000000
       Size.Width = 160.000000000000000000
       Size.Height = 50.000000000000000000
       Size.PlatformDefault = False
@@ -2729,8 +2729,8 @@ object FormPrincipal: TFormPrincipal
       Align = Right
       StyledSettings = []
       HitTest = True
-      Margins.Right = 10.000000000000000000
-      Position.X = 304.000000000000000000
+      Margins.Right = 30.000000000000000000
+      Position.X = 284.000000000000000000
       Size.Width = 86.000000000000000000
       Size.Height = 50.000000000000000000
       Size.PlatformDefault = False
@@ -2762,13 +2762,13 @@ object FormPrincipal: TFormPrincipal
       object RectAbas: TRectangle
         Align = Left
         Fill.Color = xFF4B4B4B
-        Size.Width = 179.000000000000000000
+        Size.Width = 190.000000000000000000
         Size.Height = 50.000000000000000000
         Size.PlatformDefault = False
         Stroke.Kind = None
         XRadius = 15.000000000000000000
         YRadius = 15.000000000000000000
-        object ImgConfig: TImage
+        object ImgAbaConfig: TImage
           MultiResBitmap.Height = 64
           MultiResBitmap.Width = 64
           MultiResBitmap = <
@@ -2828,13 +2828,15 @@ object FormPrincipal: TFormPrincipal
                 0305C7A72948E4E96A0000000049454E44AE426082}
               FileName = 'E:\git_hub\minhasFinancas\Image\aba-config.png'
             end>
-          Position.X = 135.000000000000000000
+          Margins.Left = 10.000000000000000000
+          Position.X = 142.000000000000000000
           Position.Y = 8.000000000000000000
           Size.Width = 35.000000000000000000
           Size.Height = 35.000000000000000000
           Size.PlatformDefault = False
+          OnClick = ImgAbaConfigClick
         end
-        object ImgHome: TImage
+        object ImgAbaHome: TImage
           MultiResBitmap.Height = 64
           MultiResBitmap.Width = 64
           MultiResBitmap = <
@@ -2883,13 +2885,13 @@ object FormPrincipal: TFormPrincipal
                 44AE426082}
               FileName = 'E:\git_hub\minhasFinancas\Image\aba-home.png'
             end>
-          Position.X = 8.000000000000000000
+          Position.X = 15.000000000000000000
           Position.Y = 8.000000000000000000
           Size.Width = 35.000000000000000000
           Size.Height = 35.000000000000000000
           Size.PlatformDefault = False
         end
-        object ImgLancamentos: TImage
+        object ImgAbaLancamentos: TImage
           MultiResBitmap.Height = 64
           MultiResBitmap.Width = 64
           MultiResBitmap = <
@@ -2938,14 +2940,14 @@ object FormPrincipal: TFormPrincipal
                 2A784BFB35D1E61F97E8CA5DBACC683B0000000049454E44AE426082}
               FileName = 'E:\git_hub\minhasFinancas\Image\aba-lancamentos.png'
             end>
-          Position.X = 73.000000000000000000
+          Position.X = 80.000000000000000000
           Position.Y = 8.000000000000000000
           Size.Width = 35.000000000000000000
           Size.Height = 35.000000000000000000
           Size.PlatformDefault = False
         end
       end
-      object Image1: TImage
+      object ImgAdicinar: TImage
         MultiResBitmap.Height = 512
         MultiResBitmap.Width = 512
         MultiResBitmap = <
@@ -3523,7 +3525,7 @@ object FormPrincipal: TFormPrincipal
         Align = Client
         Margins.Top = 5.000000000000000000
         Margins.Bottom = 5.000000000000000000
-        Size.Width = 70.000000000000000000
+        Size.Width = 59.000000000000000000
         Size.Height = 40.000000000000000000
         Size.PlatformDefault = False
       end
@@ -3541,7 +3543,7 @@ object FormPrincipal: TFormPrincipal
     Size.Height = 321.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 0
-    ItemAppearance.ItemHeight = 50
+    ItemAppearance.ItemHeight = 75
     ItemAppearanceObjects.ItemObjects.ObjectsCollection = <
       item
         AppearanceObjectName = 'TxtDescricao'
@@ -3551,8 +3553,8 @@ object FormPrincipal: TFormPrincipal
         Appearance.TextAlign = Leading
         Appearance.WordWrap = True
         Appearance.TextColor = xFF6B6B6B
-        Appearance.Width = 240.000000000000000000
-        Appearance.Height = 22.000000000000000000
+        Appearance.Width = 260.000000000000000000
+        Appearance.Height = 45.000000000000000000
         Appearance.VertAlign = Center
         Appearance.PlaceOffset.X = 13.000000000000000000
         Appearance.PlaceOffset.Y = -15.000000000000000000
@@ -3565,10 +3567,10 @@ object FormPrincipal: TFormPrincipal
         Appearance.TextAlign = Leading
         Appearance.TextVertAlign = Leading
         Appearance.TextColor = xFFBEBEBE
-        Appearance.Width = 239.000000000000000000
+        Appearance.Width = 260.000000000000000000
         Appearance.Height = 22.000000000000000000
         Appearance.PlaceOffset.X = 13.000000000000000000
-        Appearance.PlaceOffset.Y = 29.000000000000000000
+        Appearance.PlaceOffset.Y = 48.000000000000000000
       end
       item
         AppearanceObjectName = 'TxtValor'
@@ -3578,9 +3580,10 @@ object FormPrincipal: TFormPrincipal
         Appearance.TextAlign = Trailing
         Appearance.TextVertAlign = Trailing
         Appearance.TextColor = xFF6B6B6B
-        Appearance.Width = 85.000000000000000000
+        Appearance.Width = 100.000000000000000000
         Appearance.Height = 22.000000000000000000
-        Appearance.PlaceOffset.X = 293.000000000000000000
+        Appearance.PlaceOffset.X = 283.000000000000000000
+        Appearance.PlaceOffset.Y = 12.000000000000000000
       end
       item
         AppearanceObjectName = 'TxtData'
@@ -3590,10 +3593,10 @@ object FormPrincipal: TFormPrincipal
         Appearance.Font.StyleExt = {00070000000000000004000000}
         Appearance.TextAlign = Trailing
         Appearance.TextColor = xFFBEBEBE
-        Appearance.Width = 85.000000000000000000
+        Appearance.Width = 100.000000000000000000
         Appearance.Height = 22.000000000000000000
-        Appearance.PlaceOffset.X = 293.000000000000000000
-        Appearance.PlaceOffset.Y = 29.000000000000000000
+        Appearance.PlaceOffset.X = 283.000000000000000000
+        Appearance.PlaceOffset.Y = 48.000000000000000000
       end>
     ItemAppearanceObjects.ItemEditObjects.ObjectsCollection = <
       item
