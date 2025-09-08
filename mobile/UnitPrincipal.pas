@@ -43,6 +43,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure Label2Click(Sender: TObject);
     procedure ImgAbaConfigClick(Sender: TObject);
+    procedure ImgAdicinarClick(Sender: TObject);
   private
     procedure AddLancamentosLv(id_lancamentos: integer;
                                descricao, categoria,
@@ -60,7 +61,7 @@ implementation
 
 {$R *.fmx}
 
-uses UnitLancamento, UnitConfig;
+uses UnitLancamento, UnitConfig, UnitLancamentoCad;
 
 procedure TFormPrincipal.AddLancamentosLv(id_lancamentos: integer;
                                           descricao, categoria,
@@ -90,6 +91,14 @@ begin
         Application.CreateForm(TFormConfig, FormConfig);
 
         FormConfig.Show;
+end;
+
+procedure TFormPrincipal.ImgAdicinarClick(Sender: TObject);
+begin
+        if NOT Assigned(FormLancamentoCad) then
+        Application.CreateForm(TFormLancamentoCad, FormLancamentoCad);
+
+        FormLancamentoCad.Show;
 end;
 
 procedure TFormPrincipal.Label2Click(Sender: TObject);

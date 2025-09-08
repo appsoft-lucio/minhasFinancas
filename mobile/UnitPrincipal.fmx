@@ -3528,6 +3528,7 @@ object FormPrincipal: TFormPrincipal
         Size.Width = 59.000000000000000000
         Size.Height = 40.000000000000000000
         Size.PlatformDefault = False
+        OnClick = ImgAdicinarClick
       end
     end
   end
