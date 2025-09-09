@@ -18,6 +18,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure ImgBackLacamentoClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Image1Click(Sender: TObject);
   private
     procedure AddCategoriaLv(id_categoria: integer; descricao: string);
     procedure ListarCategoria;
@@ -32,6 +33,8 @@ var
 implementation
 
 {$R *.fmx}
+
+uses UnitNewCategory;
 
 procedure TFormCategoria.AddCategoriaLv(id_categoria: integer;
                                           descricao: string);
@@ -67,6 +70,14 @@ end;
 procedure TFormCategoria.FormShow(Sender: TObject);
 begin
         ListarCategoria;
+end;
+
+procedure TFormCategoria.Image1Click(Sender: TObject);
+begin
+        if not Assigned(FormNewCategory) then
+        Application.CreateForm(TFormNewCategory, FormNewCategory);
+
+        FormNewCategory.Show;
 end;
 
 procedure TFormCategoria.ImgBackLacamentoClick(Sender: TObject);

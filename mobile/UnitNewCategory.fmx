@@ -1,7 +1,7 @@
-object FormLancamentoCad: TFormLancamentoCad
+object FormNewCategory: TFormNewCategory
   Left = 0
   Top = 0
-  Caption = 'Lan'#231'amentos'
+  Caption = 'Categoria'
   ClientHeight = 650
   ClientWidth = 400
   Fill.Kind = Solid
@@ -27,9 +27,9 @@ object FormLancamentoCad: TFormLancamentoCad
       TextSettings.Font.Size = 18.000000000000000000
       TextSettings.Font.StyleExt = {00070000000000000004000000}
       TextSettings.HorzAlign = Center
-      Text = 'Novo Lan'#231'amento'
+      Text = 'Nova Categoria'
       TabOrder = 2
-      object ImgSalvarLancamento: TImage
+      object ImgSalvarCategoria: TImage
         MultiResBitmap.Height = 346
         MultiResBitmap.Width = 331
         MultiResBitmap = <
@@ -1236,7 +1236,7 @@ object FormLancamentoCad: TFormLancamentoCad
         Size.PlatformDefault = False
       end
     end
-    object ImgBackNovoLancamento: TImage
+    object ImgBackNovoCategoria: TImage
       MultiResBitmap.Height = 346
       MultiResBitmap.Width = 331
       MultiResBitmap = <
@@ -1329,10 +1329,10 @@ object FormLancamentoCad: TFormLancamentoCad
       Size.Width = 40.000000000000000000
       Size.Height = 60.000000000000000000
       Size.PlatformDefault = False
-      OnClick = ImgBackNovoLancamentoClick
+      OnClick = ImgBackNovoCategoriaClick
     end
   end
-  object LayoutNovoLancamento: TLayout
+  object LytNovoLancamento: TLayout
     Align = Client
     Margins.Left = 20.000000000000000000
     Margins.Top = 15.000000000000000000
@@ -1341,7 +1341,7 @@ object FormLancamentoCad: TFormLancamentoCad
     Size.Height = 575.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 1
-    object EditDescricao: TEdit
+    object EditCategoria: TEdit
       Touch.InteractiveGestures = [LongTap, DoubleTap]
       Align = Top
       TabOrder = 0
@@ -1349,102 +1349,8 @@ object FormLancamentoCad: TFormLancamentoCad
       Size.Width = 360.000000000000000000
       Size.Height = 32.000000000000000000
       Size.PlatformDefault = False
-      TextPrompt = 'Descri'#231#227'o do Lan'#231'amento'
+      TextPrompt = 'Descri'#231#227'o da Categoria'
       StyledSettings = [Size, Style, FontColor]
-    end
-    object Layout1: TLayout
-      Align = Top
-      Margins.Top = 20.000000000000000000
-      Position.Y = 52.000000000000000000
-      Size.Width = 360.000000000000000000
-      Size.Height = 50.000000000000000000
-      Size.PlatformDefault = False
-      TabOrder = 1
-      object Rectangle1: TRectangle
-        Align = Right
-        Fill.Kind = None
-        Margins.Top = 5.000000000000000000
-        Margins.Bottom = 5.000000000000000000
-        Position.X = 230.000000000000000000
-        Position.Y = 5.000000000000000000
-        Size.Width = 130.000000000000000000
-        Size.Height = 40.000000000000000000
-        Size.PlatformDefault = False
-        Stroke.Color = xFFD0D0D0
-        XRadius = 10.000000000000000000
-        YRadius = 10.000000000000000000
-        object Label1: TLabel
-          Align = Left
-          StyledSettings = [Family, Style]
-          Margins.Top = 5.000000000000000000
-          Margins.Bottom = 5.000000000000000000
-          Position.Y = 5.000000000000000000
-          Size.Width = 65.000000000000000000
-          Size.Height = 30.000000000000000000
-          Size.PlatformDefault = False
-          TextSettings.Font.Family = 'Roboto'
-          TextSettings.Font.Size = 16.000000000000000000
-          TextSettings.FontColor = xFFCC5500
-          TextSettings.HorzAlign = Center
-          Text = 'Receita'
-          TabOrder = 1
-        end
-        object Label2: TLabel
-          Align = Right
-          StyledSettings = [Family, Style]
-          Margins.Top = 5.000000000000000000
-          Margins.Bottom = 5.000000000000000000
-          Position.X = 65.000000000000000000
-          Position.Y = 5.000000000000000000
-          Size.Width = 65.000000000000000000
-          Size.Height = 30.000000000000000000
-          Size.PlatformDefault = False
-          TextSettings.Font.Family = 'Roboto'
-          TextSettings.Font.Size = 16.000000000000000000
-          TextSettings.FontColor = xFFACACAC
-          TextSettings.HorzAlign = Center
-          Text = 'Despesa'
-          TabOrder = 0
-        end
-      end
-      object Edit1: TEdit
-        Touch.InteractiveGestures = [LongTap, DoubleTap]
-        Align = Client
-        TabOrder = 1
-        TextSettings.Font.Family = 'Roboto'
-        Margins.Right = 10.000000000000000000
-        Size.Width = 220.000000000000000000
-        Size.Height = 32.000000000000000000
-        Size.PlatformDefault = False
-        TextPrompt = 'Valor'
-        StyledSettings = [Size, Style, FontColor]
-      end
-    end
-    object ComboBox1: TComboBox
-      Align = Top
-      Items.Strings = (
-        'Combustivel'#11
-        'Agua'#11
-        'Luz'#11
-        'Internet'#11
-        'Lazer')
-      ItemIndex = 4
-      Margins.Top = 20.000000000000000000
-      Position.Y = 122.000000000000000000
-      Size.Width = 360.000000000000000000
-      Size.Height = 32.000000000000000000
-      Size.PlatformDefault = False
-      TabOrder = 2
-    end
-    object DateEdit1: TDateEdit
-      Date = 45908.000000000000000000
-      Align = Top
-      Margins.Top = 20.000000000000000000
-      Position.Y = 174.000000000000000000
-      Size.Width = 360.000000000000000000
-      Size.Height = 32.000000000000000000
-      Size.PlatformDefault = False
-      TabOrder = 3
     end
     object Layout2: TLayout
       Align = Bottom
@@ -1452,7 +1358,7 @@ object FormLancamentoCad: TFormLancamentoCad
       Size.Width = 360.000000000000000000
       Size.Height = 85.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 4
+      TabOrder = 1
       object Image1: TImage
         MultiResBitmap.Height = 64
         MultiResBitmap.Width = 64

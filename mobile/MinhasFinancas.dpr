@@ -8,17 +8,23 @@ uses
   UnitLancamento in 'UnitLancamento.pas' {FormLancamento},
   UnitConfig in 'UnitConfig.pas' {FormConfig},
   UnitLancamentoCad in 'UnitLancamentoCad.pas' {FormLancamentoCad},
-  UnitCategoria in 'UnitCategoria.pas' {FormCategoria};
+  UnitCategoria in 'UnitCategoria.pas' {FormCategoria},
+  UnitNewCategory in 'UnitNewCategory.pas' {FormNewCategory},
+  UnitEditPrefil in 'UnitEditPrefil.pas' {FormEditPerfil},
+  UnitEditarSenha in 'UnitEditarSenha.pas' {FormEditarSenha};
 
 {$R *.res}
 
 begin
   Application.Initialize;
+  Application.CreateForm(TFormLogin, FormLogin);
   Application.CreateForm(TFormPrincipal, FormPrincipal);
   Application.CreateForm(TFormLancamentoCad, FormLancamentoCad);
   Application.CreateForm(TFormConfig, FormConfig);
   Application.CreateForm(TFormLancamento, FormLancamento);
-  Application.CreateForm(TFormLogin, FormLogin);
   Application.CreateForm(TFormCategoria, FormCategoria);
+  Application.CreateForm(TFormNewCategory, FormNewCategory);
+  Application.CreateForm(TFormEditPerfil, FormEditPerfil);
+  Application.CreateForm(TFormEditarSenha, FormEditarSenha);
   Application.Run;
 end.

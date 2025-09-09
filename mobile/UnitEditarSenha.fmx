@@ -1,7 +1,7 @@
-object FormLancamentoCad: TFormLancamentoCad
+object FormEditarSenha: TFormEditarSenha
   Left = 0
   Top = 0
-  Caption = 'Lan'#231'amentos'
+  Caption = 'Senha'
   ClientHeight = 650
   ClientWidth = 400
   Fill.Kind = Solid
@@ -9,15 +9,14 @@ object FormLancamentoCad: TFormLancamentoCad
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
-  OnClose = FormClose
-  DesignerMasterStyle = 3
-  object LytCabecalhoNewCategoria: TLayout
+  DesignerMasterStyle = 0
+  object LytCabecalhoEditarSenha: TLayout
     Align = Top
     Size.Width = 400.000000000000000000
     Size.Height = 60.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 0
-    object LblTitulo: TLabel
+    object LblEditarSenha: TLabel
       Align = Contents
       StyledSettings = []
       Size.Width = 400.000000000000000000
@@ -27,9 +26,9 @@ object FormLancamentoCad: TFormLancamentoCad
       TextSettings.Font.Size = 18.000000000000000000
       TextSettings.Font.StyleExt = {00070000000000000004000000}
       TextSettings.HorzAlign = Center
-      Text = 'Novo Lan'#231'amento'
+      Text = 'Editar Senha'
       TabOrder = 2
-      object ImgSalvarLancamento: TImage
+      object ImgSalvarSenha: TImage
         MultiResBitmap.Height = 346
         MultiResBitmap.Width = 331
         MultiResBitmap = <
@@ -1236,7 +1235,7 @@ object FormLancamentoCad: TFormLancamentoCad
         Size.PlatformDefault = False
       end
     end
-    object ImgBackNovoLancamento: TImage
+    object ImgBackEditarSenha: TImage
       MultiResBitmap.Height = 346
       MultiResBitmap.Width = 331
       MultiResBitmap = <
@@ -1329,10 +1328,9 @@ object FormLancamentoCad: TFormLancamentoCad
       Size.Width = 40.000000000000000000
       Size.Height = 60.000000000000000000
       Size.PlatformDefault = False
-      OnClick = ImgBackNovoLancamentoClick
     end
   end
-  object LayoutNovoLancamento: TLayout
+  object LytEditarSenha: TLayout
     Align = Client
     Margins.Left = 20.000000000000000000
     Margins.Top = 15.000000000000000000
@@ -1341,164 +1339,31 @@ object FormLancamentoCad: TFormLancamentoCad
     Size.Height = 575.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 1
-    object EditDescricao: TEdit
+    object EditSenha: TEdit
       Touch.InteractiveGestures = [LongTap, DoubleTap]
       Align = Top
-      TabOrder = 0
+      TabOrder = 1
+      Password = True
       TextSettings.Font.Family = 'Roboto'
       Size.Width = 360.000000000000000000
       Size.Height = 32.000000000000000000
       Size.PlatformDefault = False
-      TextPrompt = 'Descri'#231#227'o do Lan'#231'amento'
+      TextPrompt = 'Nova Senha'
       StyledSettings = [Size, Style, FontColor]
     end
-    object Layout1: TLayout
+    object EditConfirmaSenha: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
       Align = Top
-      Margins.Top = 20.000000000000000000
-      Position.Y = 52.000000000000000000
-      Size.Width = 360.000000000000000000
-      Size.Height = 50.000000000000000000
-      Size.PlatformDefault = False
-      TabOrder = 1
-      object Rectangle1: TRectangle
-        Align = Right
-        Fill.Kind = None
-        Margins.Top = 5.000000000000000000
-        Margins.Bottom = 5.000000000000000000
-        Position.X = 230.000000000000000000
-        Position.Y = 5.000000000000000000
-        Size.Width = 130.000000000000000000
-        Size.Height = 40.000000000000000000
-        Size.PlatformDefault = False
-        Stroke.Color = xFFD0D0D0
-        XRadius = 10.000000000000000000
-        YRadius = 10.000000000000000000
-        object Label1: TLabel
-          Align = Left
-          StyledSettings = [Family, Style]
-          Margins.Top = 5.000000000000000000
-          Margins.Bottom = 5.000000000000000000
-          Position.Y = 5.000000000000000000
-          Size.Width = 65.000000000000000000
-          Size.Height = 30.000000000000000000
-          Size.PlatformDefault = False
-          TextSettings.Font.Family = 'Roboto'
-          TextSettings.Font.Size = 16.000000000000000000
-          TextSettings.FontColor = xFFCC5500
-          TextSettings.HorzAlign = Center
-          Text = 'Receita'
-          TabOrder = 1
-        end
-        object Label2: TLabel
-          Align = Right
-          StyledSettings = [Family, Style]
-          Margins.Top = 5.000000000000000000
-          Margins.Bottom = 5.000000000000000000
-          Position.X = 65.000000000000000000
-          Position.Y = 5.000000000000000000
-          Size.Width = 65.000000000000000000
-          Size.Height = 30.000000000000000000
-          Size.PlatformDefault = False
-          TextSettings.Font.Family = 'Roboto'
-          TextSettings.Font.Size = 16.000000000000000000
-          TextSettings.FontColor = xFFACACAC
-          TextSettings.HorzAlign = Center
-          Text = 'Despesa'
-          TabOrder = 0
-        end
-      end
-      object Edit1: TEdit
-        Touch.InteractiveGestures = [LongTap, DoubleTap]
-        Align = Client
-        TabOrder = 1
-        TextSettings.Font.Family = 'Roboto'
-        Margins.Right = 10.000000000000000000
-        Size.Width = 220.000000000000000000
-        Size.Height = 32.000000000000000000
-        Size.PlatformDefault = False
-        TextPrompt = 'Valor'
-        StyledSettings = [Size, Style, FontColor]
-      end
-    end
-    object ComboBox1: TComboBox
-      Align = Top
-      Items.Strings = (
-        'Combustivel'#11
-        'Agua'#11
-        'Luz'#11
-        'Internet'#11
-        'Lazer')
-      ItemIndex = 4
-      Margins.Top = 20.000000000000000000
-      Position.Y = 122.000000000000000000
+      TabOrder = 0
+      Password = True
+      TextSettings.Font.Family = 'Roboto'
+      Position.Y = 57.000000000000000000
+      Margins.Top = 25.000000000000000000
       Size.Width = 360.000000000000000000
       Size.Height = 32.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 2
-    end
-    object DateEdit1: TDateEdit
-      Date = 45908.000000000000000000
-      Align = Top
-      Margins.Top = 20.000000000000000000
-      Position.Y = 174.000000000000000000
-      Size.Width = 360.000000000000000000
-      Size.Height = 32.000000000000000000
-      Size.PlatformDefault = False
-      TabOrder = 3
-    end
-    object Layout2: TLayout
-      Align = Bottom
-      Position.Y = 490.000000000000000000
-      Size.Width = 360.000000000000000000
-      Size.Height = 85.000000000000000000
-      Size.PlatformDefault = False
-      TabOrder = 4
-      object Image1: TImage
-        MultiResBitmap.Height = 64
-        MultiResBitmap.Width = 64
-        MultiResBitmap = <
-          item
-            Width = 64
-            Height = 64
-            PNG = {
-              89504E470D0A1A0A0000000D4948445200000040000000400806000000AA6971
-              DE0000000473424954080808087C0864880000037A49444154789CED9B515ADA
-              4010C767766381D6077A037A02F106F45D643C41F104EA098413544F203D4117
-              F0BDF404E209E406E5410BF8919D3EA0FDF8E24613D8CDAAE4F7C62699FCF3CF
-              6676996C0072361B747D02262ADF0154641856931E2300C69A795C0C82212A35
-              76A9CF9901B744D580F93B00D4D68983001D8DD82E2935B222EC697CFBFC253A
-              168B8BB70633B74BBD5ECB664C0007064C885AC87C6A3B2E0080463CF9A8D499
-              CD98560D98105590F9C666CC2873C4DD6DA586B6E2095B81000084A33BBF4C60
-              F9D1B2D60398A83C63FE63D834925A37B7FAFDDF69E2CDEBF5C65C883300A844
-              B715103FDB1A1DACF580298071980BB43E4E7BF1000041BFDF65C443D3B63B83
-              29AB62CD00015036B507FD7E77D59825A506A6F60F5AEFAC1A338A350374181A
-              0D78ED584D826F91D8243821AA09E66F4903F1E2B9AC194ED05945D852DCA6A1
-              798000A324C723F33814E23C6E266934208BF13C6B380CBF962E2F07D176E323
-              20B53E72AE28638494C6DE6C348011DF64427B0E6436CE1B8C0668C41F6EE564
-              4F28C4B9A9FDB92458915A1F3DF60657496E5D922449A175276E3296782A3CA9
-              D79B28C445B4BDD8ED3A2FAA3CC7B4D1E0689B606E7EE8F512F5E28D9F07E406
-              F816E09BDC00DF027CB3F10604599C8489CAD330A450CAE14BF5BC5BA2EA5618
-              56B4944357A5F0659CF7801911CD986F50888B80F96AB2BFDF8ADB7742D40A98
-              AF58889FC87C35D9DBABB9D6E7DC005E1431FFFFB740C4D35BA227E5B37BA26A
-              A49C5E4629AD16404D6491032AD10653492B34BF3A4BFC3A6D55363E09E606F8
-              16E09BDC00DF027C931BE05B806F72037C0BF04D6E806F01BEC90DF02DC037B9
-              01BE05F8C68B011CF3A2D20759183088FC1E6B29AFA33B15A55400103546B912
-              F588FB9218E2213E5C08020CA5D6642A76A252635CAC0A7BDC3660C413D7FA9C
-              57851F2EF620C9BE05A5146470D797C993A06F01BEC90DF02DC037EFD28034F3
-              8CC40648298DEFF4B2787D15C78C884CEDE2E97C2296C4066CC5ACCC44292F66
-              07078DA4716C3121AA71CCB7038161A21547AA054ED346E317ACF911946B10A0
-              53E8768DCBEC4DA4CA01F30C6666EBA211DB69F64F65C0B65243D0FAD59A80CC
-              ADB46B0A528F02C57EFF0C115B698F730EF371A1D74B75F701561C060B4AB519
-              F18BEF55A20F0CE688BBC55ECFB814F625D65EE5C944E539E20ECEE7659DE122
-              EB7B21AE3F018C5C7F5A9BF3DEF90710312ADD25DBDC420000000049454E44AE
-              426082}
-            FileName = 'E:\git_hub\minhasFinancas\Image\delete.png'
-          end>
-        Align = Center
-        Size.Width = 40.000000000000000000
-        Size.Height = 40.000000000000000000
-        Size.PlatformDefault = False
-      end
+      TextPrompt = 'Confirmar Senha'
+      StyledSettings = [Size, Style, FontColor]
     end
   end
 end

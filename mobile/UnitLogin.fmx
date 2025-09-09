@@ -17,7 +17,7 @@ object FormLogin: TFormLogin
     Size.Height = 650.000000000000000000
     Size.PlatformDefault = False
     TabHeight = 49.000000000000000000
-    TabIndex = 2
+    TabIndex = 1
     TabOrder = 1
     TabPosition = None
     Sizes = (
@@ -1935,7 +1935,7 @@ object FormLogin: TFormLogin
         item
         end>
       TextSettings.Trimming = None
-      IsSelected = False
+      IsSelected = True
       Size.Width = 8.000000000000000000
       Size.Height = 8.000000000000000000
       Size.PlatformDefault = False
@@ -3847,6 +3847,7 @@ object FormLogin: TFormLogin
           Touch.InteractiveGestures = [LongTap, DoubleTap]
           Align = Top
           TabOrder = 1
+          Password = True
           Position.X = 10.000000000000000000
           Position.Y = 371.000000000000000000
           Margins.Bottom = 30.000000000000000000
@@ -3888,7 +3889,7 @@ object FormLogin: TFormLogin
         item
         end>
       TextSettings.Trimming = None
-      IsSelected = True
+      IsSelected = False
       Size.Width = 8.000000000000000000
       Size.Height = 8.000000000000000000
       Size.PlatformDefault = False
@@ -5801,6 +5802,7 @@ object FormLogin: TFormLogin
           Touch.InteractiveGestures = [LongTap, DoubleTap]
           Align = Top
           TabOrder = 1
+          Password = True
           Position.X = 10.000000000000000000
           Position.Y = 511.000000000000000000
           Margins.Bottom = 30.000000000000000000
@@ -5813,6 +5815,7 @@ object FormLogin: TFormLogin
           Touch.InteractiveGestures = [LongTap, DoubleTap]
           Align = Top
           TabOrder = 3
+          Password = True
           Position.X = 10.000000000000000000
           Position.Y = 441.000000000000000000
           Margins.Bottom = 15.000000000000000000

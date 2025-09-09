@@ -706,6 +706,7 @@ object FormCategoria: TFormCategoria
       Size.Width = 40.000000000000000000
       Size.Height = 50.000000000000000000
       Size.PlatformDefault = False
+      OnClick = Image1Click
     end
   end
   object LvCategorias: TListView

@@ -10,10 +10,10 @@ uses
 
 type
   TFormLancamentoCad = class(TForm)
-    LytCabecalhoConfig: TLayout;
+    LytCabecalhoNewCategoria: TLayout;
     LblTitulo: TLabel;
     ImgBackNovoLancamento: TImage;
-    ImgSalvar: TImage;
+    ImgSalvarLancamento: TImage;
     LayoutNovoLancamento: TLayout;
     EditDescricao: TEdit;
     Layout1: TLayout;

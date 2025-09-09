@@ -325,6 +325,18 @@
             <Form>FormCategoria</Form>
             <FormType>fmx</FormType>
         </DCCReference>
+        <DCCReference Include="UnitNewCategory.pas">
+            <Form>FormNewCategory</Form>
+            <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="UnitEditPrefil.pas">
+            <Form>FormEditPerfil</Form>
+            <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="UnitEditarSenha.pas">
+            <Form>FormEditarSenha</Form>
+            <FormType>fmx</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
