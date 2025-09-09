@@ -321,6 +321,10 @@
             <Form>FormLancamentoCad</Form>
             <FormType>fmx</FormType>
         </DCCReference>
+        <DCCReference Include="UnitCategoria.pas">
+            <Form>FormCategoria</Form>
+            <FormType>fmx</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

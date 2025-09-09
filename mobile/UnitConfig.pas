@@ -16,20 +16,25 @@ type
     ImgEditarPerfil: TImage;
     LblEditarPerfil: TLabel;
     ImgGoEditarPerfil: TImage;
-    Rectangle1: TRectangle;
+    RectDesconectar: TRectangle;
     ImgDesconectar: TImage;
     LblDesconectar: TLabel;
     ImgGoDesconectar: TImage;
-    Rectangle2: TRectangle;
+    RectAssinatura: TRectangle;
     ImgAssinatura: TImage;
     LblAssinatura: TLabel;
     ImgGoAssinatura: TImage;
-    Rectangle3: TRectangle;
+    RecAlterarSenha: TRectangle;
     ImgAlterarSenha: TImage;
     LblAlterarSenha: TLabel;
     ImgGoAlterarSenha: TImage;
+    RectCategoria: TRectangle;
+    ImgCategoria: TImage;
+    LblCategoria: TLabel;
+    ImgGoCategoria: TImage;
     procedure ImgBackConfigClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure RectCategoriaClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -43,6 +48,8 @@ implementation
 
 {$R *.fmx}
 
+uses UnitCategoria;
+
 procedure TFormConfig.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
         Action:= TCloseAction.caFree;
@@ -52,6 +59,14 @@ end;
 procedure TFormConfig.ImgBackConfigClick(Sender: TObject);
 begin
         Close;
+end;
+
+procedure TFormConfig.RectCategoriaClick(Sender: TObject);
+begin
+        if not Assigned(FormCategoria) then
+        Application.CreateForm(TFormCategoria, FormCategoria);
+
+        FormCategoria.Show;
 end;
 
 end.
