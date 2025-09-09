@@ -1413,7 +1413,7 @@ object FormLancamentoCad: TFormLancamentoCad
         Size.Width = 220.000000000000000000
         Size.Height = 32.000000000000000000
         Size.PlatformDefault = False
-        TextPrompt = 'Descri'#231#227'o do Lan'#231'amento'
+        TextPrompt = 'Valor'
       end
     end
     object ComboBox1: TComboBox

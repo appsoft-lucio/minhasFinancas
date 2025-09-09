@@ -27,9 +27,11 @@ type
     LblLancamentosSaldo: TLabel;
     LblLancamentosValorSaldo: TLabel;
     LvLancamentos: TListView;
+    Image1: TImage;
     procedure FormShow(Sender: TObject);
     procedure ImgBackLacamentoClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Image1Click(Sender: TObject);
   private
     procedure AddLancamentosLv(id_lancamentos: integer;
                                descricao, categoria,
@@ -46,6 +48,8 @@ var
 implementation
 
 {$R *.fmx}
+
+uses UnitLancamentoCad;
 
 procedure TFormLancamento.AddLancamentosLv(id_lancamentos: integer;
                                           descricao, categoria,
@@ -73,6 +77,14 @@ end;
 procedure TFormLancamento.FormShow(Sender: TObject);
 begin
         ListarLacamentos;
+end;
+
+procedure TFormLancamento.Image1Click(Sender: TObject);
+begin
+        if NOT Assigned(FormLancamentoCad) then
+        Application.CreateForm(TFormLancamentoCad, FormLancamentoCad);
+
+        FormLancamentoCad.Show;
 end;
 
 procedure TFormLancamento.ImgBackLacamentoClick(Sender: TObject);
