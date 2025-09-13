@@ -35,6 +35,8 @@ type
     procedure ImgBackConfigClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure RectCategoriaClick(Sender: TObject);
+    procedure RectEditarPerfilClick(Sender: TObject);
+    procedure RecAlterarSenhaClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -48,7 +50,7 @@ implementation
 
 {$R *.fmx}
 
-uses UnitCategoria;
+uses UnitCategoria, UnitEditPrefil, UnitEditarSenha;
 
 procedure TFormConfig.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
@@ -61,12 +63,28 @@ begin
         Close;
 end;
 
+procedure TFormConfig.RecAlterarSenhaClick(Sender: TObject);
+begin
+        if not Assigned(FormCategoria) then
+        Application.CreateForm(TFormEditarSenha, FormEditarSenha);
+
+        FormEditarSenha.Show;
+end;
+
 procedure TFormConfig.RectCategoriaClick(Sender: TObject);
 begin
         if not Assigned(FormCategoria) then
         Application.CreateForm(TFormCategoria, FormCategoria);
 
         FormCategoria.Show;
+end;
+
+procedure TFormConfig.RectEditarPerfilClick(Sender: TObject);
+begin
+        if not Assigned(FormEditPerfil) then
+        Application.CreateForm(TFormEditPerfil, FormEditPerfil);
+
+        FormEditPerfil.Show;
 end;
 
 end.

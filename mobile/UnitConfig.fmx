@@ -135,6 +135,7 @@ object FormConfig: TFormConfig
     Size.Height = 70.000000000000000000
     Size.PlatformDefault = False
     Stroke.Color = xFFE9E9E9
+    OnClick = RectEditarPerfilClick
     object ImgEditarPerfil: TImage
       MultiResBitmap.Height = 512
       MultiResBitmap.Width = 512
@@ -3802,6 +3803,7 @@ object FormConfig: TFormConfig
     Size.Height = 70.000000000000000000
     Size.PlatformDefault = False
     Stroke.Color = xFFE9E9E9
+    OnClick = RecAlterarSenhaClick
     object ImgAlterarSenha: TImage
       MultiResBitmap.Height = 512
       MultiResBitmap.Width = 512

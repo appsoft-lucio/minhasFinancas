@@ -9,6 +9,8 @@ object FormEditPerfil: TFormEditPerfil
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
+  OnClose = FormClose
+  OnShow = FormShow
   DesignerMasterStyle = 3
   object LytCabecalhoEditPerfil: TLayout
     Align = Top
@@ -1328,6 +1330,7 @@ object FormEditPerfil: TFormEditPerfil
       Size.Width = 40.000000000000000000
       Size.Height = 60.000000000000000000
       Size.PlatformDefault = False
+      OnClick = ImgBackEditarPerfilClick
     end
   end
   object LytEditarPerfil: TLayout
@@ -1339,7 +1342,7 @@ object FormEditPerfil: TFormEditPerfil
     Size.Height = 575.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 1
-    object EditNome: TEdit
+    object EditNomePerfil: TEdit
       Touch.InteractiveGestures = [LongTap, DoubleTap]
       Align = Top
       TabOrder = 1
@@ -1350,7 +1353,7 @@ object FormEditPerfil: TFormEditPerfil
       TextPrompt = 'Nome'
       StyledSettings = [Size, Style, FontColor]
     end
-    object EditEmail: TEdit
+    object EditEmailPerfil: TEdit
       Touch.InteractiveGestures = [LongTap, DoubleTap]
       Align = Top
       TabOrder = 0

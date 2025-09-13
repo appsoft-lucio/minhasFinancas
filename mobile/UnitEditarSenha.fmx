@@ -9,6 +9,7 @@ object FormEditarSenha: TFormEditarSenha
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
+  OnClose = FormClose
   DesignerMasterStyle = 0
   object LytCabecalhoEditarSenha: TLayout
     Align = Top
@@ -1328,6 +1329,7 @@ object FormEditarSenha: TFormEditarSenha
       Size.Width = 40.000000000000000000
       Size.Height = 60.000000000000000000
       Size.PlatformDefault = False
+      OnClick = ImgBackEditarSenhaClick
     end
   end
   object LytEditarSenha: TLayout

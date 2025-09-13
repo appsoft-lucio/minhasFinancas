@@ -16,6 +16,8 @@ type
     LytEditarSenha: TLayout;
     EditSenha: TEdit;
     EditConfirmaSenha: TEdit;
+    procedure ImgBackEditarSenhaClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -28,5 +30,16 @@ var
 implementation
 
 {$R *.fmx}
+
+procedure TFormEditarSenha.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+        Action:= TCloseAction.caFree;
+        FormEditarSenha:= nil;
+end;
+
+procedure TFormEditarSenha.ImgBackEditarSenhaClick(Sender: TObject);
+begin
+        Close;
+end;
 
 end.

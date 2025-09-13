@@ -5,10 +5,11 @@
         <FrameworkType>FMX</FrameworkType>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
-        <Platform Condition="'$(Platform)'==''">Android64</Platform>
+        <Platform Condition="'$(Platform)'==''">Win64</Platform>
         <TargetedPlatforms>558099</TargetedPlatforms>
         <AppType>Application</AppType>
         <MainSource>MinhasFinancas.dpr</MainSource>
+        <ProjectName Condition="'$(ProjectName)'==''">MinhasFinancas</ProjectName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
         <Base>true</Base>
@@ -337,6 +338,10 @@
             <Form>FormEditarSenha</Form>
             <FormType>fmx</FormType>
         </DCCReference>
+        <DCCReference Include="Utils\uLoading.pas"/>
+        <DCCReference Include="Utils\uFunctions.pas"/>
+        <DCCReference Include="Utils\uCombobox.pas"/>
+        <DCCReference Include="Utils\uSession.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

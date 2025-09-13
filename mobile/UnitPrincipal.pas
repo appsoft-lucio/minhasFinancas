@@ -7,7 +7,7 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.TabControl,
   FMX.Controls.Presentation, FMX.StdCtrls, FMX.Layouts, FMX.Objects,
   FMX.ListView.Types, FMX.ListView.Appearances, FMX.ListView.Adapters.Base,
-  FMX.ListView;
+  FMX.ListView, uLoading   ;
 
 type
   TFormPrincipal = class(TForm)
@@ -49,6 +49,7 @@ type
                                descricao, categoria,
                                dt: string; valor: double);
     procedure ListarUltimosLacamentos;
+    procedure TerminateLancamentos(Sender: TObject);
     { Private declarations }
   public
     { Public declarations }
@@ -112,17 +113,38 @@ end;
 procedure TFormPrincipal.ListarUltimosLacamentos;
 
 begin
-        AddLancamentosLv(1, 'Compra de gasolina', 'Transporte', '01/08/2025', 170);
-        AddLancamentosLv(2, 'Almoço no restaurante', 'Alimentação', '02/08/2025', 45);
-        AddLancamentosLv(3, 'Supermercado', 'Alimentação', '03/08/2025', 320);
-        AddLancamentosLv(4, 'Cinema', 'Lazer', '04/08/2025', 25);
-        AddLancamentosLv(5, 'Mensalidade Academia', 'Saúde', '05/08/2025', 120);
-        AddLancamentosLv(6, 'Conta de luz', 'Moradia', '06/08/2025', 180);
-        AddLancamentosLv(7, 'Pagamento do cartão', 'Dívidas', '07/08/2025', 500);
-        AddLancamentosLv(8, 'Uber para trabalho', 'Transporte', '08/08/2025', 35);
-        AddLancamentosLv(9, 'Água e esgoto', 'Moradia', '09/08/2025', 90);
-        AddLancamentosLv(10, 'Compra de roupas', 'Vestuário', '10/08/2025', 2050);
-        AddLancamentosLv(11, 'Compra de gasolina', 'Transporte', '01/09', 170);
+
+        TLoading.Show(FormPrincipal, 'Carregando...');
+        TLoading.ExecuteThread(
+        procedure
+        begin
+        Sleep(500); // Simula acesso ao servidor
+        end,
+        TerminateLancamentos
+        );
+
+end;
+
+procedure TFormPrincipal.TerminateLancamentos(Sender: TObject);
+begin
+  TLoading.Hide;
+  if Assigned(TThread(Sender).FatalException) then
+  begin
+    ShowMessage(Exception(TThread(Sender).FatalException).Message);
+    Exit;
+  end;
+
+  AddLancamentosLv(1, 'Compra de gasolina', 'Transporte', '01/08/2025', 170);
+  AddLancamentosLv(2, 'Almoço no restaurante', 'Alimentação', '02/08/2025', 45);
+  AddLancamentosLv(3, 'Supermercado', 'Alimentação', '03/08/2025', 320);
+  AddLancamentosLv(4, 'Cinema', 'Lazer', '04/08/2025', 25);
+  AddLancamentosLv(5, 'Mensalidade Academia', 'Saúde', '05/08/2025', 120);
+  AddLancamentosLv(6, 'Conta de luz', 'Moradia', '06/08/2025', 180);
+  AddLancamentosLv(7, 'Pagamento do cartão', 'Dívidas', '07/08/2025', 500);
+  AddLancamentosLv(8, 'Uber para trabalho', 'Transporte', '08/08/2025', 35);
+  AddLancamentosLv(9, 'Água e esgoto', 'Moradia', '09/08/2025', 90);
+  AddLancamentosLv(10, 'Compra de roupas', 'Vestuário', '10/08/2025', 2050);
+  AddLancamentosLv(11, 'Compra de gasolina', 'Transporte', '01/09', 170);
 
 end;
 

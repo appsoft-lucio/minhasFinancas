@@ -6,7 +6,8 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.Controls.Presentation, FMX.StdCtrls, FMX.Layouts, FMX.ListView.Types,
-  FMX.ListView.Appearances, FMX.ListView.Adapters.Base, FMX.ListView;
+  FMX.ListView.Appearances, FMX.ListView.Adapters.Base, FMX.ListView,
+  uLoading;
 
 type
   TFormCategoria = class(TForm)
@@ -22,6 +23,7 @@ type
   private
     procedure AddCategoriaLv(id_categoria: integer; descricao: string);
     procedure ListarCategoria;
+    procedure TerminateLancamentos(Sender: TObject);
     { Private declarations }
   public
     { Public declarations }
@@ -52,12 +54,30 @@ end;
 procedure TFormCategoria.ListarCategoria;
 
 begin
+        TLoading.Show(FormCategoria, 'Carregando...');
+        TLoading.ExecuteThread(
+        procedure
+        begin
+        Sleep(500); // Simula acesso ao servidor
+        end,
+        TerminateLancamentos
+        );
+end;
+
+procedure TFormCategoria.TerminateLancamentos(Sender: TObject);
+begin
+  TLoading.Hide;
+  if Assigned(TThread(Sender).FatalException) then
+  begin
+    ShowMessage(Exception(TThread(Sender).FatalException).Message);
+    Exit;
+  end;
+
         AddCategoriaLv(1, 'Combustivel');
         AddCategoriaLv(2, 'Agua');
         AddCategoriaLv(3, 'Luz');
         AddCategoriaLv(4, 'Internet');
         AddCategoriaLv(5, 'Lazer');
-
 
 end;
 

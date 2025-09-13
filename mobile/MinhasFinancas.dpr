@@ -11,7 +11,11 @@ uses
   UnitCategoria in 'UnitCategoria.pas' {FormCategoria},
   UnitNewCategory in 'UnitNewCategory.pas' {FormNewCategory},
   UnitEditPrefil in 'UnitEditPrefil.pas' {FormEditPerfil},
-  UnitEditarSenha in 'UnitEditarSenha.pas' {FormEditarSenha};
+  UnitEditarSenha in 'UnitEditarSenha.pas' {FormEditarSenha},
+  uLoading in 'Utils\uLoading.pas',
+  uFunctions in 'Utils\uFunctions.pas',
+  uCombobox in 'Utils\uCombobox.pas',
+  uSession in 'Utils\uSession.pas';
 
 {$R *.res}
 

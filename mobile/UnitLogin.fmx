@@ -17,7 +17,7 @@ object FormLogin: TFormLogin
     Size.Height = 650.000000000000000000
     Size.PlatformDefault = False
     TabHeight = 49.000000000000000000
-    TabIndex = 1
+    TabIndex = 2
     TabOrder = 1
     TabPosition = None
     Sizes = (
@@ -1935,7 +1935,7 @@ object FormLogin: TFormLogin
         item
         end>
       TextSettings.Trimming = None
-      IsSelected = True
+      IsSelected = False
       Size.Width = 8.000000000000000000
       Size.Height = 8.000000000000000000
       Size.PlatformDefault = False
@@ -3789,7 +3789,7 @@ object FormLogin: TFormLogin
           Stroke.Kind = None
           XRadius = 6.000000000000000000
           YRadius = 6.000000000000000000
-          object SpeedButton2: TSpeedButton
+          object BtnLogin: TSpeedButton
             Align = Client
             StyledSettings = []
             Size.Width = 380.000000000000000000
@@ -3801,6 +3801,7 @@ object FormLogin: TFormLogin
             TextSettings.Font.StyleExt = {00070000000000000004000000}
             TextSettings.FontColor = claWhite
             TextSettings.Trimming = None
+            OnClick = BtnLoginClick
           end
         end
         object Rectangle3: TRectangle
@@ -3889,7 +3890,7 @@ object FormLogin: TFormLogin
         item
         end>
       TextSettings.Trimming = None
-      IsSelected = False
+      IsSelected = True
       Size.Width = 8.000000000000000000
       Size.Height = 8.000000000000000000
       Size.PlatformDefault = False
@@ -5716,7 +5717,7 @@ object FormLogin: TFormLogin
             TabOrder = 0
           end
         end
-        object Label5: TLabel
+        object LblTitulo: TLabel
           Align = Top
           StyledSettings = [FontColor]
           Margins.Top = 30.000000000000000000
@@ -5724,7 +5725,7 @@ object FormLogin: TFormLogin
           Position.X = 10.000000000000000000
           Position.Y = 170.000000000000000000
           Size.Width = 380.000000000000000000
-          Size.Height = 93.000000000000000000
+          Size.Height = 100.000000000000000000
           Size.PlatformDefault = False
           TextSettings.Font.Family = 'Roboto'
           TextSettings.Font.Size = 26.000000000000000000
@@ -5786,107 +5787,107 @@ object FormLogin: TFormLogin
             OnClick = SpeedButton5Click
           end
         end
-        object Edit1: TEdit
-          Touch.InteractiveGestures = [LongTap, DoubleTap]
-          Align = Top
-          TabOrder = 4
-          Position.X = 10.000000000000000000
-          Position.Y = 301.000000000000000000
-          Margins.Bottom = 15.000000000000000000
+        object ScrollBoxCriarConta: TScrollBox
+          Align = Client
           Size.Width = 380.000000000000000000
-          Size.Height = 32.000000000000000000
+          Size.Height = 235.000000000000000000
           Size.PlatformDefault = False
-          TextPrompt = 'Nome Completo'
-        end
-        object Edit2: TEdit
-          Touch.InteractiveGestures = [LongTap, DoubleTap]
-          Align = Top
           TabOrder = 1
-          Password = True
-          Position.X = 10.000000000000000000
-          Position.Y = 511.000000000000000000
-          Margins.Bottom = 30.000000000000000000
-          Size.Width = 380.000000000000000000
-          Size.Height = 32.000000000000000000
-          Size.PlatformDefault = False
-          TextPrompt = 'Confirme sua senha'
-        end
-        object Edit3: TEdit
-          Touch.InteractiveGestures = [LongTap, DoubleTap]
-          Align = Top
-          TabOrder = 3
-          Password = True
-          Position.X = 10.000000000000000000
-          Position.Y = 441.000000000000000000
-          Margins.Bottom = 15.000000000000000000
-          Size.Width = 380.000000000000000000
-          Size.Height = 32.000000000000000000
-          Size.PlatformDefault = False
-          TextPrompt = 'Informe uma senha'
-        end
-        object Edit4: TEdit
-          Touch.InteractiveGestures = [LongTap, DoubleTap]
-          Align = Top
-          TabOrder = 2
-          Position.X = 10.000000000000000000
-          Position.Y = 371.000000000000000000
-          Margins.Bottom = 15.000000000000000000
-          Size.Width = 380.000000000000000000
-          Size.Height = 32.000000000000000000
-          Size.PlatformDefault = False
-          TextPrompt = 'Didigete seu E-mail'
-        end
-        object LblNome: TLabel
-          Align = Top
-          StyledSettings = [Size, FontColor]
-          Position.X = 10.000000000000000000
-          Position.Y = 278.000000000000000000
-          Size.Width = 380.000000000000000000
-          Size.Height = 23.000000000000000000
-          Size.PlatformDefault = False
-          TextSettings.Font.Family = 'Roboto'
-          TextSettings.Font.StyleExt = {00050000000000000004000000}
-          Text = 'Nome'
-          TabOrder = 8
-        end
-        object LblConfirmaSenha: TLabel
-          Align = Top
-          StyledSettings = [Size, FontColor]
-          Position.X = 10.000000000000000000
-          Position.Y = 488.000000000000000000
-          Size.Width = 380.000000000000000000
-          Size.Height = 23.000000000000000000
-          Size.PlatformDefault = False
-          TextSettings.Font.Family = 'Roboto'
-          TextSettings.Font.StyleExt = {00050000000000000004000000}
-          Text = 'Confirme sua senha'
-          TabOrder = 7
-        end
-        object LblSenha: TLabel
-          Align = Top
-          StyledSettings = [Size, FontColor]
-          Position.X = 10.000000000000000000
-          Position.Y = 418.000000000000000000
-          Size.Width = 380.000000000000000000
-          Size.Height = 23.000000000000000000
-          Size.PlatformDefault = False
-          TextSettings.Font.Family = 'Roboto'
-          TextSettings.Font.StyleExt = {00050000000000000004000000}
-          Text = 'Senha'
-          TabOrder = 6
-        end
-        object LblEmail: TLabel
-          Align = Top
-          StyledSettings = [Size, FontColor]
-          Position.X = 10.000000000000000000
-          Position.Y = 348.000000000000000000
-          Size.Width = 380.000000000000000000
-          Size.Height = 23.000000000000000000
-          Size.PlatformDefault = False
-          TextSettings.Font.Family = 'Roboto'
-          TextSettings.Font.StyleExt = {00050000000000000004000000}
-          Text = 'E-mail'
-          TabOrder = 5
+          Viewport.Width = 375.000000000000000000
+          Viewport.Height = 235.000000000000000000
+          object LblNome: TLabel
+            Align = Top
+            StyledSettings = [Size, FontColor]
+            Size.Width = 375.000000000000000000
+            Size.Height = 23.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Family = 'Roboto'
+            TextSettings.Font.StyleExt = {00050000000000000004000000}
+            Text = 'Nome'
+            TabOrder = 8
+          end
+          object LblEmail: TLabel
+            Align = Top
+            StyledSettings = [Size, FontColor]
+            Position.Y = 70.000000000000000000
+            Size.Width = 375.000000000000000000
+            Size.Height = 23.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Family = 'Roboto'
+            TextSettings.Font.StyleExt = {00050000000000000004000000}
+            Text = 'E-mail'
+            TabOrder = 5
+          end
+          object LblSenha: TLabel
+            Align = Top
+            StyledSettings = [Size, FontColor]
+            Position.Y = 140.000000000000000000
+            Size.Width = 375.000000000000000000
+            Size.Height = 23.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Family = 'Roboto'
+            TextSettings.Font.StyleExt = {00050000000000000004000000}
+            Text = 'Senha'
+            TabOrder = 6
+          end
+          object LblConfirmaSenha: TLabel
+            Align = Top
+            StyledSettings = [Size, FontColor]
+            Position.Y = 210.000000000000000000
+            Size.Width = 375.000000000000000000
+            Size.Height = 23.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Family = 'Roboto'
+            TextSettings.Font.StyleExt = {00050000000000000004000000}
+            Text = 'Confirme sua senha'
+            TabOrder = 7
+          end
+          object EditConfirmarSenhaCriarConta: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            TabOrder = 1
+            Password = True
+            Position.Y = 233.000000000000000000
+            Margins.Bottom = 30.000000000000000000
+            Size.Width = 375.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TextPrompt = 'Confirme sua senha'
+          end
+          object EditEmailCriarConta: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            TabOrder = 2
+            Position.Y = 163.000000000000000000
+            Margins.Bottom = 15.000000000000000000
+            Size.Width = 375.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TextPrompt = 'Didigete seu E-mail'
+          end
+          object EditNomeCriarConta: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            TabOrder = 4
+            Position.Y = 23.000000000000000000
+            Margins.Bottom = 15.000000000000000000
+            Size.Width = 375.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TextPrompt = 'Nome Completo'
+          end
+          object EditSenhaCriarConta: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            TabOrder = 3
+            Password = True
+            Position.Y = 93.000000000000000000
+            Margins.Bottom = 15.000000000000000000
+            Size.Width = 375.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TextPrompt = 'Informe uma senha'
+          end
         end
       end
     end

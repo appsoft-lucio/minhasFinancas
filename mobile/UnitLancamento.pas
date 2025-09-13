@@ -6,7 +6,8 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.Layouts, FMX.Controls.Presentation, FMX.StdCtrls, FMX.ListView.Types,
-  FMX.ListView.Appearances, FMX.ListView.Adapters.Base, FMX.ListView;
+  FMX.ListView.Appearances, FMX.ListView.Adapters.Base, FMX.ListView,
+  uLoading;
 
 type
   TFormLancamento = class(TForm)
@@ -37,6 +38,7 @@ type
                                descricao, categoria,
                                dt: string; valor: double);
     procedure ListarLacamentos;
+    procedure TerminateLancamentos(Sender: TObject);
     { Private declarations }
   public
     { Public declarations }
@@ -95,6 +97,29 @@ end;
 procedure TFormLancamento.ListarLacamentos;
 
 begin
+
+        TLoading.Show(FormLancamento, 'Carregando...');
+        TLoading.ExecuteThread(
+        procedure
+        begin
+        Sleep(500); // Simula acesso ao servidor
+        end,
+        TerminateLancamentos
+        );
+
+
+
+end;
+
+procedure TFormLancamento.TerminateLancamentos(Sender: TObject);
+begin
+  TLoading.Hide;
+  if Assigned(TThread(Sender).FatalException) then
+  begin
+    ShowMessage(Exception(TThread(Sender).FatalException).Message);
+    Exit;
+  end;
+
         AddLancamentosLv(1, 'Compra de gasolina', 'Transporte', '01/08/2025', 170);
         AddLancamentosLv(2, 'Almoço no restaurante', 'Alimentação', '02/08/2025', 45);
         AddLancamentosLv(3, 'Supermercado', 'Alimentação', '03/08/2025', 320);

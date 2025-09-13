@@ -5,7 +5,8 @@ interface
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.TabControl,
-  FMX.Objects, FMX.Layouts, FMX.Controls.Presentation, FMX.StdCtrls, FMX.Edit;
+  FMX.Objects, FMX.Layouts, FMX.Controls.Presentation, FMX.StdCtrls, FMX.Edit,
+  uLoading;
 
 type
   TFormLogin = class(TForm)
@@ -13,51 +14,24 @@ type
     TabInicio: TTabItem;
     TabLogin: TTabItem;
     TabNovaConta: TTabItem;
-    Layout1: TLayout;
-    imgPorquinho: TImage;
-    LabelImgPorquinho: TLabel;
-    Label1: TLabel;
-    RectAcessarLogin: TRectangle;
-    SpeedButtonAcessarLogin: TSpeedButton;
-    Rectangle1: TRectangle;
-    SpeedButton1: TSpeedButton;
-    Layout2: TLayout;
-    Image1: TImage;
-    Label2: TLabel;
-    Label3: TLabel;
-    Rectangle2: TRectangle;
-    SpeedButton2: TSpeedButton;
-    Rectangle3: TRectangle;
-    SpeedButton3: TSpeedButton;
-    EditEmail: TEdit;
-    EditSenha: TEdit;
-    Layout3: TLayout;
-    Image2: TImage;
-    Label4: TLabel;
-    Label5: TLabel;
-    Rectangle4: TRectangle;
-    SpeedButton4: TSpeedButton;
-    Rectangle5: TRectangle;
-    SpeedButton5: TSpeedButton;
-    Edit1: TEdit;
-    Edit2: TEdit;
-    Edit3: TEdit;
-    Edit4: TEdit;
-    LblNome: TLabel;
-    LblConfirmaSenha: TLabel;
-    LblSenha: TLabel;
-    LblEmail: TLabel;
-    LblEmailAcessar: TLabel;
-    LblSenhaAcessar: TLabel;
+    ScrollBoxCriarConta: TScrollBox;
+    EditNomeCriarConta: TEdit;
+    EditEmailCriarConta: TEdit;
+    EditSenhaCriarConta: TEdit;
+    EditConfirmarSenhaCriarConta: TEdit;
+    BtnLogin: TSpeedButton;
     procedure SpeedButtonAcessarLoginClick(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure SpeedButton3Click(Sender: TObject);
     procedure SpeedButton5Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure BtnLoginClick(Sender: TObject);
   private
-    { Private declarations }
+    procedure OpenMainForm;
+    procedure TerminateLogin(Sender: TObject);
+    procedure BtnMostrarConfirmaSenhaClick(Sender: TObject);
+    procedure BtnMostrarSenhaCriarClick(Sender: TObject);
   public
-    { Public declarations }
   end;
 
 var
@@ -67,29 +41,77 @@ implementation
 
 {$R *.fmx}
 
+uses UnitPrincipal;
+
 procedure TFormLogin.FormShow(Sender: TObject);
 begin
-        TabControl.ActiveTab := TabInicio;
+  TabControl.ActiveTab := TabInicio;
 end;
 
 procedure TFormLogin.SpeedButton1Click(Sender: TObject);
 begin
-        TabControl.GotoVisibleTab(2);
+  TabControl.GotoVisibleTab(2);
 end;
 
 procedure TFormLogin.SpeedButton3Click(Sender: TObject);
 begin
-        TabControl.GotoVisibleTab(2)
+  TabControl.GotoVisibleTab(2);
 end;
 
 procedure TFormLogin.SpeedButton5Click(Sender: TObject);
 begin
-        TabControl.GotoVisibleTab(1);
+  TabControl.GotoVisibleTab(1);
 end;
 
 procedure TFormLogin.SpeedButtonAcessarLoginClick(Sender: TObject);
 begin
-        TabControl.GotoVisibleTab(1);
+  TabControl.GotoVisibleTab(1);
 end;
 
+procedure TFormLogin.BtnLoginClick(Sender: TObject);
+begin
+  TLoading.Show(FormLogin, 'Carregando...');
+  TLoading.ExecuteThread(
+    procedure
+    begin
+      Sleep(500); // Simula acesso ao servidor
+    end,
+    TerminateLogin
+  );
+end;
+
+procedure TFormLogin.OpenMainForm;
+begin
+  if not Assigned(FormPrincipal) then
+    Application.CreateForm(TFormPrincipal, FormPrincipal);
+
+  FormPrincipal.Show;
+end;
+
+procedure TFormLogin.TerminateLogin(Sender: TObject);
+begin
+  TLoading.Hide;
+  if Assigned(TThread(Sender).FatalException) then
+  begin
+    ShowMessage(Exception(TThread(Sender).FatalException).Message);
+    Exit;
+  end;
+
+  OpenMainForm;
+end;
+
+// Botão para EditSenhaCriarConta
+procedure TFormLogin.BtnMostrarSenhaCriarClick(Sender: TObject);
+begin
+  EditSenhaCriarConta.Password := not EditSenhaCriarConta.Password;
+end;
+
+// Botão para EditConfirmarSenhaCriarConta
+procedure TFormLogin.BtnMostrarConfirmaSenhaClick(Sender: TObject);
+begin
+  EditConfirmarSenhaCriarConta.Password := not EditConfirmarSenhaCriarConta.Password;
+end;
+
+
 end.
+
