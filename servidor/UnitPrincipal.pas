@@ -8,7 +8,7 @@ uses
   DataSet.Serialize.Config;
 
 type
-  TForm1 = class(TForm)
+  TFormPrincipal = class(TForm)
     procedure FormShow(Sender: TObject);
   private
     { Private declarations }
@@ -17,7 +17,7 @@ type
   end;
 
 var
-  Form1: TForm1;
+  FormPrincipal: TFormPrincipal;
 
 implementation
 
@@ -25,22 +25,20 @@ implementation
 
 uses Horse,
      Horse.Jhonson,
-     Horse.CORS;
+     Horse.CORS,
+     Controllers.Users,
+     Controllers.Category;
 
-procedure Login(Req: THorseRequest; Res: THorseResponse; Next: TProc);
-begin
-        Res.Send('Rotina de login acessada ;).')
-end;
-
-procedure TForm1.FormShow(Sender: TObject);
+procedure TFormPrincipal.FormShow(Sender: TObject);
 begin
         THorse.Use(Jhonson());
         THorse.Use(CORS);
 
-        THorse.Get('/usuarios/login', Login);
-
         TDataSetSerializeConfig.GetInstance.CaseNameDefinition:= cndLower;
         TDataSetSerializeConfig.GetInstance.Import.DecimalSeparator:= '.';
+
+        Controllers.Users.RegistrarRotas;
+        Controllers.Category.RegistrarRotas;
 
         THorse.Listen(3001);
 end;
