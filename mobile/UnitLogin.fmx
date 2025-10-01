@@ -10,7 +10,7 @@ object FormLogin: TFormLogin
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
   OnShow = FormShow
-  DesignerMasterStyle = 3
+  DesignerMasterStyle = 0
   object TabControl: TTabControl
     Align = Client
     Size.Width = 400.000000000000000000
@@ -1890,7 +1890,7 @@ object FormLogin: TFormLogin
             Align = Client
             StyledSettings = []
             Size.Width = 380.000000000000000000
-            Size.Height = 48.000000000000000000
+            Size.Height = 50.000000000000000000
             Size.PlatformDefault = False
             Text = 'Acessar Minha Conta'
             TextSettings.Font.Family = 'Roboto'
@@ -1917,7 +1917,7 @@ object FormLogin: TFormLogin
             Align = Client
             StyledSettings = []
             Size.Width = 380.000000000000000000
-            Size.Height = 48.000000000000000000
+            Size.Height = 50.000000000000000000
             Size.PlatformDefault = False
             Text = 'Criar minha conta.'
             TextSettings.Font.Family = 'Roboto'
@@ -3793,7 +3793,7 @@ object FormLogin: TFormLogin
             Align = Client
             StyledSettings = []
             Size.Width = 380.000000000000000000
-            Size.Height = 48.000000000000000000
+            Size.Height = 50.000000000000000000
             Size.PlatformDefault = False
             Text = 'Acessar '
             TextSettings.Font.Family = 'Roboto'
@@ -3821,7 +3821,7 @@ object FormLogin: TFormLogin
             Align = Client
             StyledSettings = []
             Size.Width = 380.000000000000000000
-            Size.Height = 48.000000000000000000
+            Size.Height = 50.000000000000000000
             Size.PlatformDefault = False
             Text = 'N'#227'o tenho conta.Criar minha conta.'
             TextSettings.Font.Family = 'Roboto'
@@ -5749,7 +5749,7 @@ object FormLogin: TFormLogin
             Align = Client
             StyledSettings = []
             Size.Width = 380.000000000000000000
-            Size.Height = 48.000000000000000000
+            Size.Height = 50.000000000000000000
             Size.PlatformDefault = False
             Text = 'Criar Conta'
             TextSettings.Font.Family = 'Roboto'
@@ -5776,7 +5776,7 @@ object FormLogin: TFormLogin
             Align = Client
             StyledSettings = []
             Size.Width = 380.000000000000000000
-            Size.Height = 48.000000000000000000
+            Size.Height = 50.000000000000000000
             Size.PlatformDefault = False
             Text = 'J'#225' tenho uma conta. Acessar.'
             TextSettings.Font.Family = 'Roboto'
@@ -5793,12 +5793,12 @@ object FormLogin: TFormLogin
           Size.Height = 235.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 1
-          Viewport.Width = 375.000000000000000000
+          Viewport.Width = 364.000000000000000000
           Viewport.Height = 235.000000000000000000
           object LblNome: TLabel
             Align = Top
             StyledSettings = [Size, FontColor]
-            Size.Width = 375.000000000000000000
+            Size.Width = 364.000000000000000000
             Size.Height = 23.000000000000000000
             Size.PlatformDefault = False
             TextSettings.Font.Family = 'Roboto'
@@ -5810,7 +5810,7 @@ object FormLogin: TFormLogin
             Align = Top
             StyledSettings = [Size, FontColor]
             Position.Y = 70.000000000000000000
-            Size.Width = 375.000000000000000000
+            Size.Width = 364.000000000000000000
             Size.Height = 23.000000000000000000
             Size.PlatformDefault = False
             TextSettings.Font.Family = 'Roboto'
@@ -5822,7 +5822,7 @@ object FormLogin: TFormLogin
             Align = Top
             StyledSettings = [Size, FontColor]
             Position.Y = 140.000000000000000000
-            Size.Width = 375.000000000000000000
+            Size.Width = 364.000000000000000000
             Size.Height = 23.000000000000000000
             Size.PlatformDefault = False
             TextSettings.Font.Family = 'Roboto'
@@ -5834,7 +5834,7 @@ object FormLogin: TFormLogin
             Align = Top
             StyledSettings = [Size, FontColor]
             Position.Y = 210.000000000000000000
-            Size.Width = 375.000000000000000000
+            Size.Width = 364.000000000000000000
             Size.Height = 23.000000000000000000
             Size.PlatformDefault = False
             TextSettings.Font.Family = 'Roboto'
@@ -5849,7 +5849,7 @@ object FormLogin: TFormLogin
             Password = True
             Position.Y = 233.000000000000000000
             Margins.Bottom = 30.000000000000000000
-            Size.Width = 375.000000000000000000
+            Size.Width = 364.000000000000000000
             Size.Height = 32.000000000000000000
             Size.PlatformDefault = False
             TextPrompt = 'Confirme sua senha'
@@ -5860,7 +5860,7 @@ object FormLogin: TFormLogin
             TabOrder = 2
             Position.Y = 163.000000000000000000
             Margins.Bottom = 15.000000000000000000
-            Size.Width = 375.000000000000000000
+            Size.Width = 364.000000000000000000
             Size.Height = 32.000000000000000000
             Size.PlatformDefault = False
             TextPrompt = 'Didigete seu E-mail'
@@ -5871,7 +5871,7 @@ object FormLogin: TFormLogin
             TabOrder = 4
             Position.Y = 23.000000000000000000
             Margins.Bottom = 15.000000000000000000
-            Size.Width = 375.000000000000000000
+            Size.Width = 364.000000000000000000
             Size.Height = 32.000000000000000000
             Size.PlatformDefault = False
             TextPrompt = 'Nome Completo'
@@ -5883,7 +5883,7 @@ object FormLogin: TFormLogin
             Password = True
             Position.Y = 93.000000000000000000
             Margins.Bottom = 15.000000000000000000
-            Size.Width = 375.000000000000000000
+            Size.Width = 364.000000000000000000
             Size.Height = 32.000000000000000000
             Size.PlatformDefault = False
             TextPrompt = 'Informe uma senha'
