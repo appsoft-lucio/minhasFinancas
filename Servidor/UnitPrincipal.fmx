@@ -1,0 +1,12 @@
+object FormPrincipal: TFormPrincipal
+  Left = 0
+  Top = 0
+  Caption = 'Servidor Minhas Finan'#231'as'
+  ClientHeight = 201
+  ClientWidth = 348
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnShow = FormShow
+  DesignerMasterStyle = 0
+end
