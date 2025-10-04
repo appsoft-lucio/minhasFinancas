@@ -64,13 +64,53 @@ begin
 end;
 
 procedure InserirUsuario (Req: THorseRequest; Res: THorseResponse; Next: TProc );
+var
+  nome, email, senha: string;
+  body, json_retorno: TJsonObject;
+
 begin
-  Res.Send('Vc acessou a rota Inserir Ususario :).')
+  try
+    body  := Req.Body<TJSONObject>;
+    nome := body.GetValue<string>('nome', '');
+    email := body.GetValue<string>('email', '');
+    senha := body.GetValue<string>('senha','');
+
+    json_retorno := Services.Usuario.InserirUsuario(nome, email, senha);
+
+    //Gerar um token JWT...
+    json_retorno.AddPair('token',
+            Criar_Token(json_retorno.GetValue<integer>('id_usuario')));
+
+    Res.Send<TJsonObject>(json_retorno).Status(201);
+
+  except on ex:exception do
+    Res.Send(ex.Message).Status(500);
+
+  end;
 end;
 
 procedure EditarSenha (Req: THorseRequest; Res: THorseResponse; Next: TProc );
+var
+  senha: string;
+  id_usuario: integer;
+  body: TJsonObject;
 begin
-  Res.Send('Vc acessou a rota Editar Senha :).')
+  try
+    body  := Req.Body<TJSONObject>;
+    senha := body.GetValue<string>('senha','');
+
+    id_usuario:= Get_usuario_Request(Req);
+
+    Services.Usuario.EditarSenha(id_usuario, senha);
+
+
+
+    Res.Send('Ok');
+
+  except on ex:exception do
+    Res.Send(ex.Message).Status(500);
+
+  end;
 end;
 
 procedure ListarUsuario (Req: THorseRequest; Res: THorseResponse; Next: TProc );
