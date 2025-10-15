@@ -11,13 +11,16 @@ uses
   Controllers.JWT in 'Controllers\Controllers.JWT.pas',
   Services.Usuario in 'Services\Services.Usuario.pas',
   uMD5 in 'Utils\uMD5.pas',
-  Repositories.Usuario in 'Repositories\Repositories.Usuario.pas' {DmUsuario: TDataModule};
+  Repositories.Usuario in 'Repositories\Repositories.Usuario.pas' {DmUsuario: TDataModule},
+  Repositories.Lancamentos in 'Repositories\Repositories.Lancamentos.pas' {DmLancamentos: TDataModule};
 
 {$R *.res}
 
 begin
+  ReportMemoryLeaksOnShutdown := true;
   Application.Initialize;
   Application.CreateForm(TFormPrincipal, FormPrincipal);
   Application.CreateForm(TDmUsuario, DmUsuario);
+  Application.CreateForm(TDmLancamentos, DmLancamentos);
   Application.Run;
 end.

@@ -1,4 +1,4 @@
-unit Repositories.Usuario;
+﻿unit Repositories.Usuario;
 
 interface
 
@@ -22,6 +22,9 @@ type
     function Login(email, senha: string): TJsonObject;
     function InserirUsuario(nome, email, senha: string): TJsonObject;
     procedure EditarSenha(id_usuario: integer; senha: string);
+    function ListarUsuarioId(id_usuario: integer): TJsonObject;
+    procedure EditarUsuario(id_usuario: integer; nome, email: string);
+    function ListarUsuarioByEmail(email: string): TJsonObject;
   end;
 
 var
@@ -66,7 +69,6 @@ begin
 end;
 
 function TDmUsuario.InserirUsuario(nome, email, senha: string): TJsonObject;
-
 var
     qry: TFDQuery;
 
@@ -105,7 +107,8 @@ begin
     qry:= TFDQuery.Create(nil);
     qry.Connection:= ConnUsuario;
 
-    qry.SQL.Add('Update usuario Set senha = :senha Where id_usuario = :id_usuario');
+    qry.SQL.Add('Update usuario Set senha = :senha');
+    qry.SQL.Add('Where id_usuario = :id_usuario');
 
     qry.ParamByName('id_usuario').Value:= id_usuario;
     qry.ParamByName('senha').Value:= senha;
@@ -116,6 +119,82 @@ begin
   finally
     FreeAndNil(qry);
 
+  end;
+end;
+
+function TDmUsuario.ListarUsuarioId(id_usuario: integer): TJsonObject;
+
+var
+    qry: TFDQuery;
+
+begin
+  Result := nil;  // 👈 garante que o compilador sabe o valor inicial
+  qry:= TFDQuery.Create(nil);
+
+  try
+    qry.Connection:= ConnUsuario;
+
+    qry.SQL.Add('Select id_usuario, nome, email, dt_cadastro, status From usuario');
+    qry.SQL.Add('Where id_usuario= :id_usuario');
+
+    qry.ParamByName('id_usuario').Value:= id_usuario;
+
+    qry.open; // 👈 mais adequado que Active := True
+
+    Result:= qry.ToJSONObject;
+  finally
+    FreeAndNil(qry);
+  end;
+end;
+
+procedure TDmUsuario.EditarUsuario(id_usuario: integer; nome, email: string);
+
+var
+    qry: TFDQuery;
+
+begin
+  try
+    qry:= TFDQuery.Create(nil);
+    qry.Connection:= ConnUsuario;
+
+    qry.SQL.Add('Update usuario Set nome = :nome, email= :email');
+    qry.SQL.Add('Where id_usuario = :id_usuario');
+
+    qry.ParamByName('id_usuario').Value:= id_usuario;
+    qry.ParamByName('nome').Value:= nome;
+    qry.ParamByName('email').Value:= email;
+
+    qry.ExecSQL;
+
+
+  finally
+    FreeAndNil(qry);
+
+  end;
+end;
+
+function TDmUsuario.ListarUsuarioByEmail(email: string): TJsonObject;
+
+var
+    qry: TFDQuery;
+
+begin
+  Result := nil;  // 👈 garante que o compilador sabe o valor inicial
+  qry:= TFDQuery.Create(nil);
+
+  try
+    qry.Connection:= ConnUsuario;
+
+    qry.SQL.Add('Select id_usuario, nome, email, dt_cadastro, status From usuario');
+    qry.SQL.Add('Where email= :email');
+
+    qry.ParamByName('email').Value:= email;
+
+    qry.open; // 👈 mais adequado que Active := True
+
+    Result:= qry.ToJSONObject;
+  finally
+    FreeAndNil(qry);
   end;
 end;
 

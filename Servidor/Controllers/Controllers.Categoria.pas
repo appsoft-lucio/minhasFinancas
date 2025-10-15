@@ -6,7 +6,8 @@ uses
   Horse,
   System.SysUtils,
   System.JSON,
-  Services.Categoria;
+  Services.Categoria,
+  controllers.JWT;
 
 procedure RegistrarRotas;
 procedure Listar (Req: THorseRequest; Res: THorseResponse; Next: TProc );
@@ -33,7 +34,7 @@ var
 
 begin
   try
-    id_usuario:= 1;
+    id_usuario:= Get_Usuario_Request(Req);
 
     Res.Send<TJsonArray>(Services.Categoria.Listar(id_usuario))
 
@@ -45,25 +46,81 @@ begin
 
 end;
 
-procedure ListarId (Req: THorseRequest; Res: THorseResponse; Next: TProc );
-begin
-  Res.Send('Vc acessou a rota Listar Categoria por Id :).')
-end;
-
 procedure Inserir (Req: THorseRequest; Res: THorseResponse; Next: TProc );
-begin
-  Res.Send('Vc acessou a rota Listar Categoria por Id :).')
-end;
+var
+  descricao: string;
+  id_usuario: integer;
+  body: TJsonObject;
 
+begin
+  try
+    id_usuario := Get_Usuario_Request(Req);
+    body  := Req.Body<TJSONObject>;
+    descricao := body.GetValue<string>('descricao', '');
+
+    Res.Send<TJsonObject>(Services.Categoria.Inserir(id_usuario, descricao))
+                          .Status(201);
+
+  except on ex:exception do
+    Res.Send(ex.Message).Status(500);
+
+  end;
+end;
 
 procedure Editar (Req: THorseRequest; Res: THorseResponse; Next: TProc );
+var
+  descricao: string;
+  id_usuario, id_categoria: integer;
+  body: TJsonObject;
 begin
-  Res.Send('Vc acessou a rota Editar Categoria :).')
+  try
+    body  := Req.Body<TJSONObject>;
+    descricao := body.GetValue<string>('descricao','');
+    id_categoria := Req.Params['id_categoria'].ToInteger;
+    id_usuario:= Get_usuario_Request(Req);
+
+    Services.Categoria.Editar(id_usuario, id_categoria, descricao);
+
+    Res.Send('Ok');
+
+  except on ex:exception do
+    Res.Send(ex.Message).Status(500);
+
+  end;
+end;
+
+procedure ListarId (Req: THorseRequest; Res: THorseResponse; Next: TProc );
+var
+  id_usuario, id_categoria: integer;
+
+begin
+  try
+    id_usuario:= Get_usuario_Request(Req);
+    id_categoria := Req.Params['id_categoria'].ToInteger;
+
+    Res.Send<TJsonObject>(Services.Categoria.ListarCategoriaId(id_usuario, id_categoria));
+
+  except on ex:exception do
+    Res.Send(ex.Message).Status(500);
+
+  end;
 end;
 
 procedure Excluir (Req: THorseRequest; Res: THorseResponse; Next: TProc );
+var
+  id_usuario, id_categoria: integer;
 begin
-  Res.Send('Vc acessou a rota Excluir Categoria :).')
+  try
+    id_usuario:= Get_usuario_Request(Req);
+    id_categoria := Req.Params['id_categoria'].ToInteger;
+
+    Services.Categoria.Excluir(id_usuario, id_categoria);
+
+    Res.Send('Ok');
+
+  except on ex:exception do
+    Res.Send(ex.Message).Status(500);
+  end;
 end;
 
 end.
