@@ -12,7 +12,9 @@ uses
   Services.Usuario in 'Services\Services.Usuario.pas',
   uMD5 in 'Utils\uMD5.pas',
   Repositories.Usuario in 'Repositories\Repositories.Usuario.pas' {DmUsuario: TDataModule},
-  Repositories.Lancamentos in 'Repositories\Repositories.Lancamentos.pas' {DmLancamentos: TDataModule};
+  Repositories.Lancamentos in 'Repositories\Repositories.Lancamentos.pas' {DmLancamentos: TDataModule},
+  Controllers.Lancamento in 'Controllers\Controllers.Lancamento.pas',
+  Services.Lancamento in 'Services\Services.Lancamento.pas';
 
 {$R *.res}
 

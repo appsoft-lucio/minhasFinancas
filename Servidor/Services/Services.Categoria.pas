@@ -6,7 +6,8 @@ uses
   Horse,
   System.SysUtils,
   System.JSON,
-  Repositories.Cattegoria;
+  Repositories.Cattegoria,
+  Repositories.Lancamentos;
 
 function Listar (id_usuario: integer): TJsonArray;
 function ListarCategoriaId (id_usuario, id_categoria: integer): TJSONObject;
@@ -70,12 +71,21 @@ end;
 procedure Excluir (id_usuario, id_categoria: integer);
 var
   dm: TDmCategoria;
+  dml: TDmLancamentos;
+  json_retorno: TJSONArray;
 begin
   try
     dm:= TDmCategoria.Create(nil);
+    dml:= TDmLancamentos.Create(nil);
+
+    //Consultar se existe lançamento antes de remover.
+    json_retorno := dml.ListarLancamentos(id_usuario, id_categoria);
+    if json_retorno.Count > 0 then
+    raise Exception.Create('A categoria não pode ser excluída porque possui lançamentos.');
 
     dm.Excluir(id_usuario, id_categoria);
   finally
+    FreeAndNil(json_retorno);
     FreeAndNil(dm);
   end;
 end;

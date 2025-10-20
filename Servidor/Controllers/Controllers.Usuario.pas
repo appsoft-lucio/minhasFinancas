@@ -22,15 +22,18 @@ procedure RegistrarRotas;
 begin
     //Rotas abertas
     THorse.Post('/usuarios/login', Login);
+
     THorse.Post('/usuarios/cadastro', InserirUsuario);
 
     //Rotas protegidas
     THorse.AddCallback(HorseJWT(Controllers.JWT.SECRET,
                         THorseJWTConfig.New.SessionClass(TMyClaims)))
                         .Post('/usuarios/password', EditarSenha);
+
     THorse.AddCallback(HorseJWT(Controllers.JWT.SECRET,
                         THorseJWTConfig.New.SessionClass(TMyClaims)))
                         .Get('/usuarios', ListarUsuarioId);
+
     THorse.AddCallback(HorseJWT(Controllers.JWT.SECRET,
                         THorseJWTConfig.New.SessionClass(TMyClaims)))
                         .Put('/usuarios', EditarUsuario);

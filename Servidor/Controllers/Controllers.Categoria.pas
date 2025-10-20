@@ -4,6 +4,7 @@ interface
 
 uses
   Horse,
+  Horse.JWT,
   System.SysUtils,
   System.JSON,
   Services.Categoria,
@@ -19,11 +20,25 @@ implementation
 
 procedure RegistrarRotas;
 begin
-    THorse.Get('/categorias', Listar);
-    THorse.Get('/categorias/:id_categoria', ListarId);
-    THorse.Post('/categorias', Inserir);
-    THorse.Put('/categorias/:id_categoria', Editar);
-    THorse.Delete('/categorias/:id_categoria', Excluir);
+    THorse.AddCallback(HorseJWT(Controllers.JWT.SECRET,
+                        THorseJWTConfig.New.SessionClass(TMyClaims)))
+                        .Get('/categorias', Listar);
+
+    THorse.AddCallback(HorseJWT(Controllers.JWT.SECRET,
+                        THorseJWTConfig.New.SessionClass(TMyClaims)))
+                        .Get('/categorias/:id_categoria', ListarId);
+
+    THorse.AddCallback(HorseJWT(Controllers.JWT.SECRET,
+                        THorseJWTConfig.New.SessionClass(TMyClaims)))
+                        .Post('/categorias', Inserir);
+
+    THorse.AddCallback(HorseJWT(Controllers.JWT.SECRET,
+                        THorseJWTConfig.New.SessionClass(TMyClaims)))
+                        .Put('/categorias/:id_categoria', Editar);
+
+    THorse.AddCallback(HorseJWT(Controllers.JWT.SECRET,
+                        THorseJWTConfig.New.SessionClass(TMyClaims)))
+                        .Delete('/categorias/:id_categoria', Excluir);
 
 end;
 
