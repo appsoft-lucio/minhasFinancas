@@ -79,7 +79,7 @@ begin
     dml:= TDmLancamentos.Create(nil);
 
     //Consultar se existe lançamento antes de remover.
-    json_retorno := dml.ListarLancamentos(id_usuario, id_categoria);
+    json_retorno := dml.ListarLancamentos(id_usuario, id_categoria, '', '');
     if json_retorno.Count > 0 then
     raise Exception.Create('A categoria não pode ser excluída porque possui lançamentos.');
 

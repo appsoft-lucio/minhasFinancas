@@ -18,12 +18,13 @@
 *.map
 *.cfg
 *.pch
-*.apk
-*.apks
-*.aab
 *.so
 *.dylib
 *.dSYM/
+*.apk
+*.apks
+*.aab
+*.ipa
 
 # Arquivos temporários de projeto
 *.local
@@ -35,33 +36,36 @@
 *.dproj.local
 *.dproj.bak
 
-# Diretórios de histórico e recuperação do Delphi
+# Histórico e recuperação do Delphi
 __history/
 __recovery/
 
 # ==========================
-# Plataformas específicas
+# Builds por plataforma
 # ==========================
 
+# Servidor (Backend)
+Servidor/Win32/
+Servidor/Win64/
+
+# Mobile - Windows
+mobile/Win32/
+mobile/Win64/
+
 # Android
-mobile/Android/Debug/
-mobile/Android64/Debug/
+mobile/Android/
+mobile/Android64/
 *.dex
 *.class
 *.apk.idsig
 
 # iOS
-*.ipa
-*.xcarchive/
 ios/build/
 ios/Pods/
 ios/.expo
+*.xcarchive/
 
-# Windows
-mobile/Win32/
-mobile/Win64/
-
-# MacOS
+# macOS
 *.app
 *.pkg
 
@@ -75,10 +79,10 @@ mobile/Win64/
 # VS Code
 .vscode/
 
-# JetBrains / IntelliJ IDEA
+# JetBrains / IntelliJ
 .idea/
 
-# Arquivos temporários do editor
+# Temporários de editor
 *.swp
 *.swo
 
@@ -107,7 +111,10 @@ pnpm-debug.log*
 Thumbs.db
 desktop.ini
 
-# Banco de dados Firebird
+# ==========================
+# Banco de dados
+# ==========================
+
+# Firebird
 Database/
 *.fdb
-
