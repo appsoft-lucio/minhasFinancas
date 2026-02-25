@@ -1,4 +1,4 @@
-unit Repositories.Cattegoria;
+﻿unit Repositories.Cattegoria;
 
 interface
 
@@ -123,6 +123,9 @@ begin
     qry.ParamByName('descricao').Value := descricao;
 
     qry.ExecSQL;
+
+    if qry.RowsAffected = 0 then
+      raise Exception.Create('Categoria não encontrada ou não pertence ao usuário! 😕');
   finally
     FreeAndNil(qry);
   end;

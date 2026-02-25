@@ -362,6 +362,11 @@
         <DCCReference Include="Utils\uFunctions.pas"/>
         <DCCReference Include="Utils\uCombobox.pas"/>
         <DCCReference Include="Utils\uSession.pas"/>
+        <DCCReference Include="DmGlobal\Dm.Global.pas">
+            <Form>DataModule1</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
@@ -869,6 +874,12 @@
                 <DeployFile LocalName="Win64\Debug\MinhasFinancas.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win64">
                         <RemoteName>MinhasFinancas.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Win64\Debug\MinhasFinancas.rsm" Configuration="Debug" Class="DebugSymbols">
+                    <Platform Name="Win64">
+                        <RemoteName>MinhasFinancas.rsm</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

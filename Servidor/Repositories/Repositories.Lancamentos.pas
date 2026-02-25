@@ -33,7 +33,9 @@ type
     procedure EditarLancamento(id_usuario, id_lancamento, id_categoria: integer; descricao,
       tipo, dt_lancamento: string; valor: double);
 
-    procedure ExcluirLancamento(id_usuario, id_lancamento: integer);
+    function ExcluirLancamento(
+  id_usuario, id_lancamento: Integer
+): Integer;
   end;
 
   var
@@ -60,8 +62,8 @@ begin
     qry := TFDQuery.Create(nil);
     qry.Connection := ConnLancamento;
 
-    qry.SQL.Add('Select l.*, coalesce(c.descricao, ''Sen Categoria'') as categoria  From lancamento l ');
-    qry.SQL.Add('left join categoria c on (c.id_categoria = l.id_categoria and c.id_usuario = l.ad_usuario)');
+    qry.SQL.Add('Select l.*, coalesce(c.descricao, ''Sem Categoria'') as categoria  From lancamento l ');
+    qry.SQL.Add('left join categoria c on (c.id_categoria = l.id_categoria and c.id_usuario = l.id_usuario)');
     qry.SQL.Add('Where l.id_usuario = :id_usuario');
 
     if id_categoria > 0 then
@@ -83,10 +85,10 @@ begin
     end;
 
     qry.ParamByName('id_usuario').Value := id_usuario;
-
     qry.Active := true;
 
     Result := qry.ToJSONArray;
+
   finally
     FreeAndNil(qry);
   end;
@@ -102,7 +104,7 @@ begin
     qry := TFDQuery.Create(nil);
     qry.Connection := ConnLancamento;
 
-    qry.SQL.Add('Select l.*, coalesce(c.descricao, ''Sen Categoria'') as categoria  From lancamento l ');
+    qry.SQL.Add('Select l.*, coalesce(c.descricao, ''Sem Categoria'') as categoria  From lancamento l ');
     qry.SQL.Add('left join categoria c on (c.id_categoria = l.id_categoria and c.id_usuario = l.id_usuario)');
     qry.SQL.Add('Where l.id_lancamento = :id_lancamento And l.id_usuario = :id_usuario');
 
@@ -212,8 +214,9 @@ begin
   end;
 end;
 
-procedure TDmLancamentos.ExcluirLancamento(id_usuario, id_lancamento: integer);
-
+function TDmLancamentos.ExcluirLancamento(
+  id_usuario, id_lancamento: Integer
+): Integer;
 var
   qry: TFDQuery;
 begin
@@ -221,18 +224,23 @@ begin
   try
     qry.Connection := ConnLancamento;
 
-    qry.SQL.Add('DELETE FROM lancamento');
-    qry.SQL.Add('WHERE id_lancamento = :id_lancamento AND id_usuario = :id_usuario');
+    qry.SQL.Text :=
+      'DELETE FROM lancamento ' +
+      'WHERE id_lancamento = :id_lancamento ' +
+      'AND id_usuario = :id_usuario';
 
-     //✅ Parâmetros
-    qry.ParamByName('id_lancamento').Value := id_lancamento;
-    qry.ParamByName('id_usuario').Value := id_usuario;
+    qry.ParamByName('id_lancamento').AsInteger := id_lancamento;
+    qry.ParamByName('id_usuario').AsInteger := id_usuario;
 
     qry.ExecSQL;
 
+    // 🔑 Retorna quantos registros foram afetados
+    Result := qry.RowsAffected;
+
   finally
-    FreeAndNil(qry);
+    qry.Free;
   end;
 end;
+
 
 end.

@@ -41,7 +41,8 @@ implementation
 
 {$R *.fmx}
 
-uses UnitPrincipal;
+uses UnitPrincipal,
+     Repositories.Usuario ;
 
 procedure TFormLogin.FormShow(Sender: TObject);
 begin
@@ -74,7 +75,7 @@ begin
   TLoading.ExecuteThread(
     procedure
     begin
-      Sleep(500); // Simula acesso ao servidor
+      DmUsuario.Login(EditEmail.Text, EditSenha.Text);
     end,
     TerminateLogin
   );

@@ -15,7 +15,8 @@ uses
   uLoading in 'Utils\uLoading.pas',
   uFunctions in 'Utils\uFunctions.pas',
   uCombobox in 'Utils\uCombobox.pas',
-  uSession in 'Utils\uSession.pas';
+  uSession in 'Utils\uSession.pas',
+  Dm.Global in 'DmGlobal\Dm.Global.pas' {DataModule1: TDataModule};
 
 {$R *.res}
 
@@ -30,5 +31,6 @@ begin
   Application.CreateForm(TFormNewCategory, FormNewCategory);
   Application.CreateForm(TFormEditPerfil, FormEditPerfil);
   Application.CreateForm(TFormEditarSenha, FormEditarSenha);
+  Application.CreateForm(TDataModule1, DataModule1);
   Application.Run;
 end.

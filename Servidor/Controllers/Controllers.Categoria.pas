@@ -1,4 +1,4 @@
-unit Controllers.Categoria;
+﻿unit Controllers.Categoria;
 
 interface
 
@@ -96,7 +96,7 @@ begin
 
     Services.Categoria.Editar(id_usuario, id_categoria, descricao);
 
-    Res.Send('Ok');
+    Res.Send('Categoria atualizada com sucesso! 😊');
 
   except on ex:exception do
     Res.Send(ex.Message).Status(500);

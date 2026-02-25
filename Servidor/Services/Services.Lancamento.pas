@@ -16,7 +16,7 @@ function Inserir(id_usuario, id_categoria: integer;
 procedure Editar(id_usuario, id_lancamento, id_categoria: integer;
                  descricao, tipo, dt_lancamento: string;
                  valor: double);
-procedure Excluir(id_usuario, id_lancamento: integer);
+function Excluir(id_usuario, id_lancamento: Integer): TJSONObject;
 
 implementation
 
@@ -110,18 +110,29 @@ begin
   end;
 end;
 
-procedure Excluir(id_usuario, id_lancamento: integer);
+function Excluir(id_usuario, id_lancamento: Integer): TJSONObject;
 var
   dm: TDmLancamentos;
+  afetados: Integer;
 begin
+  dm := TDmLancamentos.Create(nil);
   try
-    dm := TDmLancamentos.Create(nil);
+    // Executa exclusão no banco
+    afetados := dm.ExcluirLancamento(id_usuario, id_lancamento);
 
-    dm.ExcluirLancamento(id_usuario, id_lancamento);
+    // Se não excluiu nada, não existia
+    if afetados = 0 then
+      raise Exception.Create('Lançamento não encontrado');
+
+    // Monta resposta de negócio
+    Result := TJSONObject.Create;
+    Result.AddPair('mensagem', 'Lançamento excluído com sucesso');
+    Result.AddPair('id_lancamento', TJSONNumber.Create(id_lancamento));
 
   finally
-    FreeAndNil(dm);
+    dm.Free;
   end;
 end;
+
 
 end.

@@ -28,7 +28,8 @@ uses
   Horse.Jhonson,
   Horse.CORS,
   Controllers.Usuario,
-  Controllers.Categoria;
+  Controllers.Categoria,
+  Controllers.Lancamento;
 
 procedure TFormPrincipal.FormShow(Sender: TObject);
 begin
@@ -40,6 +41,7 @@ begin
 
   Controllers.Usuario.RegistrarRotas;
   Controllers.Categoria.RegistrarRotas;
+  Controllers.Lancamento.RegistrarRotas;
 
   THorse.Listen(3001);
 

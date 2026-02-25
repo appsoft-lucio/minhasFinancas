@@ -1,4 +1,4 @@
-unit Controllers.Lancamento;
+﻿unit Controllers.Lancamento;
 
 interface
 
@@ -138,18 +138,47 @@ end;
 
 procedure Excluir(Req: THorseRequest; Res: THorseResponse; Next: TProc);
 var
-  id_usuario, id_lancamento: integer;
+  id_usuario, id_lancamento: Integer;
+  json: TJSONObject;
 begin
   try
-
     id_usuario := Get_Usuario_Request(Req);
-    id_lancamento := Req.Params['id_lancamento'].ToInteger;
 
-    Services.Lancamento.Excluir(id_usuario, id_lancamento);
-    Res.Send('OK');
+    // 🔴 Validação: parâmetro obrigatório
+    if not Req.Params.ContainsKey('id_lancamento') then
+    begin
+      Res.Status(400).Send(
+        TJSONObject.Create.AddPair(
+          'erro', 'Lançamento não informado'
+        )
+      );
+      Exit;
+    end;
 
-  except on ex:exception do
-    Res.Send(ex.Message).Status(500);
+    // 🔴 Validação: valor inválido
+    if not TryStrToInt(Req.Params['id_lancamento'], id_lancamento) or
+       (id_lancamento <= 0) then
+    begin
+      Res.Status(400).Send(
+        TJSONObject.Create.AddPair(
+          'erro', 'Lançamento inválido'
+        )
+      );
+      Exit;
+    end;
+
+    // Chama a regra de negócio
+    json := Services.Lancamento.Excluir(id_usuario, id_lancamento);
+
+    Res.Status(200).Send(json);
+
+  except
+    on E: Exception do
+      Res.Status(404).Send(
+        TJSONObject.Create.AddPair('erro', E.Message)
+      );
   end;
 end;
+
+
 end.
