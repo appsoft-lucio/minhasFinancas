@@ -20,6 +20,10 @@ type
     EditSenhaCriarConta: TEdit;
     EditConfirmarSenhaCriarConta: TEdit;
     BtnLogin: TSpeedButton;
+    ScrollBoxLogin: TScrollBox;
+    lblEmailLogin: TLabel;
+    EditEmailLogin: TEdit;
+    EditSenhaLogin: TEdit;
     procedure SpeedButtonAcessarLoginClick(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure SpeedButton3Click(Sender: TObject);
@@ -42,7 +46,8 @@ implementation
 {$R *.fmx}
 
 uses UnitPrincipal,
-     Repositories.Usuario ;
+     //Repositories.Usuario,
+     Dm.Global;
 
 procedure TFormLogin.FormShow(Sender: TObject);
 begin
@@ -75,7 +80,7 @@ begin
   TLoading.ExecuteThread(
     procedure
     begin
-      DmUsuario.Login(EditEmail.Text, EditSenha.Text);
+      DmGlobal.Login(EditEmailLogin.Text, EditSenhaLogin.Text);
     end,
     TerminateLogin
   );

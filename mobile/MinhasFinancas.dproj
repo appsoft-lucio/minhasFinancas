@@ -363,7 +363,7 @@
         <DCCReference Include="Utils\uCombobox.pas"/>
         <DCCReference Include="Utils\uSession.pas"/>
         <DCCReference Include="DmGlobal\Dm.Global.pas">
-            <Form>DataModule1</Form>
+            <Form>DmGlobal</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>

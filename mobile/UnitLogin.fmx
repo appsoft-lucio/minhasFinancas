@@ -3832,56 +3832,61 @@ object FormLogin: TFormLogin
             OnClick = SpeedButton3Click
           end
         end
-        object EditEmail: TEdit
-          Touch.InteractiveGestures = [LongTap, DoubleTap]
-          Align = Top
-          TabOrder = 2
-          Position.X = 10.000000000000000000
-          Position.Y = 286.000000000000000000
-          Margins.Bottom = 30.000000000000000000
+        object ScrollBoxLogin: TScrollBox
+          Align = Client
           Size.Width = 380.000000000000000000
-          Size.Height = 32.000000000000000000
+          Size.Height = 257.000000000000000000
           Size.PlatformDefault = False
-          TextPrompt = 'Digite seu e-mail'
-        end
-        object EditSenha: TEdit
-          Touch.InteractiveGestures = [LongTap, DoubleTap]
-          Align = Top
-          TabOrder = 1
-          Password = True
-          Position.X = 10.000000000000000000
-          Position.Y = 371.000000000000000000
-          Margins.Bottom = 30.000000000000000000
-          Size.Width = 380.000000000000000000
-          Size.Height = 32.000000000000000000
-          Size.PlatformDefault = False
-          TextPrompt = 'Digite sua senha'
-        end
-        object LblEmailAcessar: TLabel
-          Align = Top
-          StyledSettings = [Size, FontColor]
-          Position.X = 10.000000000000000000
-          Position.Y = 263.000000000000000000
-          Size.Width = 380.000000000000000000
-          Size.Height = 23.000000000000000000
-          Size.PlatformDefault = False
-          TextSettings.Font.Family = 'Roboto'
-          TextSettings.Font.StyleExt = {00050000000000000004000000}
-          Text = 'E-mail'
-          TabOrder = 6
-        end
-        object LblSenhaAcessar: TLabel
-          Align = Top
-          StyledSettings = [Size, FontColor]
-          Position.X = 10.000000000000000000
-          Position.Y = 348.000000000000000000
-          Size.Width = 380.000000000000000000
-          Size.Height = 23.000000000000000000
-          Size.PlatformDefault = False
-          TextSettings.Font.Family = 'Roboto'
-          TextSettings.Font.StyleExt = {00050000000000000004000000}
-          Text = 'Senha'
-          TabOrder = 5
+          TabOrder = 3
+          Viewport.Width = 380.000000000000000000
+          Viewport.Height = 257.000000000000000000
+          object LblSenhaAcessar: TLabel
+            Align = Top
+            StyledSettings = [Size, FontColor]
+            Position.Y = 85.000000000000000000
+            Size.Width = 380.000000000000000000
+            Size.Height = 23.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Family = 'Roboto'
+            TextSettings.Font.StyleExt = {00050000000000000004000000}
+            Text = 'Senha'
+            TabOrder = 6
+          end
+          object lblEmailLogin: TLabel
+            Align = Top
+            StyledSettings = [Family, Size, FontColor]
+            Size.Width = 380.000000000000000000
+            Size.Height = 23.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Family = 'Roboto'
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            Text = 'E-mail'
+            TabOrder = 7
+          end
+          object EditEmailLogin: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            TabOrder = 2
+            Password = True
+            Position.Y = 23.000000000000000000
+            Margins.Bottom = 30.000000000000000000
+            Size.Width = 380.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TextPrompt = 'Digite seu e-mail'
+          end
+          object EditSenhaLogin: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Top
+            TabOrder = 1
+            Password = True
+            Position.Y = 108.000000000000000000
+            Margins.Bottom = 30.000000000000000000
+            Size.Width = 380.000000000000000000
+            Size.Height = 32.000000000000000000
+            Size.PlatformDefault = False
+            TextPrompt = 'Digite sua senha'
+          end
         end
       end
     end
