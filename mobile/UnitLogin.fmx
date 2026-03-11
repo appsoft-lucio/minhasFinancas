@@ -5879,7 +5879,7 @@ object FormLogin: TFormLogin
             Size.Width = 375.000000000000000000
             Size.Height = 32.000000000000000000
             Size.PlatformDefault = False
-            TextPrompt = 'Nome Completo'
+            TextPrompt = 'Informe seu nome Completo'
           end
           object EditSenhaCriarConta: TEdit
             Touch.InteractiveGestures = [LongTap, DoubleTap]

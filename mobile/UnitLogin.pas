@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.TabControl,
   FMX.Objects, FMX.Layouts, FMX.Controls.Presentation, FMX.StdCtrls, FMX.Edit,
-  uLoading;
+  uLoading, uSession;
 
 type
   TFormLogin = class(TForm)
@@ -74,6 +74,7 @@ begin
   TabControl.GotoVisibleTab(1);
 end;
 
+// Botão para Login
 procedure TFormLogin.BtnLoginClick(Sender: TObject);
 begin
   TLoading.Show(FormLogin, 'Carregando...');
@@ -102,6 +103,13 @@ begin
     ShowMessage(Exception(TThread(Sender).FatalException).Message);
     Exit;
   end;
+
+  //Jogin valido
+  TSession.id_usuario := DmGlobal.TabUsuario.FieldByName('id_usuario').AsInteger;
+  TSession.nome := DmGlobal.TabUsuario.FieldByName('nome').AsString;
+  TSession.email := DmGlobal.TabUsuario.FieldByName('email').AsString;
+  TSession.token := DmGlobal.TabUsuario.FieldByName('token').AsString;
+  TSession.status := '????';//DmGlobal.TabUsuario.FieldByName('status').ToString;
 
   OpenMainForm;
 end;
