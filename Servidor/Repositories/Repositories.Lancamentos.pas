@@ -62,7 +62,7 @@ begin
     qry := TFDQuery.Create(nil);
     qry.Connection := ConnLancamento;
 
-    qry.SQL.Add('Select l.*, coalesce(c.descricao, ''Sem Categoria'') as categoria  From lancamento l ');
+    qry.SQL.Add('Select l.*, coalesce(c.descricao, ''Sem Categoria'') as categoria From lancamento l ');
     qry.SQL.Add('left join categoria c on (c.id_categoria = l.id_categoria and c.id_usuario = l.id_usuario)');
     qry.SQL.Add('Where l.id_usuario = :id_usuario');
 

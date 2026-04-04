@@ -7,7 +7,7 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.TabControl,
   FMX.Controls.Presentation, FMX.StdCtrls, FMX.Layouts, FMX.Objects,
   FMX.ListView.Types, FMX.ListView.Appearances, FMX.ListView.Adapters.Base,
-  FMX.ListView, uLoading   ;
+  FMX.ListView, uLoading, System.DateUtils, uFunctions;
 
 type
   TFormPrincipal = class(TForm)
@@ -62,7 +62,7 @@ implementation
 
 {$R *.fmx}
 
-uses UnitLancamento, UnitConfig, UnitLancamentoCad;
+uses UnitLancamento, UnitConfig, UnitLancamentoCad, Dm.Global;
 
 procedure TFormPrincipal.AddLancamentosLv(id_lancamentos: integer;
                                           descricao, categoria,
@@ -77,7 +77,7 @@ begin
 
         TListItemText(item.Objects.FindDrawable('TxtDescricao')).Text := descricao;
         TListItemText(item.Objects.FindDrawable('TxtCategoria')).Text := categoria;
-        TListItemText(item.Objects.FindDrawable('TxtValor')).Text := dt;
+        TListItemText(item.Objects.FindDrawable('TxtValor')).Text :=Copy(dt, 1, 6);
         TListItemText(item.Objects.FindDrawable('TxtData')).Text := FormatFloat('R$#,##0.00', valor);
 end;
 
@@ -114,38 +114,57 @@ procedure TFormPrincipal.ListarUltimosLacamentos;
 
 begin
 
-        TLoading.Show(FormPrincipal, 'Carregando...');
-        TLoading.ExecuteThread(
-        procedure
-        begin
-        Sleep(500); // Simula acesso ao servidor
-        end,
-        TerminateLancamentos
-        );
+  TLoading.Show(FormPrincipal, 'Carregando...');
+  TLoading.ExecuteThread(
+  procedure
+
+  var
+    dt_de, dt_ate : string;
+
+    begin
+      FormatDateTime('yyyy-mm-dd', startOfTheMonth(date));
+      FormatDateTime('yyyy-mm-dd', EndOfTheMonth(date));
+
+      //Sleep(500); // Simula acesso ao servidor
+      DmGlobal.ConsultarLancamentos(0, dt_de, dt_ate)
+    end,
+  TerminateLancamentos
+  );
 
 end;
 
 procedure TFormPrincipal.TerminateLancamentos(Sender: TObject);
 begin
   TLoading.Hide;
+
+  //Se deu erro na Thread
   if Assigned(TThread(Sender).FatalException) then
   begin
     ShowMessage(Exception(TThread(Sender).FatalException).Message);
     Exit;
   end;
 
-  AddLancamentosLv(1, 'Compra de gasolina', 'Transporte', '01/08/2025', 170);
-  AddLancamentosLv(2, 'Almoço no restaurante', 'Alimentação', '02/08/2025', 45);
-  AddLancamentosLv(3, 'Supermercado', 'Alimentação', '03/08/2025', 320);
-  AddLancamentosLv(4, 'Cinema', 'Lazer', '04/08/2025', 25);
-  AddLancamentosLv(5, 'Mensalidade Academia', 'Saúde', '05/08/2025', 120);
-  AddLancamentosLv(6, 'Conta de luz', 'Moradia', '06/08/2025', 180);
-  AddLancamentosLv(7, 'Pagamento do cartão', 'Dívidas', '07/08/2025', 500);
-  AddLancamentosLv(8, 'Uber para trabalho', 'Transporte', '08/08/2025', 35);
-  AddLancamentosLv(9, 'Água e esgoto', 'Moradia', '09/08/2025', 90);
-  AddLancamentosLv(10, 'Compra de roupas', 'Vestuário', '10/08/2025', 2050);
-  AddLancamentosLv(11, 'Compra de gasolina', 'Transporte', '01/09', 170);
+  while NOT DmGlobal.TabLancamento.Eof do
+  begin
+    AddLancamentosLv(DmGlobal.TabLancamento.FieldByName('id_lancamento').AsInteger,
+    DmGlobal.TabLancamento.FieldByName('descricao').AsString,
+    DmGlobal.TabLancamento.FieldByName('categoria').AsString,
+    UTCtoShortDateBR(DmGlobal.TabLancamento.FieldByName('dt_lancamento').AsString),
+    DmGlobal.TabLancamento.FieldByName('valor').AsFloat);
+
+    DmGlobal.TabLancamento.Next;
+  end;
+
+
 
 end;
 
 end.
+
+
+
+
+
+
+
+
