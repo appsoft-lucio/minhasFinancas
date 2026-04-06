@@ -583,11 +583,11 @@ object FormPrincipal: TFormPrincipal
             Text = 'Saldo do M'#234's'
             TabOrder = 2
           end
-          object LblValorSaldo: TLabel
+          object LblSaldo: TLabel
             StyledSettings = []
             Margins.Left = 10.000000000000000000
-            Position.X = 17.000000000000000000
-            Position.Y = 27.000000000000000000
+            Position.X = 14.000000000000000000
+            Position.Y = 22.000000000000000000
             Size.Width = 173.000000000000000000
             Size.Height = 43.000000000000000000
             Size.PlatformDefault = False
@@ -595,8 +595,9 @@ object FormPrincipal: TFormPrincipal
             TextSettings.Font.Size = 26.000000000000000000
             TextSettings.Font.StyleExt = {00090000000000000004000000}
             TextSettings.FontColor = xFF4B4B4B
-            Text = 'R$1.250,00'
+            Text = '0'
             TabOrder = 1
+            OnClick = LblSaldoClick
           end
         end
         object LayoutReceitaEDespesas: TLayout
@@ -1632,7 +1633,7 @@ object FormPrincipal: TFormPrincipal
               Text = 'Receitas'
               TabOrder = 2
             end
-            object LblValorReceita: TLabel
+            object LblTotalReceita: TLabel
               StyledSettings = []
               Margins.Left = 10.000000000000000000
               Position.X = 59.000000000000000000
@@ -1644,7 +1645,7 @@ object FormPrincipal: TFormPrincipal
               TextSettings.Font.Size = 16.000000000000000000
               TextSettings.Font.StyleExt = {00050000000000000004000000}
               TextSettings.FontColor = xFF4B4B4B
-              Text = 'R$2.750,00'
+              Text = '0'
               TabOrder = 1
             end
           end
@@ -2682,7 +2683,7 @@ object FormPrincipal: TFormPrincipal
               Text = 'Despesas'
               TabOrder = 2
             end
-            object LblValorDespesa: TLabel
+            object LblTotalDespesa: TLabel
               StyledSettings = []
               Margins.Left = 10.000000000000000000
               Position.X = 62.000000000000000000
@@ -2694,7 +2695,7 @@ object FormPrincipal: TFormPrincipal
               TextSettings.Font.Size = 16.000000000000000000
               TextSettings.Font.StyleExt = {00050000000000000004000000}
               TextSettings.FontColor = xFF4B4B4B
-              Text = 'R$1.500,00'
+              Text = '20'
               TabOrder = 1
             end
           end
