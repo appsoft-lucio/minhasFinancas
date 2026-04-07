@@ -2891,6 +2891,7 @@ object FormPrincipal: TFormPrincipal
           Size.Width = 35.000000000000000000
           Size.Height = 35.000000000000000000
           Size.PlatformDefault = False
+          OnClick = ImgAbaHomeClick
         end
         object ImgAbaLancamentos: TImage
           MultiResBitmap.Height = 64
@@ -3606,6 +3607,7 @@ object FormPrincipal: TFormPrincipal
         AppearanceClassName = 'TTextObjectAppearance'
       end>
     CanSwipeDelete = False
+    OnChange = LvLancamentosChange
     ShowSelection = False
   end
 end

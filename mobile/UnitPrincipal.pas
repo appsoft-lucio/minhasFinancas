@@ -24,7 +24,8 @@ uses
   FMX.ListView,
   uLoading,
   System.DateUtils,
-  uFunctions;
+  uFunctions,
+  System.StrUtils;
 
 type
   TFormPrincipal = class(TForm)
@@ -63,12 +64,14 @@ type
     procedure ImgAbaConfigClick(Sender: TObject);
     procedure ImgAdicinarClick(Sender: TObject);
     procedure LblSaldoClick(Sender: TObject);
+    procedure ImgAbaHomeClick(Sender: TObject);
+    procedure LvLancamentosChange(Sender: TObject);
 
   private
     // Adiciona um item de lançamento no ListView
     procedure AddLancamentosLv(
       id_lancamentos: integer;
-      descricao, categoria, dt: string;
+      descricao, categoria, dt, tipo: string;
       valor: double
     );
 
@@ -100,22 +103,36 @@ uses
 ------------------------------------------------------------------------------}
 procedure TFormPrincipal.AddLancamentosLv(
   id_lancamentos: integer;
-  descricao, categoria, dt: string;
+  descricao, categoria, dt, tipo: string;
   valor: double
 );
 var
   item: TListViewItem;
+  txtValor: TListItemText;
 begin
-  // Cria um novo item no ListView
   item := LvLancamentos.Items.Add;
   item.Height := 75;
   item.Tag := id_lancamentos;
 
-  // Preenche os textos do item
   TListItemText(item.Objects.FindDrawable('TxtDescricao')).Text := descricao;
   TListItemText(item.Objects.FindDrawable('TxtCategoria')).Text := categoria;
-  TListItemText(item.Objects.FindDrawable('TxtValor')).Text := Copy(dt, 1, 6);
-  TListItemText(item.Objects.FindDrawable('TxtData')).Text := FormatFloat('R$#,##0.00', valor);
+  TListItemText(item.Objects.FindDrawable('TxtValor')).Text := Copy(dt, 1, 5);
+
+  txtValor := TListItemText(item.Objects.FindDrawable('TxtData'));
+
+  txtValor.Text :=
+    IfThen(tipo = 'D', '- ', '') +
+    FormatFloat('R$#,##0.00', valor);
+
+  // Mudar a cor do texto
+  if tipo = 'D' then
+  begin
+    txtValor.TextColor := $FFB00020;
+  end
+  else
+  begin
+    txtValor.TextColor := $FF2E7D32;
+  end;
 end;
 
 {------------------------------------------------------------------------------
@@ -135,6 +152,11 @@ begin
     Application.CreateForm(TFormConfig, FormConfig);
 
   FormConfig.Show;
+end;
+
+procedure TFormPrincipal.ImgAbaHomeClick(Sender: TObject);
+begin
+  ListarUltimosLacamentos;
 end;
 
 {------------------------------------------------------------------------------
@@ -170,6 +192,7 @@ end;
 procedure TFormPrincipal.ListarUltimosLacamentos;
 begin
   TLoading.Show(FormPrincipal, 'Carregando...');
+  lvLancamentos.items.clear;
 
   TLoading.ExecuteThread(
     procedure
@@ -184,6 +207,11 @@ begin
     end,
     TerminateLancamentos
   );
+end;
+
+procedure TFormPrincipal.LvLancamentosChange(Sender: TObject);
+begin
+
 end;
 
 {------------------------------------------------------------------------------
@@ -214,6 +242,7 @@ begin
       DmGlobal.TabLancamento.FieldByName('descricao').AsString,
       DmGlobal.TabLancamento.FieldByName('categoria').AsString,
       UTCtoShortDateBR(DmGlobal.TabLancamento.FieldByName('dt_lancamento').AsString),
+      DmGlobal.TabLancamento.FieldByName('tipo').AsString,
       DmGlobal.TabLancamento.FieldByName('valor').AsFloat
     );
 
@@ -228,6 +257,16 @@ begin
   LblTotalDespesa.Text := FormatFloat('R$#,##0.00', total_despesa );
   LblTotalReceita.Text := FormatFloat('R$#,##0.00', total_receita );
   LblSaldo.Text := FormatFloat('R$#,##0.00', total_receita - total_despesa );
+
+  if DmGlobal.TabLancamento.IsEmpty then
+begin
+  LblTotalDespesa.Text := 'R$0,00';
+  LblTotalReceita.Text := 'R$0,00';
+  LblSaldo.Text := 'R$0,00';
+
+  ShowMessage('Nenhum lançamento encontrado.');
+  Exit;
+end;
 
 end;
 
