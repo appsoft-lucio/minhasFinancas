@@ -727,7 +727,7 @@ object FormLancamento: TFormLancamento
       Stroke.Kind = None
       XRadius = 10.000000000000000000
       YRadius = 10.000000000000000000
-      object LblDada: TLabel
+      object LblMes: TLabel
         Align = Client
         StyledSettings = []
         Size.Width = 210.000000000000000000
@@ -885,6 +885,7 @@ object FormLancamento: TFormLancamento
         Size.Width = 35.000000000000000000
         Size.Height = 50.000000000000000000
         Size.PlatformDefault = False
+        OnClick = ImgMesNextClick
       end
       object ImgMesBack: TImage
         MultiResBitmap.Height = 64
@@ -1029,6 +1030,7 @@ object FormLancamento: TFormLancamento
         Size.Width = 35.000000000000000000
         Size.Height = 50.000000000000000000
         Size.PlatformDefault = False
+        OnClick = ImgMesBackClick
       end
     end
   end
@@ -1058,7 +1060,7 @@ object FormLancamento: TFormLancamento
         Text = 'Receitas'
         TabOrder = 5
       end
-      object LblLancamentosValorReceita: TLabel
+      object LblTotalReceita: TLabel
         StyledSettings = []
         Position.Y = 25.000000000000000000
         Size.Width = 100.000000000000000000
@@ -1084,7 +1086,7 @@ object FormLancamento: TFormLancamento
         Text = 'Despesas'
         TabOrder = 4
       end
-      object LblLancamentosValorDespesas: TLabel
+      object LblTotalDespesa: TLabel
         StyledSettings = []
         Position.X = 94.000000000000000000
         Position.Y = 25.000000000000000000
@@ -1111,7 +1113,7 @@ object FormLancamento: TFormLancamento
         Text = 'Saldo'
         TabOrder = 2
       end
-      object LblLancamentosValorSaldo: TLabel
+      object LblSaldo: TLabel
         StyledSettings = []
         Position.X = 184.000000000000000000
         Position.Y = 25.000000000000000000
