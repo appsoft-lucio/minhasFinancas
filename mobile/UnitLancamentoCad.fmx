@@ -10,6 +10,7 @@ object FormLancamentoCad: TFormLancamentoCad
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
   OnClose = FormClose
+  OnShow = FormShow
   DesignerMasterStyle = 3
   object LytCabecalhoNewCategoria: TLayout
     Align = Top
@@ -1234,6 +1235,7 @@ object FormLancamentoCad: TFormLancamentoCad
         Size.Width = 40.000000000000000000
         Size.Height = 60.000000000000000000
         Size.PlatformDefault = False
+        OnClick = ImgSalvarLancamentoClick
       end
     end
     object ImgBackNovoLancamento: TImage
@@ -1373,9 +1375,10 @@ object FormLancamentoCad: TFormLancamentoCad
         Stroke.Color = xFFD0D0D0
         XRadius = 10.000000000000000000
         YRadius = 10.000000000000000000
-        object Label1: TLabel
+        object LabelReceita: TLabel
           Align = Left
           StyledSettings = [Family, Style]
+          HitTest = True
           Margins.Top = 5.000000000000000000
           Margins.Bottom = 5.000000000000000000
           Position.Y = 5.000000000000000000
@@ -1388,10 +1391,12 @@ object FormLancamentoCad: TFormLancamentoCad
           TextSettings.HorzAlign = Center
           Text = 'Receita'
           TabOrder = 1
+          OnClick = LabelReceitaClick
         end
-        object Label2: TLabel
+        object LabelDespesa: TLabel
           Align = Right
           StyledSettings = [Family, Style]
+          HitTest = True
           Margins.Top = 5.000000000000000000
           Margins.Bottom = 5.000000000000000000
           Position.X = 65.000000000000000000
@@ -1405,9 +1410,10 @@ object FormLancamentoCad: TFormLancamentoCad
           TextSettings.HorzAlign = Center
           Text = 'Despesa'
           TabOrder = 0
+          OnClick = LabelDespesaClick
         end
       end
-      object Edit1: TEdit
+      object EditValor: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
         Align = Client
         TabOrder = 1
@@ -1420,7 +1426,7 @@ object FormLancamentoCad: TFormLancamentoCad
         StyledSettings = [Size, Style, FontColor]
       end
     end
-    object ComboBox1: TComboBox
+    object ComboBoxCategoria: TComboBox
       Align = Top
       Items.Strings = (
         'Combustivel'#11
@@ -1436,7 +1442,7 @@ object FormLancamentoCad: TFormLancamentoCad
       Size.PlatformDefault = False
       TabOrder = 2
     end
-    object DateEdit1: TDateEdit
+    object EditDataLancamento: TDateEdit
       Date = 45908.000000000000000000
       Align = Top
       Margins.Top = 20.000000000000000000

@@ -1,21 +1,21 @@
-unit Dm.Global;
+Ôªøunit Dm.Global;
 
 interface
 
 uses
-  // Units b·sicas do Delphi
+  // Units b√°sicas do Delphi
   System.SysUtils,
   System.Classes,
   System.JSON,
 
-  // Biblioteca para fazer requisiÁıes HTTP para a API
+  // Biblioteca para requisi√ß√µes HTTP
   RESTRequest4D,
 
-  // Adapter que converte resposta JSON da API para dataset
+  // Adapter para converter JSON da API em dataset
   DataSet.Serialize.Adapter.RESTRequest4D,
   DataSet.Serialize.Config,
 
-  // Units do FireDAC para trabalhar com datasets em memÛria
+  // FireDAC para datasets em mem√≥ria
   FireDAC.Stan.Intf,
   FireDAC.Stan.Option,
   FireDAC.Stan.Param,
@@ -27,59 +27,67 @@ uses
   FireDAC.Comp.DataSet,
   FireDAC.Comp.Client,
 
-  // Unit da sess„o do usu·rio logado
+  // Sess√£o do usu√°rio logado
   uSession;
 
 type
   TDmGlobal = class(TDataModule)
-    // Dataset em memÛria para armazenar os dados do usu·rio
+    // Dataset em mem√≥ria para dados do usu√°rio
     TabUsuario: TFDMemTable;
 
-    // Dataset em memÛria para armazenar os lanÁamentos financeiros
+    // Dataset em mem√≥ria para lan√ßamentos financeiros
     TabLancamento: TFDMemTable;
 
-    // Evento executado quando o DataModule È criado
+    // Dataset em mem√≥ria para categorias
+    TabCategoria: TFDMemTable;
+
+    // Evento executado ao criar o DataModule
     procedure DataModuleCreate(Sender: TObject);
   private
-    { DeclaraÁıes privadas }
+    { Declara√ß√µes privadas }
   public
-    { DeclaraÁıes p˙blicas }
+    { Declara√ß√µes p√∫blicas }
 
-    // Faz login enviando email e senha para a API
+    // Realiza login do usu√°rio
     procedure Login(email, senha: string);
 
-    // Faz cadastro de um novo usu·rio
+    // Cria uma nova conta de usu√°rio
     procedure CriarConta(nome, email, senha: string);
 
-    // Consulta os lanÁamentos filtrando por categoria e perÌodo
-    procedure ConsultarLancamentos(id_categoria: integer; dt_de, dt_ate: string);
+    // Consulta lan√ßamentos com filtro por categoria e per√≠odo
+    procedure ConsultarLancamentos(id_categoria: Integer; dt_de, dt_ate: string);
+
+    // Consulta as categorias do usu√°rio
+    procedure ConsultarCategotias;
+
+    // Insere um novo lan√ßamento financeiro
+    procedure InserirLancamento(descricao, tipo, dt: string; valor: Double;
+      id_categoria: Integer);
   end;
 
 var
-  // Vari·vel global do DataModule
   DmGlobal: TDmGlobal;
 
 const
   {
-    URL base da API
+    URL base da API.
 
-    Use uma das opÁıes abaixo conforme o teste:
+    Use uma das op√ß√µes abaixo conforme o ambiente de teste:
 
     1) Teste no PC:
-       localhost significa "este mesmo computador"
+       localhost aponta para a pr√≥pria m√°quina
 
     2) Teste no celular:
-       troque para o IP do computador na rede local
-       Exemplo: http://192.168.0.10:3001
+       use o IP local do computador
+       Exemplo: http://192.168.1.16:3001
 
-    IMPORTANTE:
-    - Para testar no celular, PC e celular precisam estar no mesmo Wi-Fi
-    - A API precisa estar rodando
-    - O firewall do Windows pode bloquear a conex„o
+    Observa√ß√µes:
+    - PC e celular devem estar na mesma rede
+    - A API deve estar em execu√ß√£o
+    - O firewall pode bloquear a conex√£o
   }
-
-  // BASE_URL = 'http://192.168.0.10:3001'; // teste no celular
-  BASE_URL = 'http://localhost:3001';       // teste no PC
+  BASE_URL = 'http://192.168.1.16:3001';
+  // BASE_URL = 'http://localhost:3001';
 
 implementation
 
@@ -90,25 +98,19 @@ implementation
 procedure TDmGlobal.DataModuleCreate(Sender: TObject);
 begin
   {
-    Essa configuraÁ„o define como os nomes dos campos vindos do JSON
-    ser„o criados no dataset.
-
-    cndLower = tudo em letras min˙sculas
+    Define que os nomes dos campos importados do JSON
+    ser√£o tratados em letras min√∫sculas.
 
     Exemplo:
-    Se a API retornar "ID_USUARIO" ou "Id_Usuario",
-    o dataset vai tratar como "id_usuario".
+    "ID_USUARIO" -> "id_usuario"
   }
   TDataSetSerializeConfig.GetInstance.CaseNameDefinition := cndLower;
 
   {
-    Define o separador decimal usado na importaÁ„o de n˙meros.
+    Define o separador decimal usado ao importar n√∫meros.
 
-    Isso ajuda a evitar erro com valores decimais,
-    principalmente quando a API retorna n˙meros com ponto.
-
-    Exemplo:
-    10.50
+    Isso evita problemas com valores decimais vindos da API,
+    principalmente quando o JSON usa ponto como separador.
   }
   TDataSetSerializeConfig.GetInstance.Import.DecimalSeparator := '.';
 end;
@@ -119,8 +121,8 @@ var
   json: TJSONObject;
 begin
   {
-    Antes de carregar novos dados no dataset, limpamos o conte˙do anterior.
-    Isso evita misturar dados antigos com os novos.
+    Limpa o dataset do usu√°rio antes de carregar novos dados.
+    Isso evita misturar informa√ß√µes antigas com a resposta atual.
   }
   if TabUsuario.Active then
   begin
@@ -128,36 +130,22 @@ begin
     TabUsuario.FieldDefs.Clear;
   end;
 
-  // Cria o objeto JSON que ser· enviado para a API
+  // Cria o JSON que ser√° enviado para a API
   json := TJSONObject.Create;
   try
     {
-      Monta o corpo da requisiÁ„o no formato JSON.
-      A API espera receber email e senha.
+      Monta o corpo da requisi√ß√£o com os dados de login.
     }
     json.AddPair('email', email);
     json.AddPair('senha', senha);
 
     {
-      Faz a requisiÁ„o POST para o endpoint de login.
+      Envia uma requisi√ß√£o POST para o endpoint de login.
 
-      .BaseURL(BASE_URL)
-        define a URL principal da API
-
-      .Resource('/usuarios/login')
-        define o endpoint de login
-
-      .AddBody(json.ToString)
-        envia o JSON no corpo da requisiÁ„o
-
-      .Accept('application/json')
-        informa que esperamos resposta em JSON
-
-      .Adapters(...)
-        converte a resposta da API para o dataset TabUsuario
-
-      .Post
-        executa a requisiÁ„o HTTP do tipo POST
+      - /usuarios/login: endpoint de autentica√ß√£o
+      - AddBody: envia o JSON no corpo da requisi√ß√£o
+      - Accept('application/json'): informa que a resposta esperada √© JSON
+      - Adapters(...): converte o JSON recebido em dataset
     }
     resp := TRequest.New
       .BaseURL(BASE_URL)
@@ -168,14 +156,14 @@ begin
       .Post;
 
     {
-      Se a API n„o retornar status 200,
-      entendemos que houve erro no login.
+      Se o status retornado n√£o for 200,
+      considera que houve erro no login.
     }
     if resp.StatusCode <> 200 then
       raise Exception.Create(resp.Content);
 
   finally
-    // Libera o objeto JSON da memÛria
+    // Libera o objeto JSON da mem√≥ria
     FreeAndNil(json);
   end;
 end;
@@ -186,25 +174,25 @@ var
   json: TJSONObject;
 begin
   {
-    Limpa o dataset antes de receber os dados do novo cadastro.
+    Limpa o dataset do usu√°rio antes de carregar os dados do novo cadastro.
   }
   if TabUsuario.Active then
     TabUsuario.EmptyDataSet;
 
   TabUsuario.FieldDefs.Clear;
 
-  // Cria o objeto JSON que ser· enviado para a API
+  // Cria o JSON que ser√° enviado para a API
   json := TJSONObject.Create;
   try
     {
-      Monta o JSON com os dados necess·rios para cadastro.
+      Monta o corpo da requisi√ß√£o com os dados do usu√°rio.
     }
     json.AddPair('nome', nome);
     json.AddPair('email', email);
     json.AddPair('senha', senha);
 
     {
-      Faz a requisiÁ„o POST para o endpoint de cadastro.
+      Envia uma requisi√ß√£o POST para o endpoint de cadastro.
     }
     resp := TRequest.New
       .BaseURL(BASE_URL)
@@ -215,24 +203,24 @@ begin
       .Post;
 
     {
-      Normalmente cadastro com sucesso retorna 201 (Created).
-      Se vier outro status, geramos erro.
+      Cadastro com sucesso normalmente retorna 201 (Created).
+      Se retornar outro c√≥digo, gera exce√ß√£o com a mensagem da API.
     }
     if resp.StatusCode <> 201 then
       raise Exception.Create(resp.Content);
 
   finally
-    // Libera o objeto JSON da memÛria
+    // Libera o objeto JSON da mem√≥ria
     FreeAndNil(json);
   end;
 end;
 
-procedure TDmGlobal.ConsultarLancamentos(id_categoria: integer; dt_de, dt_ate: string);
+procedure TDmGlobal.ConsultarLancamentos(id_categoria: Integer; dt_de, dt_ate: string);
 var
   resp: IResponse;
 begin
   {
-    Limpa os lanÁamentos antigos antes de carregar novos dados.
+    Limpa os lan√ßamentos antigos antes de buscar os novos dados.
   }
   if TabLancamento.Active then
     TabLancamento.EmptyDataSet;
@@ -240,16 +228,14 @@ begin
   TabLancamento.FieldDefs.Clear;
 
   {
-    Faz a requisiÁ„o GET para buscar os lanÁamentos.
+    Faz uma requisi√ß√£o GET para consultar os lan√ßamentos.
 
-    Par‚metros enviados:
-    - id_categoria
-    - dt_de
-    - dt_ate
+    Par√¢metros enviados:
+    - id_categoria: filtra por categoria
+    - dt_de: data inicial
+    - dt_ate: data final
 
-    .TokenBearer(TSession.token)
-    envia o token JWT do usu·rio logado para a API,
-    permitindo acesso aos dados protegidos.
+    O token JWT √© enviado para permitir acesso aos dados protegidos.
   }
   resp := TRequest.New
     .BaseURL(BASE_URL)
@@ -263,10 +249,95 @@ begin
     .Get;
 
   {
-    Se a API n„o retornar 200, entendemos que houve erro.
+    Se a API n√£o retornar 200, houve erro na consulta.
   }
   if resp.StatusCode <> 200 then
     raise Exception.Create(resp.Content);
+end;
+
+procedure TDmGlobal.ConsultarCategotias;
+var
+  resp: IResponse;
+begin
+  {
+    Limpa os dados antigos das categorias antes de carregar os novos.
+    Isso evita duplicidade e dados desatualizados.
+  }
+  if TabCategoria.Active then
+    TabCategoria.EmptyDataSet;
+
+  {
+    Remove os campos antigos para que sejam recriados
+    conforme o novo retorno da API.
+  }
+  TabCategoria.FieldDefs.Clear;
+
+  {
+    Faz uma requisi√ß√£o GET para buscar as categorias.
+
+    - Endpoint: /categorias
+    - TokenBearer: envia o token JWT do usu√°rio logado
+    - Adapter: converte a resposta JSON para o dataset TabCategoria
+  }
+  resp := TRequest.New
+    .BaseURL(BASE_URL)
+    .Resource('/categorias')
+    .Accept('application/json')
+    .TokenBearer(TSession.token)
+    .Adapters(TDataSetSerializeAdapter.New(TabCategoria))
+    .Get;
+
+  {
+    Verifica se a consulta foi conclu√≠da com sucesso.
+    Status 200 significa OK.
+  }
+  if resp.StatusCode <> 200 then
+    raise Exception.Create(resp.Content);
+end;
+
+procedure TDmGlobal.InserirLancamento(descricao, tipo, dt: string;
+  valor: Double; id_categoria: Integer);
+var
+  resp: IResponse;
+  json: TJSONObject;
+begin
+  // Cria o JSON que ser√° enviado para a API
+  json := TJSONObject.Create;
+  try
+    {
+      Monta o corpo da requisi√ß√£o com os dados do lan√ßamento.
+    }
+    json.AddPair('descricao', descricao);
+    json.AddPair('tipo', tipo);
+    json.AddPair('dt_lancamento', dt);
+    json.AddPair('valor', TJSONNumber.Create(valor));
+    json.AddPair('id_categoria', TJSONNumber.Create(id_categoria));
+
+    {
+      Envia uma requisi√ß√£o POST para cadastrar um novo lan√ßamento.
+
+      Observa√ß√£o:
+      como o endpoint √© protegido, o ideal √© enviar tamb√©m o token JWT.
+    }
+    resp := TRequest.New
+      .BaseURL(BASE_URL)
+      .Resource('/lancamentos')
+      .AddBody(json.ToString)
+      .Accept('application/json')
+      .TokenBearer(TSession.token)
+      .Post;
+
+    {
+      Inclus√£o com sucesso normalmente retorna 201 (Created).
+      Se vier outro status, gera exce√ß√£o com a mensagem da API.
+    }
+    if resp.StatusCode <> 201 then
+      raise Exception.Create(resp.Content);
+
+  finally
+    // Libera o objeto JSON da mem√≥ria
+    FreeAndNil(json);
+  end;
 end;
 
 end.

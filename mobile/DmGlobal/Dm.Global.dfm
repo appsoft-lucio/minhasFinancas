@@ -1,7 +1,7 @@
 object DmGlobal: TDmGlobal
   OnCreate = DataModuleCreate
   Height = 182
-  Width = 295
+  Width = 339
   object TabUsuario: TFDMemTable
     FetchOptions.AssignedValues = [evMode]
     FetchOptions.Mode = fmAll
@@ -22,6 +22,17 @@ object DmGlobal: TDmGlobal
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
     Left = 136
+    Top = 24
+  end
+  object TabCategoria: TFDMemTable
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    Left = 248
     Top = 24
   end
 end

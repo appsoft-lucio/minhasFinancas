@@ -124,6 +124,7 @@ begin
         if NOT Assigned(FormLancamentoCad) then
         Application.CreateForm(TFormLancamentoCad, FormLancamentoCad);
 
+        FormLancamentoCad.id_lancamento := 0;
         FormLancamentoCad.Show;
 end;
 
