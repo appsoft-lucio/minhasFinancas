@@ -65,7 +65,8 @@ type
     procedure ImgAdicinarClick(Sender: TObject);
     procedure LblSaldoClick(Sender: TObject);
     procedure ImgAbaHomeClick(Sender: TObject);
-    procedure LvLancamentosChange(Sender: TObject);
+    procedure LvLancamentosItemClick(const Sender: TObject;
+      const AItem: TListViewItem);
 
   private
     // Adiciona um item de lançamento no ListView
@@ -75,14 +76,13 @@ type
       valor: double
     );
 
-    // Faz a consulta dos últimos lançamentos
-    procedure ListarUltimosLacamentos;
-
     // Método executado ao terminar a thread de carregamento
     procedure TerminateLancamentos(Sender: TObject);
 
   public
     { Public declarations }
+    // Faz a consulta dos últimos lançamentos
+    procedure ListarUltimosLacamentos;
   end;
 
 var
@@ -200,8 +200,8 @@ begin
     var
       dt_de, dt_ate: string;
     begin
-      FormatDateTime('yyyy-mm-dd', StartOfTheMonth(Date));
-      FormatDateTime('yyyy-mm-dd', EndOfTheMonth(Date));
+      dt_de := FormatDateTime('yyyy-mm-dd', StartOfTheMonth(Date));
+      dt_ate:= FormatDateTime('yyyy-mm-dd', EndOfTheMonth(Date));
 
       // Sleep(500); // Simula acesso ao servidor
       DmGlobal.ConsultarLancamentos(0, dt_de, dt_ate)
@@ -210,9 +210,14 @@ begin
   );
 end;
 
-procedure TFormPrincipal.LvLancamentosChange(Sender: TObject);
+procedure TFormPrincipal.LvLancamentosItemClick(const Sender: TObject;
+  const AItem: TListViewItem);
 begin
+  if not Assigned(FormLancamentoCad) then
+    Application.CreateForm(TFormLancamentoCad, FormLancamentoCad);
 
+  FormLancamentoCad.id_lancamento := AItem.Tag;
+  FormLancamentoCad.Show;
 end;
 
 {------------------------------------------------------------------------------
@@ -220,8 +225,7 @@ end;
 ------------------------------------------------------------------------------}
 procedure TFormPrincipal.TerminateLancamentos(Sender: TObject);
 var
-  total_receita, total_despesa : double;
-
+  total_receita, total_despesa: double;
 begin
   TLoading.Hide;
 
@@ -234,6 +238,19 @@ begin
 
   total_receita := 0;
   total_despesa := 0;
+
+  // Se não houver lançamentos
+  if DmGlobal.TabLancamento.IsEmpty then
+  begin
+    LblTotalDespesa.Text := 'R$0,00';
+    LblTotalReceita.Text := 'R$0,00';
+    LblSaldo.Text := 'R$0,00';
+    ShowMessage('Nenhum lançamento encontrado.');
+    Exit;
+  end;
+
+  // Volta para o primeiro registro antes de percorrer
+  DmGlobal.TabLancamento.First;
 
   // Percorre os lançamentos retornados e adiciona no ListView
   while not DmGlobal.TabLancamento.Eof do
@@ -249,26 +266,15 @@ begin
 
     if DmGlobal.TabLancamento.FieldByName('tipo').AsString = 'D' then
       total_despesa := total_despesa + DmGlobal.TabLancamento.FieldByName('valor').AsFloat
-      else
+    else
       total_receita := total_receita + DmGlobal.TabLancamento.FieldByName('valor').AsFloat;
 
     DmGlobal.TabLancamento.Next;
   end;
 
-  LblTotalDespesa.Text := FormatFloat('R$#,##0.00', total_despesa );
-  LblTotalReceita.Text := FormatFloat('R$#,##0.00', total_receita );
-  LblSaldo.Text := FormatFloat('R$#,##0.00', total_receita - total_despesa );
-
-  if DmGlobal.TabLancamento.IsEmpty then
-begin
-  LblTotalDespesa.Text := 'R$0,00';
-  LblTotalReceita.Text := 'R$0,00';
-  LblSaldo.Text := 'R$0,00';
-
-  ShowMessage('Nenhum lançamento encontrado.');
-  Exit;
-end;
-
+  LblTotalDespesa.Text := FormatFloat('R$#,##0.00', total_despesa);
+  LblTotalReceita.Text := FormatFloat('R$#,##0.00', total_receita);
+  LblSaldo.Text := FormatFloat('R$#,##0.00', total_receita - total_despesa);
 end;
 
 end.

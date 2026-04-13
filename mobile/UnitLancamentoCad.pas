@@ -51,6 +51,7 @@ type
     procedure TerminateTela(Sender: TObject);
     procedure SetTipo(tp: string);
     procedure TerminateSalvar(Sender: TObject);
+    procedure DadosLancamento(id_lanc: integer);
     { Private declarations }
   public
     { Public declarations }
@@ -64,7 +65,8 @@ implementation
 
 {$R *.fmx}
 
-uses Dm.Global;
+uses Dm.Global,
+     UnitPrincipal;
 
 procedure TFormLancamentoCad.FormClose(Sender: TObject;
   var Action: TCloseAction);
@@ -75,6 +77,15 @@ end;
 
 procedure TFormLancamentoCad.FormShow(Sender: TObject);
 begin
+  if id_lancamento = 0 then
+  begin
+    EditDescricao.Text := '';
+    EditValor.Text := '';
+    EditDataLancamento.Date := Date;
+    Ftipo := '';
+    ComboBoxCategoria.ItemIndex := -1;
+  end;
+
   CarregarTela;
 end;
 
@@ -86,13 +97,17 @@ end;
 procedure TFormLancamentoCad.TerminateSalvar(Sender: TObject);
 begin
   TLoading.Hide;
+
   if Assigned(TThread(Sender).FatalException) then
   begin
     ShowMessage(Exception(TThread(Sender).FatalException).Message);
     Exit;
   end;
 
-  close;
+  if Assigned(FormPrincipal) then
+    FormPrincipal.ListarUltimosLacamentos;
+
+  Close;
 end;
 
 procedure TFormLancamentoCad.ImgSalvarLancamentoClick(Sender: TObject);
@@ -131,6 +146,22 @@ begin
   SetTipo('R');
 end;
 
+procedure TFormLancamentoCad.DadosLancamento(id_lanc: integer);
+begin
+        TLoading.Show(FormLancamentoCad, 'Carregando...');
+
+        TLoading.ExecuteThread(
+        procedure
+        begin
+        DmGlobal.ConsultarLancamentosId(id_lanc);
+        end,
+        TerminateTela
+        );
+
+
+
+end;
+
 procedure TFormLancamentoCad.TerminateTela(Sender: TObject);
 begin
   TLoading.Hide;
@@ -143,11 +174,13 @@ begin
   MontaCombo(ComboBoxCategoria, DmGlobal.TabCategoria,
                        'id_categoria', 'descricao', false);
 
+  //Modo Edicao
+  if id_lancamento > 0 then
+    DadosLancamento(id_lancamento);
 end;
 
 
 procedure TFormLancamentoCad.CarregarTela;
-
 begin
         TLoading.Show(FormLancamentoCad, 'Carregando...');
 

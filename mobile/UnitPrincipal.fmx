@@ -3607,7 +3607,7 @@ object FormPrincipal: TFormPrincipal
         AppearanceClassName = 'TTextObjectAppearance'
       end>
     CanSwipeDelete = False
-    OnChange = LvLancamentosChange
+    OnItemClick = LvLancamentosItemClick
     ShowSelection = False
   end
 end
