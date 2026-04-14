@@ -1424,6 +1424,7 @@ object FormLancamentoCad: TFormLancamentoCad
         Size.PlatformDefault = False
         TextPrompt = 'Valor'
         StyledSettings = [Size, Style, FontColor]
+        OnTyping = EditValorTyping
       end
     end
     object ComboBoxCategoria: TComboBox

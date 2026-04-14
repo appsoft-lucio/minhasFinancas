@@ -19,7 +19,8 @@ uses
   FMX.ListBox,
   FMX.DateTimeCtrls,
   uLoading,
-  uFunctions;
+  uFunctions,
+  System.RegularExpressions;
 
 type
   TFormLancamentoCad = class(TForm)
@@ -44,6 +45,7 @@ type
     procedure LabelReceitaClick(Sender: TObject);
     procedure LabelDespesaClick(Sender: TObject);
     procedure ImgSalvarLancamentoClick(Sender: TObject);
+    procedure EditValorTyping(Sender: TObject);
   private
     Fid_lancamento: integer;
     Ftipo: string;
@@ -80,7 +82,7 @@ begin
   if id_lancamento = 0 then
   begin
     EditDescricao.Text := '';
-    EditValor.Text := '';
+    EditValor.Text := '0,00';
     EditDataLancamento.Date := Date;
     Ftipo := '';
     ComboBoxCategoria.ItemIndex := -1;
@@ -120,7 +122,7 @@ begin
         DmGlobal.InserirLancamento(EditDescricao.Text,
                                    Ftipo,
                                    FormatDatetime('yyyy-mm-dd', EditDataLancamento.Date),
-                                   EditValor.Text.ToDouble,
+                                   StrToFloat(EditValor.Text),
                                    ComboGetId(ComboBoxCategoria)
                                    );
         end,
@@ -160,6 +162,27 @@ begin
 
 
 
+end;
+
+procedure TFormLancamentoCad.EditValorTyping(Sender: TObject);
+var
+  v: string;
+  valor: Currency;
+begin
+  // Remove tudo que não for número
+  v := TRegEx.Replace(EditValor.Text, '[^0-9]', '');
+
+  if v = '' then
+    v := '0';
+
+  // Converte para número dividindo por 100
+  valor := StrToFloat(v) / 100;
+
+  // Formata com vírgula
+  EditValor.Text := FormatFloat('0.00', valor);
+
+  // Move cursor para o final
+  EditValor.GoToTextEnd;
 end;
 
 procedure TFormLancamentoCad.TerminateTela(Sender: TObject);
