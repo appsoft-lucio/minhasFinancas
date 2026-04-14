@@ -65,6 +65,9 @@ type
       id_categoria: Integer);
 
     procedure ConsultarLancamentosId(id_lancamento: Integer);
+
+    procedure EditarLancamento(id_lancamento: integer; descricao, tipo,
+      dt: string; valor: Double; id_categoria: Integer);
   end;
 
 var
@@ -372,6 +375,52 @@ begin
       Se vier outro status, gera exceção com a mensagem da API.
     }
     if resp.StatusCode <> 201 then
+      raise Exception.Create(resp.Content);
+
+  finally
+    // Libera o objeto JSON da memória
+    FreeAndNil(json);
+  end;
+end;
+
+procedure TDmGlobal.EditarLancamento(id_lancamento: integer; descricao, tipo, dt: string;
+  valor: Double; id_categoria: Integer);
+var
+  resp: IResponse;
+  json: TJSONObject;
+begin
+  // Cria o JSON que será enviado para a API
+  json := TJSONObject.Create;
+  try
+    {
+      Monta o corpo da requisição com os dados do lançamento.
+    }
+    json.AddPair('descricao', descricao);
+    json.AddPair('tipo', tipo);
+    json.AddPair('dt_lancamento', dt);
+    json.AddPair('valor', TJSONNumber.Create(valor));
+    json.AddPair('id_categoria', TJSONNumber.Create(id_categoria));
+
+    {
+      Envia uma requisição POST para cadastrar um novo lançamento.
+
+      Observação:
+      como o endpoint é protegido, o ideal é enviar também o token JWT.
+    }
+    resp := TRequest.New
+      .BaseURL(BASE_URL)
+      .Resource('/lancamentos')
+      .ResourceSuffix(id_lancamento.ToString)
+      .AddBody(json.ToString)
+      .Accept('application/json')
+      .TokenBearer(TSession.token)
+      .Put;
+
+    {
+      Inclusão com sucesso normalmente retorna 201 (Created).
+      Se vier outro status, gera exceção com a mensagem da API.
+    }
+    if resp.StatusCode <> 200 then
       raise Exception.Create(resp.Content);
 
   finally

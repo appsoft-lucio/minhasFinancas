@@ -4,8 +4,10 @@ interface
 
 uses
   System.SysUtils,
-  System.Types, System.UITypes,
-  System.Classes, System.Variants,
+  System.Types,
+  System.UITypes,
+  System.Classes,
+  System.Variants,
   FMX.Types,
   FMX.Controls,
   FMX.Forms,
@@ -47,17 +49,17 @@ type
     procedure ImgSalvarLancamentoClick(Sender: TObject);
     procedure EditValorTyping(Sender: TObject);
   private
-    Fid_lancamento: integer;
+    Fid_lancamento: Integer;
     Ftipo: string;
     procedure CarregarTela;
     procedure TerminateTela(Sender: TObject);
     procedure SetTipo(tp: string);
     procedure TerminateSalvar(Sender: TObject);
-    procedure DadosLancamento(id_lanc: integer);
+    procedure DadosLancamento(id_lanc: Integer);
     { Private declarations }
   public
     { Public declarations }
-    property id_lancamento: integer read Fid_lancamento write Fid_lancamento;
+    property id_lancamento: Integer read Fid_lancamento write Fid_lancamento;
     procedure TerminateEidtarLancamento(Sender: TObject);
   end;
 
@@ -68,14 +70,14 @@ implementation
 
 {$R *.fmx}
 
-uses Dm.Global,
-     UnitPrincipal;
+uses
+  Dm.Global,
+  UnitPrincipal;
 
-procedure TFormLancamentoCad.FormClose(Sender: TObject;
-  var Action: TCloseAction);
+procedure TFormLancamentoCad.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-        Action:= TCloseAction.caFree;
-        FormLancamentoCad:= nil;
+  Action := TCloseAction.caFree;
+  FormLancamentoCad := nil;
 end;
 
 procedure TFormLancamentoCad.FormShow(Sender: TObject);
@@ -94,7 +96,7 @@ end;
 
 procedure TFormLancamentoCad.ImgBackNovoLancamentoClick(Sender: TObject);
 begin
-        Close;
+  Close;
 end;
 
 procedure TFormLancamentoCad.TerminateSalvar(Sender: TObject);
@@ -115,23 +117,32 @@ end;
 
 procedure TFormLancamentoCad.ImgSalvarLancamentoClick(Sender: TObject);
 begin
-        TLoading.Show(FormLancamentoCad, 'Carregando...');
+  TLoading.Show(FormLancamentoCad, 'Carregando...');
 
-        TLoading.ExecuteThread(
-        procedure
-        begin
-        DmGlobal.InserirLancamento(EditDescricao.Text,
-                                   Ftipo,
-                                   FormatDatetime('yyyy-mm-dd', EditDataLancamento.Date),
-                                   StrToFloat(StringReplace(EditValor.Text, '.', '', [rfReplaceAll])),
-                                   ComboGetId(ComboBoxCategoria)
-                                   );
-        end,
-        TerminateSalvar
-        );
-
-
-
+  TLoading.ExecuteThread(
+    procedure
+    begin
+      if id_lancamento = 0 then
+        DmGlobal.InserirLancamento(
+        EditDescricao.Text,
+        Ftipo,
+        FormatDatetime('yyyy-mm-dd', EditDataLancamento.Date),
+        StrToFloat(StringReplace(EditValor.Text, '.', '', [rfReplaceAll])),
+        ComboGetId(ComboBoxCategoria)
+      )
+      else
+        DmGlobal.EditarLancamento(
+        id_lancamento,
+        EditDescricao.Text,
+        Ftipo,
+        FormatDatetime('yyyy-mm-dd', EditDataLancamento.Date),
+        StrToFloat(StringReplace(EditValor.Text, '.', '', [rfReplaceAll])),
+        ComboGetId(ComboBoxCategoria)
+      )
+        ;
+    end,
+    TerminateSalvar
+  );
 end;
 
 procedure TFormLancamentoCad.SetTipo(tp: string);
@@ -149,17 +160,18 @@ begin
   SetTipo('R');
 end;
 
-procedure TFormLancamentoCad.DadosLancamento(id_lanc: integer);
+procedure TFormLancamentoCad.DadosLancamento(id_lanc: Integer);
 begin
-        TLoading.Show(FormLancamentoCad, 'Carregando...');
+  lblTitulo.Text := 'Editar Lançamento';
+  TLoading.Show(FormLancamentoCad, 'Carregando...');
 
-        TLoading.ExecuteThread(
-        procedure
-        begin
-        DmGlobal.ConsultarLancamentosId(id_lanc);
-        end,
-        TerminateTela
-        );
+  TLoading.ExecuteThread(
+    procedure
+    begin
+      DmGlobal.ConsultarLancamentosId(id_lanc);
+    end,
+    TerminateEidtarLancamento
+  );
 end;
 
 procedure TFormLancamentoCad.TerminateEidtarLancamento(Sender: TObject);
@@ -193,9 +205,9 @@ begin
       .AsInteger
   );
 
-  EditDataLancamento.Date := DmGlobal.TabLancamento
+  EditDataLancamento.Date := ShortStringUTCToDate(DmGlobal.TabLancamento
     .FieldByName('Dt_lancamento')
-    .AsDateTime;
+    .AsString);
 end;
 
 procedure TFormLancamentoCad.EditValorTyping(Sender: TObject);
@@ -221,35 +233,37 @@ end;
 procedure TFormLancamentoCad.TerminateTela(Sender: TObject);
 begin
   TLoading.Hide;
+
   if Assigned(TThread(Sender).FatalException) then
   begin
     ShowMessage(Exception(TThread(Sender).FatalException).Message);
     Exit;
   end;
 
-  MontaCombo(ComboBoxCategoria, DmGlobal.TabCategoria,
-                       'id_categoria', 'descricao', false);
+  MontaCombo(
+    ComboBoxCategoria,
+    DmGlobal.TabCategoria,
+    'id_categoria',
+    'descricao',
+    false
+  );
 
   //Modo Edicao
   if id_lancamento > 0 then
     DadosLancamento(id_lancamento);
 end;
 
-
 procedure TFormLancamentoCad.CarregarTela;
 begin
-        TLoading.Show(FormLancamentoCad, 'Carregando...');
+  TLoading.Show(FormLancamentoCad, 'Carregando...');
 
-        TLoading.ExecuteThread(
-        procedure
-        begin
-        DmGlobal.ConsultarCategotias;
-        end,
-        TerminateTela
-        );
-
-
-
+  TLoading.ExecuteThread(
+    procedure
+    begin
+      DmGlobal.ConsultarCategotias;
+    end,
+    TerminateTela
+  );
 end;
 
 end.
