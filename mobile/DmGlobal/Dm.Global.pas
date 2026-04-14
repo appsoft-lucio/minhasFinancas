@@ -68,6 +68,8 @@ type
 
     procedure EditarLancamento(id_lancamento: integer; descricao, tipo,
       dt: string; valor: Double; id_categoria: Integer);
+
+    procedure ExcluirLancamento(id_lancamento: integer);
   end;
 
 var
@@ -427,6 +429,24 @@ begin
     // Libera o objeto JSON da memória
     FreeAndNil(json);
   end;
+end;
+
+procedure TDmGlobal.ExcluirLancamento(id_lancamento: integer);
+var
+  resp: IResponse;
+
+begin
+    resp := TRequest.New
+      .BaseURL(BASE_URL)
+      .Resource('/lancamentos')
+      .ResourceSuffix(id_lancamento.ToString)
+      .Accept('application/json')
+      .TokenBearer(TSession.token)
+      .Delete;
+
+    if resp.StatusCode <> 200 then
+      raise Exception.Create(resp.Content);
+
 end;
 
 end.

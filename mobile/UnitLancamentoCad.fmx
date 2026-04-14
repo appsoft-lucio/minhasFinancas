@@ -1460,7 +1460,7 @@ object FormLancamentoCad: TFormLancamentoCad
       Size.Height = 85.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 4
-      object Image1: TImage
+      object ImageDelete: TImage
         MultiResBitmap.Height = 64
         MultiResBitmap.Width = 64
         MultiResBitmap = <
@@ -1505,6 +1505,8 @@ object FormLancamentoCad: TFormLancamentoCad
         Size.Width = 40.000000000000000000
         Size.Height = 40.000000000000000000
         Size.PlatformDefault = False
+        Visible = False
+        OnClick = ImageDeleteClick
       end
     end
   end

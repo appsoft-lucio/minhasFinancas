@@ -22,7 +22,8 @@ uses
   FMX.DateTimeCtrls,
   uLoading,
   uFunctions,
-  System.RegularExpressions;
+  System.RegularExpressions,
+  FMX.DialogService;
 
 type
   TFormLancamentoCad = class(TForm)
@@ -40,7 +41,7 @@ type
     ComboBoxCategoria: TComboBox;
     EditDataLancamento: TDateEdit;
     Layout2: TLayout;
-    Image1: TImage;
+    ImageDelete: TImage;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure ImgBackNovoLancamentoClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -48,6 +49,7 @@ type
     procedure LabelDespesaClick(Sender: TObject);
     procedure ImgSalvarLancamentoClick(Sender: TObject);
     procedure EditValorTyping(Sender: TObject);
+    procedure ImageDeleteClick(Sender: TObject);
   private
     Fid_lancamento: Integer;
     Ftipo: string;
@@ -56,6 +58,7 @@ type
     procedure SetTipo(tp: string);
     procedure TerminateSalvar(Sender: TObject);
     procedure DadosLancamento(id_lanc: Integer);
+    procedure ExcluirLancamento(id_lanc: Integer);
     { Private declarations }
   public
     { Public declarations }
@@ -92,6 +95,36 @@ begin
   end;
 
   CarregarTela;
+end;
+
+procedure TFormLancamentoCad.ExcluirLancamento(id_lanc: Integer);
+begin
+  TLoading.Show(FormLancamentoCad, 'Carregando...');
+
+  TLoading.ExecuteThread(
+    procedure
+    begin
+      DmGlobal.ExcluirLancamento(id_lanc);
+    end,
+    TerminateSalvar
+  );
+end;
+
+procedure TFormLancamentoCad.ImageDeleteClick(Sender: TObject);
+begin
+  TDialogService.MessageDialog('Confirma exclusao do lacamento?',
+                      TMsgDlgType.mtConfirmation,
+                      [TmsgDlgBtn.mbYes, TMsgDlgBtn.mbNo],
+                      TMsgDlgBtn.mbNo,
+                      0,
+                      procedure(const AResult: TModalResult)
+                      begin
+                        if AResult = mrYes then
+                        begin
+                         ExcluirLancamento(id_lancamento);
+                        end;
+                      end
+                      );
 end;
 
 procedure TFormLancamentoCad.ImgBackNovoLancamentoClick(Sender: TObject);
@@ -163,6 +196,7 @@ end;
 procedure TFormLancamentoCad.DadosLancamento(id_lanc: Integer);
 begin
   lblTitulo.Text := 'Editar Lançamento';
+  imageDelete.Visible := id_lancamento >= 0;
   TLoading.Show(FormLancamentoCad, 'Carregando...');
 
   TLoading.ExecuteThread(
