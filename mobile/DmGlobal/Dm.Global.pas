@@ -88,8 +88,8 @@ const
     - A API deve estar em execução
     - O firewall pode bloquear a conexão
   }
-  BASE_URL = 'http://192.168.1.16:3001';
-  // BASE_URL = 'http://localhost:3001';
+  // BASE_URL = 'http://192.168.1.16:3001';
+   BASE_URL = 'http://localhost:3001';
 
 implementation
 

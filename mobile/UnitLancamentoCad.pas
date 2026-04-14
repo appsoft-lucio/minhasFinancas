@@ -58,6 +58,7 @@ type
   public
     { Public declarations }
     property id_lancamento: integer read Fid_lancamento write Fid_lancamento;
+    procedure TerminateEidtarLancamento(Sender: TObject);
   end;
 
 var
@@ -159,9 +160,42 @@ begin
         end,
         TerminateTela
         );
+end;
 
+procedure TFormLancamentoCad.TerminateEidtarLancamento(Sender: TObject);
+begin
+  TLoading.Hide;
 
+  if Assigned(TThread(Sender).FatalException) then
+  begin
+    ShowMessage(Exception(TThread(Sender).FatalException).Message);
+    Exit;
+  end;
 
+  EditDescricao.Text := DmGlobal.TabLancamento
+    .FieldByName('descricao')
+    .AsString;
+
+  EditValor.Text := DmGlobal.TabLancamento
+    .FieldByName('valor')
+    .AsString;
+
+  SetTipo(
+    DmGlobal.TabLancamento
+      .FieldByName('Tipo')
+      .AsString
+  );
+
+  ComboSelecionarById(
+    ComboBoxCategoria,
+    DmGlobal.TabLancamento
+      .FieldByName('id_categoria')
+      .AsInteger
+  );
+
+  EditDataLancamento.Date := DmGlobal.TabLancamento
+    .FieldByName('Dt_lancamento')
+    .AsDateTime;
 end;
 
 procedure TFormLancamentoCad.EditValorTyping(Sender: TObject);
