@@ -84,7 +84,7 @@ begin
       qry.ParamByName('dt_ate').Value := dt_ate;
     end;
 
-    qry.SQL.Add('Order By l.dt_lancamento DESC');
+    qry.SQL.Add('Order By l.dt_lancamento DESC, l.id_lancamento DESC');
 
     qry.ParamByName('id_usuario').Value := id_usuario;
     qry.Active := true;

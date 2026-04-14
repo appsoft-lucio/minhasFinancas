@@ -122,7 +122,7 @@ begin
         DmGlobal.InserirLancamento(EditDescricao.Text,
                                    Ftipo,
                                    FormatDatetime('yyyy-mm-dd', EditDataLancamento.Date),
-                                   StrToFloat(EditValor.Text),
+                                   StrToFloat(StringReplace(EditValor.Text, '.', '', [rfReplaceAll])),
                                    ComboGetId(ComboBoxCategoria)
                                    );
         end,
@@ -169,19 +169,18 @@ var
   v: string;
   valor: Currency;
 begin
-  // Remove tudo que não for número
+  // pega só números
   v := TRegEx.Replace(EditValor.Text, '[^0-9]', '');
 
   if v = '' then
     v := '0';
 
-  // Converte para número dividindo por 100
-  valor := StrToFloat(v) / 100;
+  // converte direto para número (sem locale)
+  valor := StrToInt64(v) / 100;
 
-  // Formata com vírgula
-  EditValor.Text := FormatFloat('0.00', valor);
+  // formata com padrão brasileiro
+  EditValor.Text := FormatFloat('#,##0.00', valor);
 
-  // Move cursor para o final
   EditValor.GoToTextEnd;
 end;
 
