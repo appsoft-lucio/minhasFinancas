@@ -14,9 +14,7 @@
 *.dll
 *.bpl
 *.bpi
-*.res
 *.map
-*.cfg
 *.pch
 *.so
 *.dylib
@@ -118,3 +116,9 @@ desktop.ini
 # Firebird
 Database/
 *.fdb
+
+# ==========================
+# Arquivos locais do projeto
+# ==========================
+
+id_usuario
