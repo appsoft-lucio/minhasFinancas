@@ -8,6 +8,7 @@ uses
   System.UITypes,
   System.Classes,
   System.Variants,
+  System.RegularExpressions,
   FMX.Types,
   FMX.Controls,
   FMX.Forms,
@@ -20,10 +21,9 @@ uses
   FMX.Edit,
   FMX.ListBox,
   FMX.DateTimeCtrls,
+  FMX.DialogService,
   uLoading,
-  uFunctions,
-  System.RegularExpressions,
-  FMX.DialogService;
+  uFunctions;
 
 type
   TFormLancamentoCad = class(TForm)
@@ -53,15 +53,14 @@ type
   private
     Fid_lancamento: Integer;
     Ftipo: string;
+
     procedure CarregarTela;
     procedure TerminateTela(Sender: TObject);
     procedure SetTipo(tp: string);
     procedure TerminateSalvar(Sender: TObject);
     procedure DadosLancamento(id_lanc: Integer);
     procedure ExcluirLancamento(id_lanc: Integer);
-    { Private declarations }
   public
-    { Public declarations }
     property id_lancamento: Integer read Fid_lancamento write Fid_lancamento;
     procedure TerminateEidtarLancamento(Sender: TObject);
   end;
@@ -77,12 +76,6 @@ uses
   Dm.Global,
   UnitPrincipal;
 
-procedure TFormLancamentoCad.FormClose(Sender: TObject; var Action: TCloseAction);
-begin
-  Action := TCloseAction.caFree;
-  FormLancamentoCad := nil;
-end;
-
 procedure TFormLancamentoCad.FormShow(Sender: TObject);
 begin
   if id_lancamento = 0 then
@@ -97,54 +90,14 @@ begin
   CarregarTela;
 end;
 
-procedure TFormLancamentoCad.ExcluirLancamento(id_lanc: Integer);
+procedure TFormLancamentoCad.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  TLoading.Show(FormLancamentoCad, 'Carregando...');
-
-  TLoading.ExecuteThread(
-    procedure
-    begin
-      DmGlobal.ExcluirLancamento(id_lanc);
-    end,
-    TerminateSalvar
-  );
-end;
-
-procedure TFormLancamentoCad.ImageDeleteClick(Sender: TObject);
-begin
-  TDialogService.MessageDialog('Confirma exclusao do lacamento?',
-                      TMsgDlgType.mtConfirmation,
-                      [TmsgDlgBtn.mbYes, TMsgDlgBtn.mbNo],
-                      TMsgDlgBtn.mbNo,
-                      0,
-                      procedure(const AResult: TModalResult)
-                      begin
-                        if AResult = mrYes then
-                        begin
-                         ExcluirLancamento(id_lancamento);
-                        end;
-                      end
-                      );
+  Action := TCloseAction.caFree;
+  FormLancamentoCad := nil;
 end;
 
 procedure TFormLancamentoCad.ImgBackNovoLancamentoClick(Sender: TObject);
 begin
-  Close;
-end;
-
-procedure TFormLancamentoCad.TerminateSalvar(Sender: TObject);
-begin
-  TLoading.Hide;
-
-  if Assigned(TThread(Sender).FatalException) then
-  begin
-    ShowMessage(Exception(TThread(Sender).FatalException).Message);
-    Exit;
-  end;
-
-  if Assigned(FormPrincipal) then
-    FormPrincipal.ListarUltimosLacamentos;
-
   Close;
 end;
 
@@ -157,30 +110,47 @@ begin
     begin
       if id_lancamento = 0 then
         DmGlobal.InserirLancamento(
-        EditDescricao.Text,
-        Ftipo,
-        FormatDatetime('yyyy-mm-dd', EditDataLancamento.Date),
-        StrToFloat(StringReplace(EditValor.Text, '.', '', [rfReplaceAll])),
-        ComboGetId(ComboBoxCategoria)
-      )
+          EditDescricao.Text,
+          Ftipo,
+          FormatDatetime('yyyy-mm-dd', EditDataLancamento.Date),
+          StrToFloat(StringReplace(EditValor.Text, '.', '', [rfReplaceAll])),
+          ComboGetId(ComboBoxCategoria)
+        )
       else
         DmGlobal.EditarLancamento(
-        id_lancamento,
-        EditDescricao.Text,
-        Ftipo,
-        FormatDatetime('yyyy-mm-dd', EditDataLancamento.Date),
-        StrToFloat(StringReplace(EditValor.Text, '.', '', [rfReplaceAll])),
-        ComboGetId(ComboBoxCategoria)
-      )
-        ;
+          id_lancamento,
+          EditDescricao.Text,
+          Ftipo,
+          FormatDatetime('yyyy-mm-dd', EditDataLancamento.Date),
+          StrToFloat(StringReplace(EditValor.Text, '.', '', [rfReplaceAll])),
+          ComboGetId(ComboBoxCategoria)
+        );
     end,
     TerminateSalvar
   );
 end;
 
-procedure TFormLancamentoCad.SetTipo(tp: string);
+procedure TFormLancamentoCad.ImageDeleteClick(Sender: TObject);
 begin
-  Ftipo := tp;
+  TDialogService.MessageDialog(
+    'Confirma exclusao do lacamento?',
+    TMsgDlgType.mtConfirmation,
+    [TMsgDlgBtn.mbYes, TMsgDlgBtn.mbNo],
+    TMsgDlgBtn.mbNo,
+    0,
+    procedure(const AResult: TModalResult)
+    begin
+      if AResult = mrYes then
+      begin
+        ExcluirLancamento(id_lancamento);
+      end;
+    end
+  );
+end;
+
+procedure TFormLancamentoCad.LabelReceitaClick(Sender: TObject);
+begin
+  SetTipo('R');
 end;
 
 procedure TFormLancamentoCad.LabelDespesaClick(Sender: TObject);
@@ -188,9 +158,42 @@ begin
   SetTipo('D');
 end;
 
-procedure TFormLancamentoCad.LabelReceitaClick(Sender: TObject);
+procedure TFormLancamentoCad.EditValorTyping(Sender: TObject);
+var
+  v: string;
+  valor: Currency;
 begin
-  SetTipo('R');
+  // pega só números
+  v := TRegEx.Replace(EditValor.Text, '[^0-9]', '');
+
+  if v = '' then
+    v := '0';
+
+  // converte direto para número (sem locale)
+  valor := StrToInt64(v) / 100;
+
+  // formata com padrão brasileiro
+  EditValor.Text := FormatFloat('#,##0.00', valor);
+
+  EditValor.GoToTextEnd;
+end;
+
+procedure TFormLancamentoCad.SetTipo(tp: string);
+begin
+  Ftipo := tp;
+end;
+
+procedure TFormLancamentoCad.CarregarTela;
+begin
+  TLoading.Show(FormLancamentoCad, 'Carregando...');
+
+  TLoading.ExecuteThread(
+    procedure
+    begin
+      DmGlobal.ConsultarCategotias;
+    end,
+    TerminateTela
+  );
 end;
 
 procedure TFormLancamentoCad.DadosLancamento(id_lanc: Integer);
@@ -206,6 +209,42 @@ begin
     end,
     TerminateEidtarLancamento
   );
+end;
+
+procedure TFormLancamentoCad.ExcluirLancamento(id_lanc: Integer);
+begin
+  TLoading.Show(FormLancamentoCad, 'Carregando...');
+
+  TLoading.ExecuteThread(
+    procedure
+    begin
+      DmGlobal.ExcluirLancamento(id_lanc);
+    end,
+    TerminateSalvar
+  );
+end;
+
+procedure TFormLancamentoCad.TerminateTela(Sender: TObject);
+begin
+  TLoading.Hide;
+
+  if Assigned(TThread(Sender).FatalException) then
+  begin
+    ShowMessage(Exception(TThread(Sender).FatalException).Message);
+    Exit;
+  end;
+
+  MontaCombo(
+    ComboBoxCategoria,
+    DmGlobal.TabCategoria,
+    'id_categoria',
+    'descricao',
+    false
+  );
+
+  //Modo Edicao
+  if id_lancamento > 0 then
+    DadosLancamento(id_lancamento);
 end;
 
 procedure TFormLancamentoCad.TerminateEidtarLancamento(Sender: TObject);
@@ -239,32 +278,14 @@ begin
       .AsInteger
   );
 
-  EditDataLancamento.Date := ShortStringUTCToDate(DmGlobal.TabLancamento
-    .FieldByName('Dt_lancamento')
-    .AsString);
+  EditDataLancamento.Date := ShortStringUTCToDate(
+    DmGlobal.TabLancamento
+      .FieldByName('Dt_lancamento')
+      .AsString
+  );
 end;
 
-procedure TFormLancamentoCad.EditValorTyping(Sender: TObject);
-var
-  v: string;
-  valor: Currency;
-begin
-  // pega só números
-  v := TRegEx.Replace(EditValor.Text, '[^0-9]', '');
-
-  if v = '' then
-    v := '0';
-
-  // converte direto para número (sem locale)
-  valor := StrToInt64(v) / 100;
-
-  // formata com padrão brasileiro
-  EditValor.Text := FormatFloat('#,##0.00', valor);
-
-  EditValor.GoToTextEnd;
-end;
-
-procedure TFormLancamentoCad.TerminateTela(Sender: TObject);
+procedure TFormLancamentoCad.TerminateSalvar(Sender: TObject);
 begin
   TLoading.Hide;
 
@@ -274,30 +295,10 @@ begin
     Exit;
   end;
 
-  MontaCombo(
-    ComboBoxCategoria,
-    DmGlobal.TabCategoria,
-    'id_categoria',
-    'descricao',
-    false
-  );
+  if Assigned(FormPrincipal) then
+    FormPrincipal.ListarUltimosLacamentos;
 
-  //Modo Edicao
-  if id_lancamento > 0 then
-    DadosLancamento(id_lancamento);
-end;
-
-procedure TFormLancamentoCad.CarregarTela;
-begin
-  TLoading.Show(FormLancamentoCad, 'Carregando...');
-
-  TLoading.ExecuteThread(
-    procedure
-    begin
-      DmGlobal.ConsultarCategotias;
-    end,
-    TerminateTela
-  );
+  Close;
 end;
 
 end.

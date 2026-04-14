@@ -2726,7 +2726,7 @@ object FormPrincipal: TFormPrincipal
       Text = 'Ultimos La'#231'amentos'
       TabOrder = 2
     end
-    object Label2: TLabel
+    object LabelVerTodosLancamentos: TLabel
       Align = Right
       StyledSettings = []
       HitTest = True
@@ -2742,7 +2742,7 @@ object FormPrincipal: TFormPrincipal
       TextSettings.HorzAlign = Trailing
       Text = 'Ver Todos'
       TabOrder = 1
-      OnClick = Label2Click
+      OnClick = LabelVerTodosLancamentosClick
     end
   end
   object RectBtnAbas: TRectangle
@@ -2893,7 +2893,7 @@ object FormPrincipal: TFormPrincipal
           Size.PlatformDefault = False
           OnClick = ImgAbaHomeClick
         end
-        object ImgAbaLancamentos: TImage
+        object ImgVerTodosLancamentos: TImage
           MultiResBitmap.Height = 64
           MultiResBitmap.Width = 64
           MultiResBitmap = <
@@ -2947,6 +2947,7 @@ object FormPrincipal: TFormPrincipal
           Size.Width = 35.000000000000000000
           Size.Height = 35.000000000000000000
           Size.PlatformDefault = False
+          OnClick = LabelVerTodosLancamentosClick
         end
       end
       object ImgAdicinar: TImage

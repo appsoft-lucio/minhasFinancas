@@ -46,13 +46,13 @@ type
     RecCabecalhoHome: TRectangle;
     Rectangle1: TRectangle;
     LblUltimosLancamentos: TLabel;
-    Label2: TLabel;
+    LabelVerTodosLancamentos: TLabel;
     RectBtnAbas: TRectangle;
     RectAbas: TRectangle;
     LytAbas: TLayout;
     ImgAdicinar: TImage;
     ImgAbaHome: TImage;
-    ImgAbaLancamentos: TImage;
+    ImgVerTodosLancamentos: TImage;
     ImgAbaConfig: TImage;
     LvLancamentos: TListView;
     Layout1: TLayout;
@@ -60,7 +60,7 @@ type
     LblTotalDespesa: TLabel;
 
     procedure FormShow(Sender: TObject);
-    procedure Label2Click(Sender: TObject);
+    procedure LabelVerTodosLancamentosClick(Sender: TObject);
     procedure ImgAbaConfigClick(Sender: TObject);
     procedure ImgAdicinarClick(Sender: TObject);
     procedure LblSaldoClick(Sender: TObject);
@@ -174,7 +174,7 @@ end;
 {------------------------------------------------------------------------------
   Abre o formulário de lançamentos
 ------------------------------------------------------------------------------}
-procedure TFormPrincipal.Label2Click(Sender: TObject);
+procedure TFormPrincipal.LabelVerTodosLancamentosClick(Sender: TObject);
 begin
   if not Assigned(FormLancamento) then
     Application.CreateForm(TFormLancamento, FormLancamento);
