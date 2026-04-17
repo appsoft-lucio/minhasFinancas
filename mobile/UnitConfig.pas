@@ -50,7 +50,7 @@ implementation
 
 {$R *.fmx}
 
-uses UnitCategoria, UnitEditPrefil, UnitEditarSenha;
+uses UnitCategoria, UnitEditPerfil, UnitEditarSenha;
 
 procedure TFormConfig.FormClose(Sender: TObject; var Action: TCloseAction);
 begin

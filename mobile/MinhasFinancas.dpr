@@ -10,7 +10,7 @@ uses
   UnitLancamentoCad in 'UnitLancamentoCad.pas' {FormLancamentoCad},
   UnitCategoria in 'UnitCategoria.pas' {FormCategoria},
   UnitNewCategory in 'UnitNewCategory.pas' {FormNewCategory},
-  UnitEditPrefil in 'UnitEditPrefil.pas' {FormEditPerfil},
+  UnitEditPerfil in 'UnitEditPerfil.pas' {FormEditPerfil},
   UnitEditarSenha in 'UnitEditarSenha.pas' {FormEditarSenha},
   uLoading in 'Utils\uLoading.pas',
   uFunctions in 'Utils\uFunctions.pas',

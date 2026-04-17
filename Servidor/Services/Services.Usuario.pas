@@ -88,25 +88,13 @@ end;
 function ListarUsuarioId(id_usuario: Integer): TJSONObject;
 var
   dm: TDmUsuario;
-  usuarioJSON: TJSONObject;
 begin
-  Result := TJSONObject.Create; // JSON principal de resposta
   dm := TDmUsuario.Create(nil);
   try
-    // Busca o usuário no banco
-    usuarioJSON := dm.ListarUsuarioId(id_usuario);
+    Result := dm.ListarUsuarioId(id_usuario);
 
-    // Se encontrou o usuário
-    if Assigned(usuarioJSON) then
-    begin
-      Result.AddPair('mensagem', 'Usuário encontrado com sucesso!');
-      Result.AddPair('usuario', usuarioJSON); // insere o JSON do usuário dentro do resultado
-    end
-    else
-    begin
-      Result.AddPair('mensagem', 'Usuário não encontrado.');
-      Result.AddPair('usuario', TJSONObject.Create); // evita retornar null
-    end;
+    if not Assigned(Result) then
+      raise Exception.Create('Usuário não encontrado.');
   finally
     FreeAndNil(dm);
   end;

@@ -350,7 +350,7 @@
             <Form>FormNewCategory</Form>
             <FormType>fmx</FormType>
         </DCCReference>
-        <DCCReference Include="UnitEditPrefil.pas">
+        <DCCReference Include="UnitEditPerfil.pas">
             <Form>FormEditPerfil</Form>
             <FormType>fmx</FormType>
         </DCCReference>

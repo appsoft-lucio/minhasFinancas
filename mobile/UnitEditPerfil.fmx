@@ -1235,6 +1235,7 @@ object FormEditPerfil: TFormEditPerfil
         Size.Width = 40.000000000000000000
         Size.Height = 60.000000000000000000
         Size.PlatformDefault = False
+        OnClick = ImgSalvarPerfilClick
       end
     end
     object ImgBackEditarPerfil: TImage
