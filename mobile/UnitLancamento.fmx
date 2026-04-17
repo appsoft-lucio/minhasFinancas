@@ -126,7 +126,7 @@ object FormLancamento: TFormLancamento
       Size.PlatformDefault = False
       OnClick = ImgBackLacamentoClick
     end
-    object Image1: TImage
+    object imgAdicionarLancamento: TImage
       MultiResBitmap.Height = 512
       MultiResBitmap.Width = 512
       MultiResBitmap = <
@@ -702,11 +702,12 @@ object FormLancamento: TFormLancamento
           FileName = 'E:\git_hub\minhasFinancas\Image\addLaranja.png'
         end>
       Margins.Right = 10.000000000000000000
-      Position.X = 352.000000000000000000
+      Position.X = 360.000000000000000000
+      Position.Y = -4.000000000000000000
       Size.Width = 40.000000000000000000
       Size.Height = 50.000000000000000000
       Size.PlatformDefault = False
-      OnClick = Image1Click
+      OnClick = imgAdicionarLancamentoClick
     end
   end
   object RectDataLacamentos: TRectangle
@@ -1202,6 +1203,7 @@ object FormLancamento: TFormLancamento
         AppearanceClassName = 'TTextObjectAppearance'
       end>
     CanSwipeDelete = False
+    OnItemClick = LvLancamentosItemClick
     ShowSelection = False
   end
 end

@@ -2886,8 +2886,8 @@ object FormPrincipal: TFormPrincipal
                 44AE426082}
               FileName = 'E:\git_hub\minhasFinancas\Image\aba-home.png'
             end>
-          Position.X = 15.000000000000000000
-          Position.Y = 8.000000000000000000
+          Position.X = 8.000000000000000000
+          Position.Y = 7.000000000000000000
           Size.Width = 35.000000000000000000
           Size.Height = 35.000000000000000000
           Size.PlatformDefault = False

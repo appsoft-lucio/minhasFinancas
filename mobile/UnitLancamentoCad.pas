@@ -26,6 +26,8 @@ uses
   uFunctions;
 
 type
+  TExecuteOnClose = procedure of object;
+
   TFormLancamentoCad = class(TForm)
     LytCabecalhoNewCategoria: TLayout;
     LblTitulo: TLabel;
@@ -53,6 +55,7 @@ type
   private
     Fid_lancamento: Integer;
     Ftipo: string;
+    FExecuteOnClose: TExecuteOnClose;
 
     procedure CarregarTela;
     procedure TerminateTela(Sender: TObject);
@@ -63,6 +66,7 @@ type
   public
     property id_lancamento: Integer read Fid_lancamento write Fid_lancamento;
     procedure TerminateEidtarLancamento(Sender: TObject);
+    property ExecuteOnClose: TExecuteOnClose read FExecuteOnClose write FExecuteOnClose;
   end;
 
 var
@@ -102,7 +106,15 @@ begin
 end;
 
 procedure TFormLancamentoCad.ImgSalvarLancamentoClick(Sender: TObject);
+var
+  idCategoria: Integer;
 begin
+  // Define categoria padrão
+  if ComboBoxCategoria.ItemIndex < 0 then
+    idCategoria := 1 // ID da "Sem categoria"
+  else
+    idCategoria := ComboGetId(ComboBoxCategoria);
+
   TLoading.Show(FormLancamentoCad, 'Carregando...');
 
   TLoading.ExecuteThread(
@@ -112,18 +124,18 @@ begin
         DmGlobal.InserirLancamento(
           EditDescricao.Text,
           Ftipo,
-          FormatDatetime('yyyy-mm-dd', EditDataLancamento.Date),
+          FormatDateTime('yyyy-mm-dd', EditDataLancamento.Date),
           StrToFloat(StringReplace(EditValor.Text, '.', '', [rfReplaceAll])),
-          ComboGetId(ComboBoxCategoria)
+          idCategoria
         )
       else
         DmGlobal.EditarLancamento(
           id_lancamento,
           EditDescricao.Text,
           Ftipo,
-          FormatDatetime('yyyy-mm-dd', EditDataLancamento.Date),
+          FormatDateTime('yyyy-mm-dd', EditDataLancamento.Date),
           StrToFloat(StringReplace(EditValor.Text, '.', '', [rfReplaceAll])),
-          ComboGetId(ComboBoxCategoria)
+          idCategoria
         );
     end,
     TerminateSalvar
@@ -295,8 +307,8 @@ begin
     Exit;
   end;
 
-  if Assigned(FormPrincipal) then
-    FormPrincipal.ListarUltimosLacamentos;
+    if Assigned(FExecuteOnClose) then
+    FExecuteOnClose;
 
   Close;
 end;

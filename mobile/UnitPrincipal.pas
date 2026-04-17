@@ -82,7 +82,7 @@ type
   public
     { Public declarations }
     // Faz a consulta dos últimos lançamentos
-    procedure ListarUltimosLacamentos;
+    procedure ListarUltimosLancamentos;
   end;
 
 var
@@ -140,7 +140,7 @@ end;
 ------------------------------------------------------------------------------}
 procedure TFormPrincipal.FormShow(Sender: TObject);
 begin
-  ListarUltimosLacamentos
+  ListarUltimosLancamentos
 end;
 
 {------------------------------------------------------------------------------
@@ -156,7 +156,7 @@ end;
 
 procedure TFormPrincipal.ImgAbaHomeClick(Sender: TObject);
 begin
-  ListarUltimosLacamentos;
+  ListarUltimosLancamentos;
 end;
 
 {------------------------------------------------------------------------------
@@ -167,6 +167,7 @@ begin
   if not Assigned(FormLancamentoCad) then
     Application.CreateForm(TFormLancamentoCad, FormLancamentoCad);
 
+  FormLancamentoCad.ExecuteOnClose := ListarUltimosLancamentos;
   FormLancamentoCad.id_lancamento := 0;
   FormLancamentoCad.Show;
 end;
@@ -190,7 +191,7 @@ end;
 {------------------------------------------------------------------------------
   Consulta os últimos lançamentos utilizando thread
 ------------------------------------------------------------------------------}
-procedure TFormPrincipal.ListarUltimosLacamentos;
+procedure TFormPrincipal.ListarUltimosLancamentos;
 begin
   TLoading.Show(FormPrincipal, 'Carregando...');
   lvLancamentos.items.clear;
@@ -216,6 +217,7 @@ begin
   if not Assigned(FormLancamentoCad) then
     Application.CreateForm(TFormLancamentoCad, FormLancamentoCad);
 
+  FormLancamentoCad.ExecuteOnClose := ListarUltimosLancamentos;
   FormLancamentoCad.id_lancamento := AItem.Tag;
   FormLancamentoCad.Show;
 end;

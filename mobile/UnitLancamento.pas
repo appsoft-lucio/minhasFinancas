@@ -43,13 +43,15 @@ type
     LblLancamentosSaldo: TLabel;
     LblSaldo: TLabel;
     LvLancamentos: TListView;
-    Image1: TImage;
+    imgAdicionarLancamento: TImage;
     procedure FormShow(Sender: TObject);
     procedure ImgBackLacamentoClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure Image1Click(Sender: TObject);
+    procedure imgAdicionarLancamentoClick(Sender: TObject);
     procedure ImgMesNextClick(Sender: TObject);
     procedure ImgMesBackClick(Sender: TObject);
+    procedure LvLancamentosItemClick(const Sender: TObject;
+      const AItem: TListViewItem);
   private
     FData : TdateTime;
     procedure AddLancamentosLv(id_lancamentos: integer;
@@ -119,11 +121,12 @@ begin
         ListarLancamentos;
 end;
 
-procedure TFormLancamento.Image1Click(Sender: TObject);
+procedure TFormLancamento.imgAdicionarLancamentoClick(Sender: TObject);
 begin
         if NOT Assigned(FormLancamentoCad) then
         Application.CreateForm(TFormLancamentoCad, FormLancamentoCad);
 
+        FormLancamentoCad.ExecuteOnClose := ListarLancamentos;
         FormLancamentoCad.id_lancamento := 0;
         FormLancamentoCad.Show;
 end;
@@ -168,6 +171,17 @@ begin
 
 
 
+end;
+
+procedure TFormLancamento.LvLancamentosItemClick(const Sender: TObject;
+  const AItem: TListViewItem);
+begin
+  if NOT Assigned(FormLancamentoCad) then
+        Application.CreateForm(TFormLancamentoCad, FormLancamentoCad);
+
+  FormLancamentoCad.ExecuteOnClose := ListarLancamentos;
+  FormLancamentoCad.id_lancamento := AItem.Tag;
+  FormLancamentoCad.Show;
 end;
 
 procedure TFormLancamento.TerminateLancamentos(Sender: TObject);
