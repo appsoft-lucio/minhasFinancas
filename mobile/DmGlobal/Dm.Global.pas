@@ -47,7 +47,7 @@ type
       id_lancamento: Integer
     );
 
-    procedure ConsultarCategotias;
+    procedure ConsultarCategorias;
 
     procedure InserirLancamento(
       descricao, tipo, dt: string;
@@ -71,6 +71,16 @@ type
     procedure EditarUsuario(
       nome, email: string
     );
+
+    procedure EditarSenha(
+      senha: string
+    );
+
+    procedure InserirCategoria(descricao: string);
+
+    procedure ConsultarCategoriasId(id_categoria: integer);
+    procedure EditarCategoria(id_categoria: integer; descricao: string);
+    procedure ExcluirCategoria(id_categoria: integer);
   end;
 
 var
@@ -228,7 +238,7 @@ begin
     raise Exception.Create(resp.Content);
 end;
 
-procedure TDmGlobal.ConsultarCategotias;
+procedure TDmGlobal.ConsultarCategorias;
 var
   resp: IResponse;
 begin
@@ -247,6 +257,53 @@ begin
 
   if resp.StatusCode <> 200 then
     raise Exception.Create(resp.Content);
+end;
+
+procedure TDmGlobal.ConsultarCategoriasId(id_categoria: integer);
+var
+  resp: IResponse;
+begin
+  if TabCategoria.Active then
+    TabCategoria.EmptyDataSet;
+
+  TabCategoria.FieldDefs.Clear;
+
+  resp := TRequest.New
+    .BaseURL(BASE_URL)
+    .Resource('/categorias')
+    .ResourceSuffix(id_categoria.toString )
+    .Accept('application/json')
+    .TokenBearer(TSession.token)
+    .Adapters(TDataSetSerializeAdapter.New(TabCategoria))
+    .Get;
+
+  if resp.StatusCode <> 200 then
+    raise Exception.Create(resp.Content);
+end;
+
+
+procedure TDmGlobal.InserirCategoria(descricao: string);
+var
+  resp: IResponse;
+  json: TJsonObject;
+begin
+  json := TJsonObject.Create;
+  try
+    json.AddPair('descricao', descricao);
+
+    resp := TRequest.New.BaseURL(BASE_URL)
+                        .Resource('/categorias')
+                        .AddBody(json.ToJSON)
+                        .Accept('application/json')
+                        .TokenBearer(TSession.token)
+                        .post;
+
+    if resp.StatusCode <> 201 then
+      raise Exception.Create(resp.Content);
+
+  finally
+    FreeAndNil(json);
+  end;
 end;
 
 procedure TDmGlobal.InserirLancamento(
@@ -281,6 +338,48 @@ begin
     FreeAndNil(json);
   end;
 end;
+
+procedure TDmGlobal.ExcluirCategoria(id_categoria: integer);
+var
+  resp: IResponse;
+begin
+  resp := TRequest.New.BaseURL(BASE_URL)
+                      .Resource('/categorias')
+                      .ResourceSuffix(id_categoria.tostring)
+                      .Accept('application/json')
+                      .TokenBearer(TSession.token)
+                      .delete;
+
+  if resp.StatusCode <> 200 then
+    raise Exception.Create(resp.Content);
+
+end;
+
+procedure TDmGlobal.EditarCategoria(id_categoria: integer; descricao: string);
+var
+  resp: IResponse;
+  json: TJsonObject;
+begin
+  json := TJsonObject.Create;
+  try
+    json.AddPair('descricao', descricao);
+
+    resp := TRequest.New.BaseURL(BASE_URL)
+                        .Resource('/categorias')
+                        .ResourceSuffix(id_categoria.tostring)
+                        .AddBody(json.ToJSON)
+                        .Accept('application/json')
+                        .TokenBearer(TSession.token)
+                        .put;
+
+    if resp.StatusCode <> 200 then
+      raise Exception.Create(resp.Content);
+
+  finally
+    FreeAndNil(json);
+  end;
+end;
+
 
 procedure TDmGlobal.EditarLancamento(
   id_lancamento: Integer;
@@ -376,6 +475,33 @@ begin
       .Accept('application/json')
       .TokenBearer(TSession.token)
       .Put;
+
+    if resp.StatusCode <> 200 then
+      raise Exception.Create(resp.Content);
+
+  finally
+    FreeAndNil(json);
+  end;
+end;
+
+procedure TDmGlobal.EditarSenha(
+  senha: string
+);
+var
+  resp: IResponse;
+  json: TJSONObject;
+begin
+  json := TJSONObject.Create;
+  try
+    json.AddPair('senha', senha);
+
+    resp := TRequest.New
+      .BaseURL(BASE_URL)
+      .Resource('/usuarios/password')
+      .AddBody(json.ToString)
+      .Accept('application/json')
+      .TokenBearer(TSession.token)
+      .Post;
 
     if resp.StatusCode <> 200 then
       raise Exception.Create(resp.Content);

@@ -15,7 +15,6 @@ type
     FDPhysFBDriverLink: TFDPhysFBDriverLink;
   private
     procedure DataModuleCreate(Sender: TObject);
-
     { Private declarations }
   public
     { Public declarations }
@@ -36,6 +35,9 @@ type
     function ExcluirLancamento(
   id_usuario, id_lancamento: Integer
 ): Integer;
+
+procedure AtualizarCategoriaPorDescricao(id_usuario,
+      id_categoria_origem: integer; descricao_destino: string);
   end;
 
   var
@@ -244,5 +246,34 @@ begin
   end;
 end;
 
+procedure TDmLancamentos.AtualizarCategoriaPorDescricao(
+  id_usuario, id_categoria_origem: integer;
+  descricao_destino: string
+);
+var
+  qry: TFDQuery;
+begin
+  qry := TFDQuery.Create(nil);
+  try
+    qry.Connection := ConnLancamento;
+
+    qry.SQL.Text :=
+      'UPDATE lancamento l ' +
+      'SET id_categoria = (' +
+      '  SELECT FIRST 1 id_categoria FROM categoria ' +
+      '  WHERE id_usuario = :usuario AND descricao = :descricao' +
+      ') ' +
+      'WHERE l.id_categoria = :origem AND l.id_usuario = :usuario';
+
+    qry.ParamByName('usuario').Value := id_usuario;
+    qry.ParamByName('origem').Value := id_categoria_origem;
+    qry.ParamByName('descricao').Value := descricao_destino;
+
+    qry.ExecSQL;
+
+  finally
+    FreeAndNil(qry);
+  end;
+end;
 
 end.

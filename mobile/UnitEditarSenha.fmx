@@ -1234,6 +1234,7 @@ object FormEditarSenha: TFormEditarSenha
         Size.Width = 40.000000000000000000
         Size.Height = 60.000000000000000000
         Size.PlatformDefault = False
+        OnClick = ImgSalvarSenhaClick
       end
     end
     object ImgBackEditarSenha: TImage

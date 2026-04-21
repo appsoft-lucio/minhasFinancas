@@ -74,6 +74,9 @@ procedure EditarSenha (id_usuario: integer; senha: string);
 var
   dm : TDmUsuario;
 begin
+  if Length(Trim(senha)) < 5 then
+  raise Exception.Create('A senha deve conter pelo menos 5 caracteres.');
+
   try
     dm := TDmUsuario.Create(nil);
 

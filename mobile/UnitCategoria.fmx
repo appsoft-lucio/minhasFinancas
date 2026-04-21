@@ -126,7 +126,7 @@ object FormCategoria: TFormCategoria
       Size.PlatformDefault = False
       OnClick = ImgBackLacamentoClick
     end
-    object Image1: TImage
+    object ImageAdicionarCategoria: TImage
       MultiResBitmap.Height = 512
       MultiResBitmap.Width = 512
       MultiResBitmap = <
@@ -706,7 +706,7 @@ object FormCategoria: TFormCategoria
       Size.Width = 40.000000000000000000
       Size.Height = 50.000000000000000000
       Size.PlatformDefault = False
-      OnClick = Image1Click
+      OnClick = ImageAdicionarCategoriaClick
     end
   end
   object LvCategorias: TListView
@@ -724,6 +724,7 @@ object FormCategoria: TFormCategoria
     ItemAppearanceObjects.ItemObjects.Text.Font.Size = 14.000000000000000000
     ItemAppearanceObjects.ItemObjects.Text.TextColor = xFF6B6B6B
     CanSwipeDelete = False
+    OnItemClick = LvCategoriasItemClick
     ShowSelection = False
   end
 end

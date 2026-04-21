@@ -23,6 +23,7 @@ type
     function Inserir(id_usuario: integer; descricao: string): TJsonObject;
     procedure Editar(id_usuario, id_categoria: integer; descricao: string);
     procedure Excluir(id_usuario, id_categoria: integer);
+    procedure GarantirCategoriaPadrao(id_usuario: integer);
   end;
 
 var
@@ -35,6 +36,8 @@ implementation
 {$R *.dfm}
 
 procedure TDmCategoria.DataModuleCreate(Sender: TObject);
+var
+  qry: TFDQuery;
 begin
   ConnCategoria.Params.Add('Database=127.0.0.1/3050:E:\git_hub\minhasFinancas\DataBase\MINHASFINANCAS.FDB');
   FDPhysFBDriverLink.VendorLib:= 'C:\Program Files (x86)\Firebird\Firebird_3_0\fbclient.dll';
@@ -133,19 +136,72 @@ end;
 
 procedure TDmCategoria.Excluir(id_usuario, id_categoria: integer);
 var
-    qry: TFDQuery;
+  qry: TFDQuery;
 begin
   qry := TFDQuery.Create(nil);
   try
     qry.Connection := ConnCategoria;
-    qry.SQL.Add('Delete From categoria');
-    qry.SQL.Add('Where id_categoria = :id_categoria');
-    qry.SQL.Add('And id_usuario = :id_usuario');
 
-    qry.ParamByName('id_usuario').Value := id_usuario;
+    // 🔒 impede excluir "Sem categoria"
+    qry.SQL.Text :=
+      'SELECT descricao FROM categoria ' +
+      'WHERE id_categoria = :id_categoria AND id_usuario = :id_usuario';
+
     qry.ParamByName('id_categoria').Value := id_categoria;
+    qry.ParamByName('id_usuario').Value := id_usuario;
+    qry.Open;
+
+if qry.IsEmpty then
+  raise Exception.Create('Categoria não encontrada.');
+
+if Trim(LowerCase(qry.FieldByName('descricao').AsString)) = 'sem categoria' then
+  raise Exception.Create('Categoria padrão não pode ser excluída.');
+
+    qry.Close;
+
+    qry.SQL.Text :=
+      'DELETE FROM categoria ' +
+      'WHERE id_categoria = :id_categoria AND id_usuario = :id_usuario';
 
     qry.ExecSQL;
+
+  finally
+    FreeAndNil(qry);
+  end;
+end;
+
+procedure TDmCategoria.GarantirCategoriaPadrao(id_usuario: integer);
+var
+  qry: TFDQuery;
+begin
+  qry := TFDQuery.Create(nil);
+  try
+    qry.Connection := ConnCategoria;
+
+    // verifica pelo NOME (mais seguro)
+    qry.SQL.Text :=
+      'SELECT id_categoria FROM categoria ' +
+      'WHERE id_usuario = :id_usuario AND descricao = :descricao';
+
+    qry.ParamByName('id_usuario').Value := id_usuario;
+    qry.ParamByName('descricao').Value := 'Sem categoria';
+
+    qry.Open;
+
+    if qry.IsEmpty then
+    begin
+      qry.Close;
+
+      qry.SQL.Text :=
+        'INSERT INTO categoria (descricao, id_usuario) ' +
+        'VALUES (:descricao, :id_usuario)';
+
+      qry.ParamByName('descricao').Value := 'Sem categoria';
+      qry.ParamByName('id_usuario').Value := id_usuario;
+
+      qry.ExecSQL;
+    end;
+
   finally
     FreeAndNil(qry);
   end;

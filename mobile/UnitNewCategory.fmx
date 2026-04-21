@@ -10,6 +10,7 @@ object FormNewCategory: TFormNewCategory
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
   OnClose = FormClose
+  OnShow = FormShow
   DesignerMasterStyle = 3
   object LytCabecalhoNewCategoria: TLayout
     Align = Top
@@ -1234,9 +1235,10 @@ object FormNewCategory: TFormNewCategory
         Size.Width = 40.000000000000000000
         Size.Height = 60.000000000000000000
         Size.PlatformDefault = False
+        OnClick = ImgSalvarCategoriaClick
       end
     end
-    object ImgBackNovoCategoria: TImage
+    object ImgBackCategoria: TImage
       MultiResBitmap.Height = 346
       MultiResBitmap.Width = 331
       MultiResBitmap = <
@@ -1329,7 +1331,7 @@ object FormNewCategory: TFormNewCategory
       Size.Width = 40.000000000000000000
       Size.Height = 60.000000000000000000
       Size.PlatformDefault = False
-      OnClick = ImgBackNovoCategoriaClick
+      OnClick = ImgBackCategoriaClick
     end
   end
   object LytNovoLancamento: TLayout
@@ -1359,7 +1361,7 @@ object FormNewCategory: TFormNewCategory
       Size.Height = 85.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 1
-      object Image1: TImage
+      object ImageDelete: TImage
         MultiResBitmap.Height = 64
         MultiResBitmap.Width = 64
         MultiResBitmap = <
@@ -1404,6 +1406,8 @@ object FormNewCategory: TFormNewCategory
         Size.Width = 40.000000000000000000
         Size.Height = 40.000000000000000000
         Size.PlatformDefault = False
+        Visible = False
+        OnClick = ImageDeleteClick
       end
     end
   end

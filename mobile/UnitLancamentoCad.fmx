@@ -1505,7 +1505,6 @@ object FormLancamentoCad: TFormLancamentoCad
         Size.Width = 40.000000000000000000
         Size.Height = 40.000000000000000000
         Size.PlatformDefault = False
-        Visible = False
         OnClick = ImageDeleteClick
       end
     end

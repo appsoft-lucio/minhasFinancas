@@ -145,7 +145,7 @@ end;
 procedure TFormLancamentoCad.ImageDeleteClick(Sender: TObject);
 begin
   TDialogService.MessageDialog(
-    'Confirma exclusao do lacamento?',
+    'Confirma exclusão  do lacamento?',
     TMsgDlgType.mtConfirmation,
     [TMsgDlgBtn.mbYes, TMsgDlgBtn.mbNo],
     TMsgDlgBtn.mbNo,
@@ -202,7 +202,7 @@ begin
   TLoading.ExecuteThread(
     procedure
     begin
-      DmGlobal.ConsultarCategotias;
+      DmGlobal.ConsultarCategorias;
     end,
     TerminateTela
   );

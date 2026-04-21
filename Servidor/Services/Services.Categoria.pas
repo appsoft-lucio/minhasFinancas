@@ -68,25 +68,39 @@ begin
   end;
 end;
 
-procedure Excluir (id_usuario, id_categoria: integer);
+procedure Excluir(id_usuario, id_categoria: integer);
 var
   dm: TDmCategoria;
   dml: TDmLancamentos;
-  json_retorno: TJSONArray;
+  categoria: TJSONObject;
 begin
   try
-    dm:= TDmCategoria.Create(nil);
-    dml:= TDmLancamentos.Create(nil);
+    dm := TDmCategoria.Create(nil);
+    dml := TDmLancamentos.Create(nil);
 
-    //Consultar se existe lançamento antes de remover.
-    json_retorno := dml.ListarLancamentos(id_usuario, id_categoria, '', '');
-    if json_retorno.Count > 0 then
-    raise Exception.Create('A categoria não pode ser excluída porque possui lançamentos.');
+    // ?? Descobre qual categoria é
+    categoria := dm.ListarCategoriaId(id_usuario, id_categoria);
 
+    if categoria.GetValue<string>('descricao').ToLower = 'sem categoria' then
+      raise Exception.Create('Categoria padrão não pode ser excluída.');
+
+    // 1?? garante existência
+    dm.GarantirCategoriaPadrao(id_usuario);
+
+    // 2?? move lançamentos
+    dml.AtualizarCategoriaPorDescricao(
+      id_usuario,
+      id_categoria,
+      'Sem categoria'
+    );
+
+    // 3?? exclui
     dm.Excluir(id_usuario, id_categoria);
+
   finally
-    FreeAndNil(json_retorno);
     FreeAndNil(dm);
+    FreeAndNil(dml);
+    FreeAndNil(categoria);
   end;
 end;
 

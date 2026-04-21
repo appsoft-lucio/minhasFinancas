@@ -14,16 +14,18 @@ type
     LytCabecalhoCategorias: TLayout;
     LblCabecalhoCategorias: TLabel;
     ImgBackLacamento: TImage;
-    Image1: TImage;
+    ImageAdicionarCategoria: TImage;
     LvCategorias: TListView;
     procedure FormShow(Sender: TObject);
     procedure ImgBackLacamentoClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure Image1Click(Sender: TObject);
+    procedure ImageAdicionarCategoriaClick(Sender: TObject);
+    procedure LvCategoriasItemClick(const Sender: TObject;
+      const AItem: TListViewItem);
   private
     procedure AddCategoriaLv(id_categoria: integer; descricao: string);
     procedure ListarCategoria;
-    procedure TerminateLancamentos(Sender: TObject);
+    procedure TerminateCategorias(Sender: TObject);
     { Private declarations }
   public
     { Public declarations }
@@ -36,7 +38,7 @@ implementation
 
 {$R *.fmx}
 
-uses UnitNewCategory;
+uses UnitNewCategory, Dm.Global;
 
 procedure TFormCategoria.AddCategoriaLv(id_categoria: integer;
                                           descricao: string);
@@ -58,13 +60,26 @@ begin
         TLoading.ExecuteThread(
         procedure
         begin
-        Sleep(500); // Simula acesso ao servidor
+        DmGlobal.ConsultarCategorias;
         end,
-        TerminateLancamentos
+        TerminateCategorias
         );
 end;
 
-procedure TFormCategoria.TerminateLancamentos(Sender: TObject);
+procedure TFormCategoria.LvCategoriasItemClick(const Sender: TObject;
+  const AItem: TListViewItem);
+begin
+  begin
+        if not Assigned(FormNewCategory) then
+        Application.CreateForm(TFormNewCategory, FormNewCategory);
+
+        FormNewCategory.ExecuteOnClose := ListarCategoria;
+        FormNewCategory.id_categoria := Aitem.Tag;
+        FormNewCategory.Show;
+end;
+end;
+
+procedure TFormCategoria.TerminateCategorias(Sender: TObject);
 begin
   TLoading.Hide;
   if Assigned(TThread(Sender).FatalException) then
@@ -73,12 +88,17 @@ begin
     Exit;
   end;
 
-        AddCategoriaLv(1, 'Combustivel');
-        AddCategoriaLv(2, 'Agua');
-        AddCategoriaLv(3, 'Luz');
-        AddCategoriaLv(4, 'Internet');
-        AddCategoriaLv(5, 'Lazer');
+  LvCategorias.Items.Clear; // importante limpar antes
 
+  DmGlobal.TabCategoria.First; // garantir início
+
+  while NOT DmGlobal.TabCategoria.Eof do
+  begin
+    AddCategoriaLv(DmGlobal.TabCategoria.FieldByName('id_categoria').AsInteger,
+                   DmGlobal.TabCategoria.FieldByName('descricao').AsString);
+
+  DmGlobal.TabCategoria.Next;
+  end;
 end;
 
 procedure TFormCategoria.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -92,11 +112,13 @@ begin
         ListarCategoria;
 end;
 
-procedure TFormCategoria.Image1Click(Sender: TObject);
+procedure TFormCategoria.ImageAdicionarCategoriaClick(Sender: TObject);
 begin
         if not Assigned(FormNewCategory) then
         Application.CreateForm(TFormNewCategory, FormNewCategory);
 
+        FormNewCategory.ExecuteOnClose := ListarCategoria;
+        FormNewCategory.id_categoria := 0;
         FormNewCategory.Show;
 end;
 
