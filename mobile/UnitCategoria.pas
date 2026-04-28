@@ -56,6 +56,7 @@ end;
 procedure TFormCategoria.ListarCategoria;
 
 begin
+        LvCategorias.Items.Clear;
         TLoading.Show(FormCategoria, 'Carregando...');
         TLoading.ExecuteThread(
         procedure
